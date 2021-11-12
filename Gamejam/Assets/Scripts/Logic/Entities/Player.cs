@@ -12,6 +12,13 @@ public class Player : IEntity
   protected float _critChance = 10;
 
   public int Initiative { get => _initiative; set => _initiative = value; }
+  public int Hp { get => _initiative; set => _initiative = value; }
+
+  public Player(int hp, int initiative)
+  {
+    this._hp = hp;
+    this._initiative = initiative;
+  }
 
   public void DealDamage(int damage)
   {
@@ -25,20 +32,16 @@ public class Player : IEntity
 
   public void SetBuff(int slotNumber, IBuff buff)
   {
-    if (this._buffs[slotNumber])
-    {
-      this._buffs[slotNumber].Deactivate(this);
-    }
+    this._buffs[slotNumber]?.Deactivate(this);
+
     this._buffs[slotNumber] = buff;
     this._buffs[slotNumber].Activate(this);
   }
 
   public void SetDebuff(int slotNumber, IDebuff debuff)
   {
-    if (this._debuffs[slotNumber])
-    {
-      this._debuffs[slotNumber].Deactivate(this);
-    }
+    this._debuffs[slotNumber]?.Deactivate(this);
+
     this._debuffs[slotNumber] = debuff;
     this._debuffs[slotNumber].Activate(this);
 

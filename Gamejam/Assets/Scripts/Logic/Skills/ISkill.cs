@@ -1,4 +1,4 @@
-interface ISkill
+public interface ISkill
 {
-  void UseSkill(IEntity target);
+  void Use(IEntity target);
 }
