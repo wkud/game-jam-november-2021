@@ -1,6 +1,6 @@
 public interface ISkill
 {
-  void Use(IEntity target);
+  void Use(IEntity[] targets);
 
   string Description
   {

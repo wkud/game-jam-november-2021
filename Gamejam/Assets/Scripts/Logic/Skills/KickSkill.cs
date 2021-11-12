@@ -8,9 +8,9 @@ public class KickSkill : ISkill
     this._power = power;
   }
 
-  public void Use(IEntity target)
+  public void Use(IEntity[] targets)
   {
-    target.DealDamage(this._power);
+    targets[0]?.DealDamage(this._power);
   }
 
   public string Description

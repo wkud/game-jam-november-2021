@@ -30,9 +30,9 @@ public class Player : IEntity
     this._skills[slotNumber] = skill;
   }
 
-  public void UseSkill(int slotNumber, IEntity target)
+  public void UseSkill(int slotNumber, IEntity[] targets)
   {
-    this._skills[slotNumber].Use(target);
+    this._skills[slotNumber].Use(targets);
   }
 
   public void SetBuff(int slotNumber, IBuff buff)
