@@ -7,4 +7,6 @@ public class Enemy : IEntity
     _hp -= damage;
   }
 
+  public int Initiative { get => _initiative; set => _initiative = value; }
+
 }

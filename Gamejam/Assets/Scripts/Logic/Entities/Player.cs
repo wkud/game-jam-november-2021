@@ -2,19 +2,25 @@
 
 public class Player : IEntity
 {
-  protected UseSpell[] _spells = new ISpell[3];
+  protected ISkill[] _skills = new ISkill[3];
   protected IBuff[] _buffs = new IBuff[2];
   protected IDebuff[] _debuffs = new IDebuff[2];
   protected int _hp = 30;
+  protected int _initiative = 10;
+  protected int _attackModifier = 10;
+  protected int _defence = 10;
+  protected float _critChance = 10;
+
+  public int Initiative { get => _initiative; set => _initiative = value; }
 
   public void DealDamage(int damage)
   {
     this._hp -= damage;
   }
 
-  public void UseSpell(int slotNumber, IEntity target)
+  public void UseSkill(int slotNumber, IEntity target)
   {
-    this._spells[slotNumber].Use(target);
+    this._skills[slotNumber].Use(target);
   }
 
   public void SetBuff(int slotNumber, IBuff buff)
