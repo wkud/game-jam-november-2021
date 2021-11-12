@@ -2,14 +2,14 @@
 
 public class Player : IEntity
 {
-  protected ISkill[] _skills = new ISkill[3];
-  protected IBuff[] _buffs = new IBuff[2];
-  protected IDebuff[] _debuffs = new IDebuff[2];
-  protected int _hp = 30;
-  protected int _initiative = 10;
-  protected int _attackModifier = 10;
-  protected int _defence = 10;
-  protected float _critChance = 10;
+  private ISkill[] _skills = new ISkill[3];
+  private IBuff[] _buffs = new IBuff[2];
+  private IDebuff[] _debuffs = new IDebuff[2];
+  private int _hp = 30;
+  private int _initiative = 10;
+  private int _attackModifier = 10;
+  private int _defence = 10;
+  private float _critChance = 10;
 
   public int Initiative { get => _initiative; set => _initiative = value; }
   public int Hp { get => _initiative; set => _initiative = value; }
@@ -23,6 +23,11 @@ public class Player : IEntity
   public void DealDamage(int damage)
   {
     this._hp -= damage;
+  }
+
+  public void SetSkill(int slotNumber, ISkill skill)
+  {
+    this._skills[slotNumber] = skill;
   }
 
   public void UseSkill(int slotNumber, IEntity target)
