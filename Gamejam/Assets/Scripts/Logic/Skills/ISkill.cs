@@ -6,4 +6,9 @@ public interface ISkill
   {
     get;
   }
+
+  int Cooldown
+  {
+    get;
+  }
 }

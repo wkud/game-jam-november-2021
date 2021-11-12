@@ -1,11 +1,23 @@
 public class KickSkill : ISkill
 {
   private int _power;
+  private int _cooldown;
   private const string _DESCRIPTION = "Kick him in the butt";
 
-  public KickSkill(int power)
+  public string Description
+  {
+    get => _DESCRIPTION;
+  }
+
+  public int Cooldown
+  {
+    get => _cooldown;
+  }
+
+  public KickSkill(int power, int cooldown)
   {
     this._power = power;
+    this._cooldown = cooldown;
   }
 
   public void Use(IEntity[] targets)
@@ -13,8 +25,4 @@ public class KickSkill : ISkill
     targets[0]?.DealDamage(this._power);
   }
 
-  public string Description
-  {
-    get => _DESCRIPTION;
-  }
 }
