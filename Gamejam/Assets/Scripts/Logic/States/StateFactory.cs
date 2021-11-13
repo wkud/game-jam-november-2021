@@ -6,10 +6,10 @@ using UnityEngine;
 public static class StateFactory
 {
 
-    public static StateController CreateStateController(StateData stateData, int turns)
+    public static StateController CreateStateController(EntityStats stats, StateData stateData, int turns)
     {
         IState state = StateFactory.CreateState(stateData);
-        StateController stateController = new StateController(state, turns);
+        StateController stateController = new StateController(stats, state, turns);
         return stateController;
     }
 

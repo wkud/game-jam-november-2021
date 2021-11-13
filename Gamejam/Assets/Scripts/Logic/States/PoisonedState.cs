@@ -11,9 +11,11 @@ public class PoisonedState : IState
         this._data = stateData;
     }
 
-    public void OnTurnStart(EntityStats stats)
-    {
-    }
+    public void OnStateStart(EntityStats stats) { }
+
+    public void OnStateEnd(EntityStats stats) { }
+
+    public void OnTurnStart(EntityStats stats) { }
 
     public void OnTurnEnd(EntityStats stats)
     {
