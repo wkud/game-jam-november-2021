@@ -40,6 +40,7 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
         IEntity[] entities = Enemies.Concat(Allies).ToArray();
         // TODO: Sort entities according to initiative
         _initiativeTracker = new InitiativeTracker(entities);
+        _currentEntity = _initiativeTracker.GetStartEntity();
 
         _playerMoveMaker = new PlayerMoveMaker(this);
         _playerMoveMaker.OnPlayerTurnEnd.AddListener(OnFinishedTurn); // TODO: add listener for playing animations
@@ -58,7 +59,7 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
         _currentEntity = _initiativeTracker.GetNextEntity();
         if (_currentEntity.Stats.Bond == Bond.Ally)
         {
-            _playerMoveMaker.OnPlayerStartTurn();
+            _playerMoveMaker.OnPlayerStartTurn(_currentEntity as Player);
             // TODO: play animations 
         }
         else

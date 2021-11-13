@@ -169,8 +169,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 362519940}
   - {fileID: 713535148}
+  - {fileID: 362519940}
   - {fileID: 102063794}
   - {fileID: 1816511176}
   m_Father: {fileID: 1786522797}
@@ -1852,18 +1852,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemies:
-  - {fileID: 362519941}
-  - {fileID: 713535149}
-  - {fileID: 102063795}
-  - {fileID: 1816511177}
-  _allies:
   - {fileID: 1363799515}
   - {fileID: 1223610975}
   - {fileID: 1999820710}
   - {fileID: 1673829856}
-  _resourceContainer:
-    _characterStats: []
-    _enemyStats: []
+  _allies:
+  - {fileID: 713535149}
+  - {fileID: 362519941}
+  - {fileID: 102063795}
+  - {fileID: 1816511177}
 --- !u!4 &1465457245
 Transform:
   m_ObjectHideFlags: 0
@@ -1975,7 +1972,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2782008045430110645, guid: a79776df89a917649aa324d3f8bd74af, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2782008045430110645, guid: a79776df89a917649aa324d3f8bd74af, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2438,7 +2435,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2782008045430110645, guid: a79776df89a917649aa324d3f8bd74af, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2782008045430110645, guid: a79776df89a917649aa324d3f8bd74af, type: 3}
       propertyPath: m_AnchorMax.x

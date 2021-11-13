@@ -18,8 +18,9 @@ public class PlayerMoveMaker
     }
 
     #region StateMachine
-    public void OnPlayerStartTurn() // state transition: WaitingForPlayerTurn -> WaitingForSkill
+    public void OnPlayerStartTurn(Player currentPlayer) // state transition: WaitingForPlayerTurn -> WaitingForSkill
     {
+        _currentPlayer = currentPlayer;
         State = PlayerTurnState.WaitingForSkill;
     }
 
