@@ -12,6 +12,8 @@ public class MapNode : MonoBehaviour
     LineRenderer _lineRend;
     List<Transform> _points;
     bool _enableDrawingLines = false;
+
+    [SerializeField] SpriteRenderer _renderer;
     
     // Start is called before the first frame update
     public void Initialize(List<MapNode> allNodes)
@@ -35,6 +37,18 @@ public class MapNode : MonoBehaviour
 
     private void Update()
     {
+        if (canBeSelected)
+        {
+            Color color = _renderer.color;
+            color.a = 1;
+            _renderer.color = color;
+        }
+        else
+        {
+            Color color = _renderer.color;
+            color.a = 0.5f;
+            _renderer.color = color;
+        }
         if (_enableDrawingLines)
         {
             int posID = 0;

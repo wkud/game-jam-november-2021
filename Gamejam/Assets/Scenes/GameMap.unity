@@ -664,6 +664,14 @@ PrefabInstance:
       value: GameController
       objectReference: {fileID: 0}
     - target: {fileID: 7894028554049114718, guid: 82cf01774a00b6643afed2a4e9b8f8d5, type: 3}
+      propertyPath: _nodesPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894028554049114718, guid: 82cf01774a00b6643afed2a4e9b8f8d5, type: 3}
+      propertyPath: _nodesPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 2382571684191151149, guid: 89a8c9c5da33d0243900e709091f7c84, type: 3}
+    - target: {fileID: 7894028554049114718, guid: 82cf01774a00b6643afed2a4e9b8f8d5, type: 3}
       propertyPath: _nodesSpawnPoints.Array.data[3]
       value: 
       objectReference: {fileID: 78742114}

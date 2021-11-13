@@ -85,6 +85,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4604048954655723682}
+  - component: {fileID: 4246456803336029148}
   m_Layer: 5
   m_Name: CharacterPanel
   m_TagString: Untagged
@@ -117,6 +118,33 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4246456803336029148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4604048954655723681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7f61c86b4451848971686b931dfd06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 0
+  slider: {fileID: 944138321311606096}
+  hpText: {fileID: 4604048954655934320}
+  initiativeText: {fileID: 4604048955693309228}
+  attackText: {fileID: 4604048955854380296}
+  defenceText: {fileID: 4604048956649947619}
+  critChanceText: {fileID: 4604048955431576605}
+  threatText: {fileID: 4604048954868667649}
+  skill1Sprite: {fileID: 0}
+  skill2Sprite: {fileID: 0}
+  skill3Sprite: {fileID: 0}
+  buff1Sprite: {fileID: 0}
+  buff2Sprite: {fileID: 0}
+  debuff1Sprite: {fileID: 0}
+  debuff2Sprite: {fileID: 0}
 --- !u!1 &4604048954655934326
 GameObject:
   m_ObjectHideFlags: 0
@@ -2279,6 +2307,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb4f194367f2f29428335fbf8e558ed1, type: 3}
+--- !u!114 &944138321311606096 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2678495738619636027, guid: bb4f194367f2f29428335fbf8e558ed1, type: 3}
+  m_PrefabInstance: {fileID: 2896286679651224683}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &3822202949777847387 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2106167536536778800, guid: bb4f194367f2f29428335fbf8e558ed1, type: 3}

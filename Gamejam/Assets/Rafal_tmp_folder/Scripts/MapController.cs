@@ -46,6 +46,8 @@ public class MapController : MonoBehaviour
             int spawnChance = 75;//%
             for (int j = 0; j < 3; j++)
             {
+                int roomType = Random.Range(0, _nodesPrefabs.Length);//randomly select room type
+
                 bool shouldSpawn = Random.Range(0, 100) < spawnChance ? true : false;
                 if (!shouldSpawn)
                 { 
@@ -55,7 +57,7 @@ public class MapController : MonoBehaviour
                 {
                     spawnChance = 40;//%
 
-                    nodeInstance = Instantiate(_nodesPrefabs[0]);
+                    nodeInstance = Instantiate(_nodesPrefabs[roomType]);
                     nodeInstance.transform.parent = _nodesContainer;
                     if (i % 2 == 1)
                     {
@@ -135,6 +137,8 @@ public class MapController : MonoBehaviour
         _currentlySelectedNode = room;
         _nodesSpawnPoints[1].transform.position += new Vector3(0, _yAxisSpawnShift, 0);
         _playerPawn.position = _currentlySelectedNode.transform.position;
+        GameController.Instance.GameState.CurrentNode = room;
+
         UnlockNextRooms();//to trzeba bedzie wywolywac po rozpatrzeniu wnetrza pokoi
     }
 }

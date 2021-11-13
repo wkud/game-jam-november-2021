@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1267788363509232916}
-  - component: {fileID: 8056116222520125886}
+  - component: {fileID: 2382571684191151149}
   - component: {fileID: 1061318865638702278}
   - component: {fileID: 871789981658636737}
   - component: {fileID: 6697330935807486722}
   m_Layer: 0
-  m_Name: Node
+  m_Name: FightNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8056116222520125886
+--- !u!114 &2382571684191151149
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2031062925962219705}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 692fb0f0a25d8204d81637b526f81ced, type: 3}
+  m_Script: {fileID: 11500000, guid: c2744c9888f0f3a47bd556f29987bdb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   childNodes: []
@@ -52,6 +52,11 @@ MonoBehaviour:
   depth: 0
   canBeSelected: 0
   _renderer: {fileID: 7317635208476408467}
+  _enemies:
+  - {fileID: 11400000, guid: 4df18efcfad73254fab04bf5c5aad2f3, type: 2}
+  - {fileID: 11400000, guid: 4df18efcfad73254fab04bf5c5aad2f3, type: 2}
+  - {fileID: 11400000, guid: 4df18efcfad73254fab04bf5c5aad2f3, type: 2}
+  - {fileID: 11400000, guid: 4df18efcfad73254fab04bf5c5aad2f3, type: 2}
 --- !u!50 &1061318865638702278
 Rigidbody2D:
   serializedVersion: 4
@@ -255,7 +260,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -37,3 +37,5 @@ public class EntityStats : ScriptableObject
 
     //public EntityStats GetCopy
 }
+
+
