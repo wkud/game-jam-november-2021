@@ -30,4 +30,6 @@ public class EntityStats : ScriptableObject
     public int Defence { get => _defence; set => _defence = value; }
     public float CritChance { get => _critChance; set => _critChance = value; }
     public float Threat { get => _threat; set => _threat = value; }
+
+    //public EntityStats GetCopy
 }

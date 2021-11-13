@@ -13,23 +13,25 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
     private IEntity _currentEntity; // an entity, which is currently making a move
     private InitiativeTracker _initiativeTracker;
     private PlayerMoveMaker _playerMoveMaker;
+    [SerializeField] private ResourceContainer _resourceContainer; // TODO move _resourceContainer into main (global) GameController
 
+    private IGameState _gameState;
 
     public PlayerTurnState PlayerTurnState => _playerMoveMaker.State; // this enum informs buttons whether they should respond to events
 
     public IEntity[] Enemies => _enemies.Select(u => u.Entity).ToArray();
     public IEntity[] Allies => _allies.Select(u => u.Entity).ToArray();
 
-
     void Start()
     {
         _units.AddRange(_enemies);
         _units.AddRange(_allies);
 
-        foreach (var unit in _units)
-        {
-            unit.Initialize(this); // TODO: Rafał, dlaczego tu jest NullReferenceException przy uruchomieniu i jak to naprawić
-        }
+        var allyPresets = _gameState.GetCharacters(); //_dataContainer.GetRandomCharacterPresets(); // TODO do this once per game
+        InitializeUnits(_allies, allyPresets);
+
+        var enemyPresets = _gameState.GetEnemiesForThisFight();
+        InitializeUnits(_enemies, enemyPresets);
 
         IEntity[] entities = Enemies.Concat(Allies).ToArray();
         // TODO: Sort entities according to initiative
@@ -37,6 +39,14 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
 
         _playerMoveMaker = new PlayerMoveMaker(this);
         _playerMoveMaker.OnPlayerTurnEnd.AddListener(OnFinishedTurn); // TODO: add listener for playing animations
+    }
+
+    private void InitializeUnits(List<Unit> units, List<EntityStats> presets)
+    {
+        for (int i = 0; i < units.Count; i++)
+        {
+            units[i].Initialize(this, presets[i]);
+        }
     }
 
     public void OnFinishedTurn() // this function needs to be called when entity ends it's turn
