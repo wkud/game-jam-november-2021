@@ -9,11 +9,13 @@ public class SkillData : ScriptableObject
   [SerializeField] private string _description;
   [SerializeField] private int _power = 9001;
   [SerializeField] private int _cooldown = 5;
-  [SerializeField] private SkillTargetCountType _targetCountType;
+  [SerializeField] private SkillTargetCount _targetCount;
+  [SerializeField] private SkillTargetBond _targetBond;
 
   public string Name { get => _name; set => _name = value; }
   public int Power { get => _power; set => _power = value; }
   public int Cooldown { get => _cooldown; set => _cooldown = value; }
   public string Description { get => _description; set => _description = value; }
-  public SkillTargetCountType TargetCountType { get => _targetCountType; set => _targetCountType = value; }
+  public SkillTargetCount TargetCount { get => _targetCount; set => _targetCount = value; }
+  public SkillTargetBond TargetBond { get => _targetBond; set => _targetBond = value; }
 }
