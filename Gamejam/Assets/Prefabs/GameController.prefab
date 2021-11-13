@@ -44,18 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712c5b9736303b544a63f2b78ac396d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapController: {fileID: 7894028554049114718}
   _resources:
     _characterStats:
     - {fileID: 11400000, guid: 4df18efcfad73254fab04bf5c5aad2f3, type: 2}
+    - {fileID: 11400000, guid: 1ed4cd18514fc2744ae078c468e8201b, type: 2}
     - {fileID: 11400000, guid: 4df18efcfad73254fab04bf5c5aad2f3, type: 2}
-    - {fileID: 11400000, guid: 4df18efcfad73254fab04bf5c5aad2f3, type: 2}
-    - {fileID: 11400000, guid: 4df18efcfad73254fab04bf5c5aad2f3, type: 2}
+    - {fileID: 11400000, guid: 1ed4cd18514fc2744ae078c468e8201b, type: 2}
     _enemyStats:
-    - {fileID: 11400000, guid: 4df18efcfad73254fab04bf5c5aad2f3, type: 2}
-    - {fileID: 11400000, guid: 4df18efcfad73254fab04bf5c5aad2f3, type: 2}
-    - {fileID: 11400000, guid: 4df18efcfad73254fab04bf5c5aad2f3, type: 2}
-    - {fileID: 11400000, guid: 4df18efcfad73254fab04bf5c5aad2f3, type: 2}
+    - {fileID: 11400000, guid: e458eb2634bcf564092732d79defdb4d, type: 2}
+    - {fileID: 11400000, guid: e458eb2634bcf564092732d79defdb4d, type: 2}
+    - {fileID: 11400000, guid: e458eb2634bcf564092732d79defdb4d, type: 2}
+    - {fileID: 11400000, guid: e458eb2634bcf564092732d79defdb4d, type: 2}
 --- !u!1 &7894028553296012516
 GameObject:
   m_ObjectHideFlags: 0

@@ -38,7 +38,6 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
         InitializeUnits(_enemies, enemyPresets.Select(e => (IEntity)e).ToList());
 
         IEntity[] entities = Enemies.Concat(Allies).ToArray();
-        // TODO: Sort entities according to initiative
         _initiativeTracker = new InitiativeTracker(entities);
         _currentEntity = _initiativeTracker.GetStartEntity();
 
