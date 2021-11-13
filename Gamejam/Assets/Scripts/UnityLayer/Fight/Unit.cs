@@ -5,15 +5,14 @@ public class Unit : MonoBehaviour
     private UnitPortraitButton _portraitButton;
     private FightController _fightController;
 
-    [SerializeField] EntityStats _entityData;
     public IEntity Entity { get; private set; }
 
-    public void Initialize(FightController fightController, EntityStats stats)
+    public void Initialize(FightController fightController, IEntity entity)
     {
         _fightController = fightController;
 
-        _entityData = stats;
-        Entity = EntityFactory.CreateEntity(_entityData);
+
+        Entity = entity;
 
         _portraitButton = GetComponentInChildren<UnitPortraitButton>();
         _portraitButton.Initialize(this);

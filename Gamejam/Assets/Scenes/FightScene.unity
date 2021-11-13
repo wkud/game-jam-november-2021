@@ -1861,11 +1861,9 @@ MonoBehaviour:
   - {fileID: 1223610975}
   - {fileID: 1999820710}
   - {fileID: 1673829856}
-  _dataContainer:
-    _characterStats:
-    - {fileID: 11400000, guid: 4df18efcfad73254fab04bf5c5aad2f3, type: 2}
-    _enemyStats:
-    - {fileID: 11400000, guid: 4df18efcfad73254fab04bf5c5aad2f3, type: 2}
+  _resourceContainer:
+    _characterStats: []
+    _enemyStats: []
 --- !u!4 &1465457245
 Transform:
   m_ObjectHideFlags: 0
