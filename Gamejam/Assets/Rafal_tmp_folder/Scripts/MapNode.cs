@@ -6,21 +6,28 @@ public class MapNode : MonoBehaviour
 {
     public List<MapNode> childNodes = new List<MapNode>();
     public int spawnPointId;//0 - left, 1 - middle, 2 - right
-    public int depth = 0;
-    public bool canBeSelected = false;
+    public int depth = 0;//basicly how far from start this tile is
+    public bool canBeSelected = false;//if can be selected
     [SerializeField] SpriteRenderer renderer;
     [SerializeField] Color lockedNodeColor;
 
 
     LineRenderer lineRend;
     List<Transform> points;
+    bool enableDrawingLines = false;
     
     // Start is called before the first frame update
     public void Initialize(List<MapNode> allNodes)
     {
         FindChildNodes(allNodes);
+        MapController.Instance.OnIntersectionsRemoved += SetLineRendererPoints;
+        MapController.Instance.OnIntersectionsRemoved += ()=>enableDrawingLines=true;
+    }
+
+    private void SetLineRendererPoints()
+    {
         lineRend = GetComponent<LineRenderer>();
-        lineRend.positionCount = childNodes.Count*2;
+        lineRend.positionCount = childNodes.Count * 2;
         points = new List<Transform>();
         points.Add(transform);
         foreach (MapNode node in childNodes)
@@ -31,7 +38,7 @@ public class MapNode : MonoBehaviour
 
     private void Update()
     {
-        if (childNodes.Count > 0)
+        if (enableDrawingLines)
         {
             int posID = 0;
             for (int i = 0; i < childNodes.Count * 2; i++)
@@ -60,7 +67,7 @@ public class MapNode : MonoBehaviour
         }
     }
 
-    public void LockRoom()
+    public void LockRoom()//called when room was not selected
     {
         canBeSelected = false;
         //renderer.color = lockedNodeColor;

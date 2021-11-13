@@ -190,7 +190,7 @@ MonoBehaviour:
   - {fileID: 1370941274}
   - {fileID: 681156906}
   nodesContainer: {fileID: 2054723113}
-  playerMapPos: {fileID: 416014873}
+  playerPawn: {fileID: 416014873}
 --- !u!4 &111825380
 Transform:
   m_ObjectHideFlags: 0
