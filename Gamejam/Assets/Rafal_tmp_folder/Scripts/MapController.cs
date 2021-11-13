@@ -7,15 +7,15 @@ using UnityEngine.Events;
 public class MapController : MonoBehaviour
 {
     public static MapController Instance = null;
-    [SerializeField] int stepsToBoss = 20;//-1 for starting node
-    [SerializeField] MapNode[] nodesPrefabs = new MapNode[0];//nodes/room prefabs 
-    [SerializeField] Transform[] nodesSpawnPoints = new Transform[3];//used on start to create node tree, then used to move camera
-    List<MapNode> allNodes = new List<MapNode>();
-    MapNode currentlySelectedNode;
-    [SerializeField] Transform nodesContainer;//here i spawn nodes
-    [SerializeField] Transform playerPawn;//current position indicator
-    float yAxisSpawnShift = 2.5f;//space between 2 nodes in y axis
-
+    [SerializeField] int _stepsToBoss = 20;//-1 for starting node
+    [SerializeField] MapNode[] _nodesPrefabs = new MapNode[0];//nodes/room prefabs 
+    [SerializeField] Transform[] _nodesSpawnPoints = new Transform[3];//used on start to create node tree, then used to move camera
+    List<MapNode> _allNodes = new List<MapNode>();
+    MapNode _currentlySelectedNode;
+    [SerializeField] Transform _nodesContainer;//here i spawn nodes
+    [SerializeField] Transform _playerPawn;//current position indicator
+    float _yAxisSpawnShift = 2.5f;//space between 2 nodes in y axis
+    
     public event UnityAction OnIntersectionsRemoved;
 
     public void Initialize()
@@ -23,25 +23,25 @@ public class MapController : MonoBehaviour
         MapController.Instance = this;
         SpawnNodes();
         UnlockNextRooms();
-        nodesSpawnPoints[1].transform.position += new Vector3(0, yAxisSpawnShift , 0);
-        playerPawn.position = currentlySelectedNode.transform.position;
+        _nodesSpawnPoints[1].transform.position += new Vector3(0, _yAxisSpawnShift , 0);
+        _playerPawn.position = _currentlySelectedNode.transform.position;
     }
     void SpawnNodes()//trzeba dorobic potem losowanie typów nodeów
     {
         
         Vector3 spawnPos;
         //create first node
-        MapNode nodeInstance = Instantiate(nodesPrefabs[0]);
-        nodeInstance.transform.parent = nodesContainer;
-        spawnPos = nodesSpawnPoints[1].position;
+        MapNode nodeInstance = Instantiate(_nodesPrefabs[0]);
+        nodeInstance.transform.parent = _nodesContainer;
+        spawnPos = _nodesSpawnPoints[1].position;
         nodeInstance.transform.position = spawnPos;
         nodeInstance.depth = 0;
         nodeInstance.spawnPointId = 1;
-        currentlySelectedNode = nodeInstance;
-        allNodes.Add(nodeInstance);
+        _currentlySelectedNode = nodeInstance;
+        _allNodes.Add(nodeInstance);
 
         //create other nodes
-        for (int i = 1; i < stepsToBoss; i++)
+        for (int i = 1; i < _stepsToBoss; i++)
         {
             int spawnChance = 75;//%
             for (int j = 0; j < 3; j++)
@@ -55,50 +55,50 @@ public class MapController : MonoBehaviour
                 {
                     spawnChance = 40;//%
 
-                    nodeInstance = Instantiate(nodesPrefabs[0]);
-                    nodeInstance.transform.parent = nodesContainer;
+                    nodeInstance = Instantiate(_nodesPrefabs[0]);
+                    nodeInstance.transform.parent = _nodesContainer;
                     if (i % 2 == 1)
                     {
-                        spawnPos = new Vector3(nodesSpawnPoints[2 - j].position.x, nodesSpawnPoints[2 - j].position.y + i * yAxisSpawnShift, nodesSpawnPoints[2 - j].position.z);
+                        spawnPos = new Vector3(_nodesSpawnPoints[2 - j].position.x, _nodesSpawnPoints[2 - j].position.y + i * _yAxisSpawnShift, _nodesSpawnPoints[2 - j].position.z);
                         nodeInstance.spawnPointId = 2-j;
                     }
                     else
                     { 
-                        spawnPos = new Vector3(nodesSpawnPoints[j].position.x, nodesSpawnPoints[j].position.y + i*yAxisSpawnShift, nodesSpawnPoints[j].position.z);
+                        spawnPos = new Vector3(_nodesSpawnPoints[j].position.x, _nodesSpawnPoints[j].position.y + i*_yAxisSpawnShift, _nodesSpawnPoints[j].position.z);
                         nodeInstance.spawnPointId = j;
                     }
                     nodeInstance.transform.position = spawnPos;
                     nodeInstance.depth = i;                    
-                    allNodes.Add(nodeInstance);
+                    _allNodes.Add(nodeInstance);
                 }
             }
         }        
 
         //create boss node
-        nodeInstance = Instantiate(nodesPrefabs[0]);
-        nodeInstance.transform.parent = nodesContainer;
-        spawnPos = new Vector3(nodesSpawnPoints[1].position.x, nodesSpawnPoints[1].position.y + stepsToBoss * yAxisSpawnShift, nodesSpawnPoints[1].position.z);
+        nodeInstance = Instantiate(_nodesPrefabs[0]);
+        nodeInstance.transform.parent = _nodesContainer;
+        spawnPos = new Vector3(_nodesSpawnPoints[1].position.x, _nodesSpawnPoints[1].position.y + _stepsToBoss * _yAxisSpawnShift, _nodesSpawnPoints[1].position.z);
         nodeInstance.transform.position = spawnPos;
-        nodeInstance.depth = stepsToBoss;
+        nodeInstance.depth = _stepsToBoss;
         nodeInstance.spawnPointId = 1;
-        allNodes.Add(nodeInstance);
+        _allNodes.Add(nodeInstance);
 
         //post creation stuff
-        foreach (MapNode node in allNodes)
+        foreach (MapNode node in _allNodes)
         {
-            node.Initialize(allNodes);
+            node.Initialize(_allNodes);
         }
         RemoveIntersectionsInTree();
     }
     MapNode GetNodeAtPosition(int tmpDepth, int tmpSpwPtId)
     {
-        MapNode desiredNode = allNodes.Find(i => i.depth == tmpDepth && i.spawnPointId == tmpSpwPtId);
+        MapNode desiredNode = _allNodes.Find(i => i.depth == tmpDepth && i.spawnPointId == tmpSpwPtId);
         if (desiredNode != null) return desiredNode;
         else return null;
     }
     void RemoveIntersectionsInTree()
     {        
-        for (int i = 1; i < stepsToBoss; i++)
+        for (int i = 1; i < _stepsToBoss; i++)
         {
             MapNode[] nodesToCheck = new MapNode[6];
             nodesToCheck[0] = GetNodeAtPosition(i, 0);
@@ -121,20 +121,20 @@ public class MapController : MonoBehaviour
     }
     void UnlockNextRooms()
     {
-        foreach (MapNode n in currentlySelectedNode.childNodes)
+        foreach (MapNode n in _currentlySelectedNode.childNodes)
         {
             n.canBeSelected = true;
         }
     }
     public void SelectRoom(MapNode room)
     {
-        foreach (MapNode n in currentlySelectedNode.childNodes)
+        foreach (MapNode n in _currentlySelectedNode.childNodes)
         {
             if (n != room) n.LockRoom();
         }
-        currentlySelectedNode = room;
-        nodesSpawnPoints[1].transform.position += new Vector3(0, yAxisSpawnShift, 0);
-        playerPawn.position = currentlySelectedNode.transform.position;
+        _currentlySelectedNode = room;
+        _nodesSpawnPoints[1].transform.position += new Vector3(0, _yAxisSpawnShift, 0);
+        _playerPawn.position = _currentlySelectedNode.transform.position;
         UnlockNextRooms();//to trzeba bedzie wywolywac po rozpatrzeniu wnetrza pokoi
     }
 }
