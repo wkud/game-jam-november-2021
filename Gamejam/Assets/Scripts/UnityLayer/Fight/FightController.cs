@@ -31,7 +31,9 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
             unit.Initialize(this); // TODO: Rafał, dlaczego tu jest NullReferenceException przy uruchomieniu i jak to naprawić
         }
 
-        _initiativeTracker = new InitiativeTracker();
+        IEntity[] entities = Enemies.Concat(Allies).ToArray();
+        // TODO: Sort entities according to initiative
+        _initiativeTracker = new InitiativeTracker(entities);
 
         _playerMoveMaker = new PlayerMoveMaker(this);
         _playerMoveMaker.OnPlayerTurnEnd.AddListener(OnFinishedTurn); // TODO: add listener for playing animations
