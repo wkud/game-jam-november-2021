@@ -6,6 +6,11 @@ public class PoisonedState : IState
 
   public StateData Data => _data;
 
+  public PoisonedState(StateData stateData)
+  {
+    this._data = stateData;
+  }
+
   public void onTurnStart(EntityStats stats)
   {
   }
