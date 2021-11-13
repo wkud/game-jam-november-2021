@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
 
     public GameState GameState { get; private set; }
 
+
     private void Awake()
     {
         if (GameController.Instance == null)

@@ -9,7 +9,7 @@ public class Enemy : IEntity
     //TODO add states and 
     //TODO add cooldown counter
 
-    
+
     public EntityStats Stats { get => _stats; }
 
     public Enemy(IEnemyAi ai, EntityStats stats)
@@ -25,7 +25,7 @@ public class Enemy : IEntity
 
     public void MakeMove(IFightStateHolder fightState)
     {
-        var availableSkills = _stats.Skills.Where(s => s.CurrentCooldown <= 0).ToArray();
+        var availableSkills = _stats.Skills.Where(s => s.Data.CurrentCooldown <= 0).ToArray();
         _ai.MakeMove(fightState.Allies, fightState.Enemies, availableSkills);
     }
 
