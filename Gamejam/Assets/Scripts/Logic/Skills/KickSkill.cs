@@ -1,28 +1,28 @@
+using UnityEngine;
+
 public class KickSkill : ISkill
 {
-  private int _power;
-  private int _cooldown;
-  private const string _DESCRIPTION = "Kick him in the butt";
+  [SerializeField] private SkillData _data;
 
   public string Description
   {
-    get => _DESCRIPTION;
+    get => _data.Description;
   }
 
   public int Cooldown
   {
-    get => _cooldown;
+    get => _data.Cooldown;
   }
 
   public KickSkill(int power, int cooldown)
   {
-    this._power = power;
-    this._cooldown = cooldown;
+    this._data.Power = power;
+    this._data.Cooldown = cooldown;
   }
 
   public void Use(IEntity[] targets)
   {
-    targets[0]?.DealDamage(this._power);
+    targets[0]?.DealDamage(this._data.Power);
   }
 
 }

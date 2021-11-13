@@ -1,54 +1,46 @@
-
+using UnityEngine;
 
 public class Player : IEntity
 {
-  private ISkill[] _skills = new ISkill[3];
-  private IBuff[] _buffs = new IBuff[2];
-  private IDebuff[] _debuffs = new IDebuff[2];
-  private int _hp = 30;
-  private int _initiative = 10;
-  private int _attackModifier = 10;
-  private int _defence = 10;
-  private float _critChance = 10;
+  [SerializeField] private PlayerStats _stats;
 
-  public int Initiative { get => _initiative; set => _initiative = value; }
-  public int Hp { get => _initiative; set => _initiative = value; }
+  public int Initiative { get => _stats.Initiative; set => _stats.Initiative = value; }
+  public int Hp { get => _stats.Hp; set => _stats.Hp = value; }
 
-  public Player(int hp, int initiative)
+  public Player(PlayerStats stats)
   {
-    this._hp = hp;
-    this._initiative = initiative;
+    this._stats = stats;
   }
 
   public void DealDamage(int damage)
   {
-    this._hp -= damage;
+    this.Hp -= damage;
   }
 
   public void SetSkill(int slotNumber, ISkill skill)
   {
-    this._skills[slotNumber] = skill;
+    this._stats.Skills[slotNumber] = skill;
   }
 
   public void UseSkill(int slotNumber, IEntity[] targets)
   {
-    this._skills[slotNumber].Use(targets);
+    this._stats.Skills[slotNumber].Use(targets);
   }
 
   public void SetBuff(int slotNumber, IBuff buff)
   {
-    this._buffs[slotNumber]?.Deactivate(this);
+    this._stats.Buffs[slotNumber]?.Deactivate(this);
 
-    this._buffs[slotNumber] = buff;
-    this._buffs[slotNumber].Activate(this);
+    this._stats.Buffs[slotNumber] = buff;
+    this._stats.Buffs[slotNumber].Activate(this);
   }
 
   public void SetDebuff(int slotNumber, IDebuff debuff)
   {
-    this._debuffs[slotNumber]?.Deactivate(this);
+    this._stats.Debuffs[slotNumber]?.Deactivate(this);
 
-    this._debuffs[slotNumber] = debuff;
-    this._debuffs[slotNumber].Activate(this);
+    this._stats.Debuffs[slotNumber] = debuff;
+    this._stats.Debuffs[slotNumber].Activate(this);
 
   }
 
