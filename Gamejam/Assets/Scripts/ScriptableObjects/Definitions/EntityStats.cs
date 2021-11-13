@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "EntityStats", menuName = "ScriptableObjects/EntityStats", order = 2)]
 public class EntityStats : ScriptableObject
@@ -6,6 +8,7 @@ public class EntityStats : ScriptableObject
     [SerializeField] private EntityId _identifier;
     [SerializeField] private Bond _bond;
 
+    [SerializeField] private List<StateController> _states = new List<StateController>();
     [SerializeField] private ISkill[] _skills = new ISkill[3];
     [SerializeField] private IBuff[] _buffs = new IBuff[2];
     [SerializeField] private IDebuff[] _debuffs = new IDebuff[2];
@@ -20,6 +23,7 @@ public class EntityStats : ScriptableObject
     public EntityId Identifier { get => _identifier; set => _identifier = value; }
     public Bond Bond { get => _bond; set => _bond = value; }
 
+    public List<StateController> States { get => _states; set => _states = value; }
     public ISkill[] Skills { get => _skills; set => _skills = value; }
     public IBuff[] Buffs { get => _buffs; set => _buffs = value; }
     public IDebuff[] Debuffs { get => _debuffs; set => _debuffs = value; }

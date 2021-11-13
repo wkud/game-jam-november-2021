@@ -13,9 +13,8 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
     private IEntity _currentEntity; // an entity, which is currently making a move
     private InitiativeTracker _initiativeTracker;
     private PlayerMoveMaker _playerMoveMaker;
-    [SerializeField] private ResourceContainer _resourceContainer; // TODO move _resourceContainer into main (global) GameController
 
-    private IGameState _gameState;
+    private IGameState _gameState = GameController.Instance.GameState;
 
     public PlayerTurnState PlayerTurnState => _playerMoveMaker.State; // this enum informs buttons whether they should respond to events
 

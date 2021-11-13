@@ -1,10 +1,10 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Player : IEntity
 {
     [SerializeField] private EntityStats _stats;
-
-    public int Initiative { get => _stats.Initiative; set => _stats.Initiative = value; }
 
     public EntityStats Stats { get => _stats; }
 
@@ -49,13 +49,30 @@ public class Player : IEntity
 
     public bool IsSkillSingleTarget(int skillIndex)
     {
-        return this._stats.Skills[skillIndex].TargetCount == SkillTargetCount.One;
+        return this._stats.Skills[skillIndex].Data.TargetCount == SkillTargetCount.One;
     }
 
     public Bond GetSkillTargetBond(int skillIndex)
     {
-        return this._stats.Skills[skillIndex].TargetBound;
+        return this._stats.Skills[skillIndex].Data.TargetBond;
     }
-    
+
+    public void OnTurnStart()
+    {
+        foreach (StateController state in this._stats.States)
+        {
+            state.OnTurnStart(this._stats);
+        }
+    }
+
+    public void OnTurnEnd()
+    {
+        foreach (StateController state in this._stats.States)
+        {
+            state.OnTurnEnd(this._stats);
+            if (state.TurnsLeft <= 0) this._stats.States.Remove(state);
+        }
+    }
+
 
 }
