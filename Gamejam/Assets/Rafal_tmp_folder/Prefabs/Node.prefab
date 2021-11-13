@@ -50,6 +50,9 @@ MonoBehaviour:
   childNodes: []
   spawnPointId: 0
   depth: 0
+  canBeSelected: 0
+  renderer: {fileID: 7317635208476408467}
+  lockedNodeColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!50 &1061318865638702278
 Rigidbody2D:
   serializedVersion: 4
