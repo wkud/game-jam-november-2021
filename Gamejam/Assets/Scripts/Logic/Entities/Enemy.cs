@@ -1,20 +1,32 @@
+using UnityEngine;
+using System.Linq;
+
 public class Enemy : IEntity
 {
-  private int _hp = 30;
-  private int _initiative = 10;
+    private IEnemyAi _ai;
+    private EntityStats _stats;
 
-  public Enemy(int hp, int initiative)
-  {
-    this._hp = hp;
-    this._initiative = initiative;
-  }
+    //TODO add states and 
+    //TODO add cooldown counter
 
-  public void DealDamage(int damage)
-  {
-    this._hp -= damage;
-  }
+    
+    public EntityStats Stats { get => _stats; }
 
-  public int Initiative { get => _initiative; set => _initiative = value; }
-  public int Hp { get => _initiative; set => _initiative = value; }
+    public Enemy(IEnemyAi ai, EntityStats stats)
+    {
+        _ai = ai;
+        _stats = stats;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        this._stats.Hp -= damage;
+    }
+
+    public void MakeMove(IFightStateHolder fightState)
+    {
+        var availableSkills = _stats.Skills.Where(s => s.CurrentCooldown <= 0).ToArray();
+        _ai.MakeMove(fightState.Allies, fightState.Enemies, availableSkills);
+    }
 
 }

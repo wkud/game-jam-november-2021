@@ -2,27 +2,28 @@ using UnityEngine;
 
 public class KickSkill : ISkill
 {
-  [SerializeField] private SkillData _data;
+    [SerializeField] private SkillData _data;
 
-  public string Description
-  {
-    get => _data.Description;
-  }
+    public SkillData Data => _data;
 
-  public int Cooldown
-  {
-    get => _data.Cooldown;
-  }
+    public SkillTargetCount TargetCount { get => _data.TargetCount; }
+    public Bond TargetBound { get => _data.TargetBond; }
 
-  public KickSkill(int power, int cooldown)
-  {
-    this._data.Power = power;
-    this._data.Cooldown = cooldown;
-  }
+    public string Description { get => _data.Description; }
 
-  public void Use(IEntity[] targets)
-  {
-    targets[0]?.DealDamage(this._data.Power);
-  }
+    public int MaxCooldown { get => _data.MaxCooldown; }
+
+    public int CurrentCooldown { get => _data.CurrentCooldown; set => _data.CurrentCooldown = value; }
+
+
+    public KickSkill(SkillData data)
+    {
+        _data = data;
+    }
+
+    public void Use(IEntity user, IEntity[] targets)
+    {
+        targets[0]?.TakeDamage(this._data.Power);
+    }
 
 }
