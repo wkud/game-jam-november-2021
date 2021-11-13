@@ -28,10 +28,10 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
         _units.AddRange(_allies);
 
         var allyPresets = _gameState.GetCharacters(); //_dataContainer.GetRandomCharacterPresets(); // TODO do this once per game
-        InitializeUnits(_allies, allyPresets);
+        InitializeUnits(_allies, allyPresets.Select(e => (IEntity)e).ToList());
 
         var enemyPresets = _gameState.GetEnemiesForThisFight();
-        InitializeUnits(_enemies, enemyPresets);
+        InitializeUnits(_enemies, enemyPresets.Select(e => (IEntity)e).ToList());
 
         IEntity[] entities = Enemies.Concat(Allies).ToArray();
         // TODO: Sort entities according to initiative
@@ -41,7 +41,7 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
         _playerMoveMaker.OnPlayerTurnEnd.AddListener(OnFinishedTurn); // TODO: add listener for playing animations
     }
 
-    private void InitializeUnits(List<Unit> units, List<EntityStats> presets)
+    private void InitializeUnits(List<Unit> units, List<IEntity> presets)
     {
         for (int i = 0; i < units.Count; i++)
         {

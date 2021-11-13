@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IGameState
 {
-    List<EntityStats> GetEnemiesForThisFight();
-    List<EntityStats> GetCharacters();
+    List<Enemy> GetEnemiesForThisFight();
+    List<Player> GetCharacters();
 }
