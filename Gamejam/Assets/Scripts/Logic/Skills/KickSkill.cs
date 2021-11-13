@@ -6,16 +6,6 @@ public class KickSkill : ISkill
 
     public SkillData Data => _data;
 
-    public SkillTargetCount TargetCount { get => _data.TargetCount; }
-    public Bond TargetBound { get => _data.TargetBond; }
-
-    public string Description { get => _data.Description; }
-
-    public int MaxCooldown { get => _data.MaxCooldown; }
-
-    public int CurrentCooldown { get => _data.CurrentCooldown; set => _data.CurrentCooldown = value; }
-
-
     public KickSkill(SkillData data)
     {
         _data = data;
