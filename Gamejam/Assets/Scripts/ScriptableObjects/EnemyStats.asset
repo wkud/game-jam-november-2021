@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: EnemyStats
   m_EditorClassIdentifier: 
   _identifier: 0
-  _bond: 0
-  _hp: 30
-  _initiative: 10
-  _attackModifier: 10
-  _defence: 10
-  _critChance: 10
-  _threat: 10
+  _bond: 1
+  _hp: 10
+  _initiative: 7
+  _attackModifier: 4
+  _defence: 12
+  _critChance: 7
+  _threat: 3

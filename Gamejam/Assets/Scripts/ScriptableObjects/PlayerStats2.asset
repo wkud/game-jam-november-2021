@@ -15,7 +15,7 @@ MonoBehaviour:
   _identifier: 0
   _bond: 0
   _hp: 30
-  _initiative: 10
+  _initiative: 4
   _attackModifier: 10
   _defence: 10
   _critChance: 10
