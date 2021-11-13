@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class FightController : MonoBehaviour, IFightStateHolder  // class for main fight management logic 
 {
@@ -14,22 +15,26 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
     private InitiativeTracker _initiativeTracker;
     private PlayerMoveMaker _playerMoveMaker;
 
-    private IGameState _gameState = GameController.Instance.GameState;
+    private GameController _gameController;
+    private IGameState _gameState;
 
     public PlayerTurnState PlayerTurnState => _playerMoveMaker.State; // this enum informs buttons whether they should respond to events
 
     public IEntity[] Enemies => _enemies.Select(u => u.Entity).ToArray();
     public IEntity[] Allies => _allies.Select(u => u.Entity).ToArray();
 
-    void Start()
+    public void Initialize(GameController gameController)
     {
+        _gameController = gameController;
+        _gameState = _gameController.GameState;
+
         _units.AddRange(_enemies);
         _units.AddRange(_allies);
 
         var allyPresets = _gameState.GetCharacters(); //_dataContainer.GetRandomCharacterPresets(); // TODO do this once per game
         InitializeUnits(_allies, allyPresets.Select(e => (IEntity)e).ToList());
 
-        var enemyPresets = _gameState.GetEnemiesForThisFight();
+        var enemyPresets = _gameState.GetEnemiesForThisFight() ?? new List<Enemy>();
         InitializeUnits(_enemies, enemyPresets.Select(e => (IEntity)e).ToList());
 
         IEntity[] entities = Enemies.Concat(Allies).ToArray();
@@ -42,7 +47,7 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
 
     private void InitializeUnits(List<Unit> units, List<IEntity> presets)
     {
-        for (int i = 0; i < units.Count; i++)
+        for (int i = 0; i < presets.Count; i++)
         {
             units[i].Initialize(this, presets[i]);
         }

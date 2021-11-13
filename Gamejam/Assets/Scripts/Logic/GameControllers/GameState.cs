@@ -17,8 +17,9 @@ public class GameState : IGameState
 
     public List<Enemy> GetEnemiesForThisFight()
     {
-        var fightNode = (FightNode)CurrentNode;
-        return fightNode.Enemies.Select(s => (Enemy)EntityFactory.CreateEntity(s)).ToList();
+        //var fightNode = (FightNode)CurrentNode;
+        //return fightNode.Enemies.Select(s => (Enemy)EntityFactory.CreateEntity(s)).ToList();
+        return null;
     }
 
     public List<Player> GetCharacters()
