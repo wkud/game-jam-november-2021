@@ -16,4 +16,5 @@ MonoBehaviour:
   _description: 
   _power: 9001
   _cooldown: 5
-  _targetCountType: 0
+  _targetCount: 0
+  _targetBond: 0

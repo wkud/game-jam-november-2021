@@ -1,16 +1,8 @@
 public interface IEntity
 {
+    EntityStats Stats { get; }
+
+    void TakeDamage(int number);
 
 
-  void DealDamage(int number);
-  int Initiative
-  {
-    get;
-    set;
-  }
-  int Hp
-  {
-    get;
-    set;
-  }
 }

@@ -5,16 +5,10 @@ using UnityEngine.UI;
 
 public class UnitPortraitButton : MonoBehaviour
 {
-    private Unit _parentUnit;
-
     public void Initialize(Unit unit)
     {
         var button = GetComponent<Button>();
-        button.onClick.AddListener(unit.OnSelect);
+        button.onClick.AddListener(unit.OnClick);
     }
 
-    void Update()
-    {
-        
-    }
 }

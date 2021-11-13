@@ -1,33 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
     private UnitPortraitButton _portraitButton;
     private FightController _fightController;
 
+    [SerializeField] EntityStats _entityData;
+    public IEntity Entity { get; private set; }
+
     public void Initialize(FightController fightController)
     {
         _fightController = fightController;
+
+        Entity = EntityFactory.CreateEntity(_entityData);
 
         _portraitButton = GetComponentInChildren<UnitPortraitButton>();
         _portraitButton.Initialize(this);
     }
 
-    public void OnSelect()
+    public void OnClick()
     {
-        if (_fightController.State == FightState.WaitingForTarget)
+        if (_fightController.PlayerTurnState == PlayerTurnState.WaitingForTarget)
         {
-            _fightController.SetTarget(this);
+            _fightController.OnSelectTarget(this);
         }
     }
-
-    void Update()
-    {
-        
-    }
-
 
 }

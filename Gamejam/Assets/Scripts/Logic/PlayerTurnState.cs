@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum FightState 
+public enum PlayerTurnState 
 {
-    EnemyTurn,
+    WaitingForPlayerTurn,
     WaitingForSkill,
     WaitingForTarget,
 }

@@ -1,14 +1,16 @@
 public interface ISkill
 {
-  void Use(IEntity[] targets);
+    public SkillData Data { get; }
 
-  string Description
-  {
-    get;
-  }
+    public SkillTargetCount TargetCount { get; } 
+    public Bond TargetBound { get; }
 
-  int Cooldown
-  {
-    get;
-  }
+    void Use(IEntity user, IEntity[] targets);
+
+    string Description { get; }
+
+    int MaxCooldown { get; }
+
+    int CurrentCooldown { get; set; }
+
 }
