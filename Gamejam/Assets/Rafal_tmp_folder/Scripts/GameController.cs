@@ -5,7 +5,11 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public static GameController Instance = null;
-    [SerializeField] MapController mapController;
+    [SerializeField] private MapController mapController;
+
+    [SerializeField] private ResourceContainer _resources = new ResourceContainer();
+
+    public GameState GameState { get; private set; }
 
     private void Awake()
     {
@@ -19,6 +23,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameState = new GameState(_resources);
         mapController.Initialize();
     }
 
