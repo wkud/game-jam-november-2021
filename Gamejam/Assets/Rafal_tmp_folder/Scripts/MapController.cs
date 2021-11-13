@@ -2,32 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MapController : MonoBehaviour
 {
+    public static MapController Instance = null;
     [SerializeField] int stepsToBoss = 20;
     [SerializeField] MapNode[] nodesPrefabs = new MapNode[0];
-    [SerializeField] Transform[] nodesSpawnPoints = new Transform[3];
+    [SerializeField] Transform[] nodesSpawnPoints = new Transform[3];//used on start to create node tree, then used to move camera
     List<MapNode> allNodes = new List<MapNode>();
     MapNode currentlySelectedNode;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] Transform nodesContainer;
+    [SerializeField] Transform playerMapPos;
+    float yAxisSpawnShift = 2.5f;
+
+
+    public void Initialize()
     {
+        MapController.Instance = this;
         SpawnNodes();
+        UnlockNextRooms();
+        nodesSpawnPoints[1].transform.position += new Vector3(0, yAxisSpawnShift , 0);
+        playerMapPos.position = currentlySelectedNode.transform.position;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void SpawnNodes()//trzeba dorobic potem losowanie typów nodeów
     {
-        float yAxisSpawnShift = 2.5f;
+        
         Vector3 spawnPos;
         //create first node
         MapNode nodeInstance = Instantiate(nodesPrefabs[0]);
-        nodeInstance.transform.parent = transform;
+        nodeInstance.transform.parent = nodesContainer;
         spawnPos = nodesSpawnPoints[1].position;
         nodeInstance.transform.position = spawnPos;
         nodeInstance.depth = 0;
@@ -51,7 +54,7 @@ public class MapController : MonoBehaviour
                     spawnChance = 50;//%
 
                     nodeInstance = Instantiate(nodesPrefabs[0]);
-                    nodeInstance.transform.parent = transform;
+                    nodeInstance.transform.parent = nodesContainer;
                     spawnPos = new Vector3(nodesSpawnPoints[j].position.x, nodesSpawnPoints[j].position.y + i*yAxisSpawnShift, nodesSpawnPoints[j].position.z);                    
                     nodeInstance.transform.position = spawnPos;
                     nodeInstance.depth = i;
@@ -65,5 +68,24 @@ public class MapController : MonoBehaviour
             node.Initialize(allNodes);
         }
         //create boss node
-    }   
+    }
+
+    void UnlockNextRooms()
+    {
+        foreach (MapNode n in currentlySelectedNode.childNodes)
+        {
+            n.canBeSelected = true;
+        }
+    }
+    public void SelectRoom(MapNode room)
+    {
+        foreach (MapNode n in currentlySelectedNode.childNodes)
+        {
+            if (n != room) n.LockRoom();
+        }
+        currentlySelectedNode = room;
+        nodesSpawnPoints[1].transform.position += new Vector3(0, yAxisSpawnShift, 0);
+        playerMapPos.position = currentlySelectedNode.transform.position;
+        UnlockNextRooms();//to trzeba bedzie wywolywac po rozpatrzeniu pokoi
+    }
 }
