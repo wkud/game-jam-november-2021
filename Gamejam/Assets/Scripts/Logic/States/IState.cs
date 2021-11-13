@@ -1,6 +1,6 @@
 public interface IState
 {
-  void onTurnStart(EntityStats stats);
-  void onTurnEnd(EntityStats stats);
-  StateData Data { get; }
+    void OnTurnStart(EntityStats stats);
+    void OnTurnEnd(EntityStats stats);
+    StateData Data { get; }
 }
