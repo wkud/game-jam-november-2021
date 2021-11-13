@@ -1,0 +1,17 @@
+using UnityEngine;
+
+public class PoisonedState : IState
+{
+  [SerializeField] private StateData _data;
+
+  public StateData Data => _data;
+
+  public void onTurnStart(EntityStats stats)
+  {
+  }
+
+  public void onTurnEnd(EntityStats stats)
+  {
+    stats.Hp -= this._data.Power;
+  }
+}

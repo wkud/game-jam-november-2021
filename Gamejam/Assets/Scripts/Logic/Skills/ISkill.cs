@@ -1,16 +1,16 @@
 public interface ISkill
 {
-    public SkillData Data { get; }
+  SkillData Data { get; }
 
-    public SkillTargetCount TargetCount { get; } 
-    public Bond TargetBound { get; }
+  SkillTargetCount TargetCount { get; }
+  Bond TargetBound { get; }
 
-    void Use(IEntity user, IEntity[] targets);
+  void Use(IEntity user, IEntity[] targets);
 
-    string Description { get; }
+  string Description { get; }
 
-    int MaxCooldown { get; }
+  int MaxCooldown { get; }
 
-    int CurrentCooldown { get; set; }
+  int CurrentCooldown { get; set; }
 
 }
