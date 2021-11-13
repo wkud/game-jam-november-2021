@@ -8,10 +8,11 @@ public class Unit : MonoBehaviour
     [SerializeField] EntityStats _entityData;
     public IEntity Entity { get; private set; }
 
-    public void Initialize(FightController fightController)
+    public void Initialize(FightController fightController, EntityStats stats)
     {
         _fightController = fightController;
 
+        _entityData = stats;
         Entity = EntityFactory.CreateEntity(_entityData);
 
         _portraitButton = GetComponentInChildren<UnitPortraitButton>();
@@ -25,5 +26,5 @@ public class Unit : MonoBehaviour
             _fightController.OnSelectTarget(this);
         }
     }
-
+    
 }
