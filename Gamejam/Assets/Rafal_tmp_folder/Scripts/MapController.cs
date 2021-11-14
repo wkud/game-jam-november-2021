@@ -139,6 +139,18 @@ public class MapController : MonoBehaviour
         _playerPawn.position = _currentlySelectedNode.transform.position;
         GameController.Instance.GameState.CurrentNode = room;
 
-        UnlockNextRooms();//to trzeba bedzie wywolywac po rozpatrzeniu wnetrza pokoi
+        UnlockNextRooms();//pamietac zeby nie dalo sie od razu kliknac w nastepny
+
+        if (room is FightNode)
+        {
+            GameController.Instance.GameState.CurrentNode = room;
+            GameController.Instance.OpenScene(SceneId.Fight);
+        }
+        else if (room is AltarNode)
+        {
+            AltarController.Instance.ResetAltar();
+            AltarController.Instance.GenerateAltarOfferings();
+        }
+        
     }
 }
