@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e79fdded53be5149b1fe91a4aeb8dd1, type: 3}
   m_Name: EnemyStats
   m_EditorClassIdentifier: 
-  _identifier: 0
+  _identifier: 3
   _bond: 1
   _hp: 10
   _initiative: 7

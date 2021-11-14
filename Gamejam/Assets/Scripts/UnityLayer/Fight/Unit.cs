@@ -31,6 +31,12 @@ public class Unit : MonoBehaviour
         {
             skillButton.Initialize(this);
         }
+
+        var statControllers = GetComponentsInChildren<StatController>();
+        foreach (var statController in statControllers)
+        {
+            statController.Initialize(this);
+        }
     }
 
     public void OnPortraitClick()
