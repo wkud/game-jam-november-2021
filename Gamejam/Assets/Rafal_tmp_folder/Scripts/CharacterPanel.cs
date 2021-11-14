@@ -26,7 +26,7 @@ public class CharacterPanel : MonoBehaviour
     [SerializeField] Image debuff1Sprite;
     [SerializeField] Image debuff2Sprite;
     // Start is called before the first frame update
-    void Start()
+    public void Initialize()
     {
         GameController.Instance.OnStatChanged += UpdateUnitStatsUI;
     }
@@ -35,14 +35,14 @@ public class CharacterPanel : MonoBehaviour
     {
         if (_id == unitID)
         {
-            //hpText.text=unit.MaxHp.ToString();
+            hpText.text=unit.Stats.MaxHp.ToString();
             initiativeText.text = unit.Stats.Initiative.ToString();
             attackText.text = unit.Stats.AttackModifier.ToString();
             defenceText.text = unit.Stats.Defence.ToString();
             critChanceText.text = unit.Stats.CritChance.ToString();
             threatText.text = unit.Stats.Threat.ToString();
 
-            ///slider.value = (float)unit.Hp / unit.MaxHp;
+            slider.value = (float)unit.Stats.CurrentHp / unit.Stats.MaxHp;
 
 
             /*if (unit.Skills[0]!=null && unit.Skills[0].Data.Sprite!=null) skill1Sprite.sprite = unit.Skills[0].Data.Sprite;

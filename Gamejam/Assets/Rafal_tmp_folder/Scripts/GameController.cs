@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour
             GameController.Instance = this;
             DontDestroyOnLoad(this);
         }
-        else Destroy(this);
+        else Destroy(gameObject);
     }
 
     void Start()
@@ -38,8 +38,10 @@ public class GameController : MonoBehaviour
         _mapController = FindObjectOfType<MapController>();
         _mapController.Initialize();
 
-        
-
+        foreach (CharacterPanel panel in FindObjectsOfType<CharacterPanel>())
+        {
+            panel.Initialize();
+        }
         for (int i = 0; i < 4; i++)
         {
             OnStatChanged?.Invoke(i, GameState.Allies[i]);
@@ -64,17 +66,28 @@ public class GameController : MonoBehaviour
 
             _mapController.gameObject.SetActive(false);
         }
+        else if(scene.buildIndex == (int)SceneId.Map)
+        {
+            foreach (CharacterPanel panel in FindObjectsOfType<CharacterPanel>())
+            {
+                panel.Initialize();
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                OnStatChanged?.Invoke(i, GameState.Allies[i]);
+            }
+        }
     }
 
     public void ChangeCharacterStat(StatName statType, int value, int unitId)
     {
         switch (statType)
         {
-            /*case StatType.MaxHp:
-                GameState.Allies[unitId].Stats.MaxHp += value;
-                if (GameState.Allies[unitId].MaxHp < 0) GameState.Allies[unitId].MaxHp = 0;
-                break;*/
             case StatName.Hp:
+                GameState.Allies[unitId].Stats.MaxHp += value;
+                if (GameState.Allies[unitId].Stats.MaxHp < 0) GameState.Allies[unitId].Stats.MaxHp = 0;
+                break;
+            case StatName.CurrentHp:
                 GameState.Allies[unitId].Stats.CurrentHp += value;
                 if (GameState.Allies[unitId].Stats.CurrentHp < 0) GameState.Allies[unitId].Stats.CurrentHp = 0;
                 break;
