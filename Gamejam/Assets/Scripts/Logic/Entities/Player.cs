@@ -41,6 +41,11 @@ public class Player : Entity
         this._stats.Skills[slotNumber].Use(this, targets);
     }
 
+    public Skill GetSkill(int slotNumber)
+    {
+        return _stats.Skills[slotNumber];
+    }
+
     public bool IsSkillSingleTarget(int skillIndex)
     {
         var skill = this._stats.Skills[skillIndex];

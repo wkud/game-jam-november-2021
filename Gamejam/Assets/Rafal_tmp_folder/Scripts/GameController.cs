@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Initialize();
+        TryInitializeFightController(); // for debug in fight scene
     }
 
     public void Initialize()
@@ -47,24 +48,24 @@ public class GameController : MonoBehaviour
             OnStatChanged?.Invoke(i, GameState.Allies[i]);
         }
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
-
-        //OpenScene(SceneId.Fight);
+        SceneManager.sceneLoaded += (Scene scena, LoadSceneMode mode) => TryInitializeFightController();
     }
 
-    public void OpenScene(SceneId scene) // map or altar
+    public void OpenScene(SceneId scene)
     {
         _mapController.gameObject.SetActive(scene == SceneId.Map);
 
         SceneManager.LoadScene((int)scene);
     }
 
-    private void  OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void TryInitializeFightController()
     {
-        if (scene.buildIndex == (int)SceneId.Fight)
+        if (SceneManager.GetActiveScene().buildIndex == (int)SceneId.Fight)
         {
             _fightController = FindObjectOfType<FightController>();
             _fightController.Initialize(this);
+
+            _mapController.gameObject.SetActive(false);
         }
         else if(scene.buildIndex == (int)SceneId.Map)
         {
