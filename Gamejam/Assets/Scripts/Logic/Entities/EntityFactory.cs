@@ -13,6 +13,11 @@ public static class EntityFactory
 
     public static IEntity CreateEntity(EntityStats entityData)
     {
+        if (entityData.Bond == Bond.Ally && entityData.Identifier != EntityId.PlayerCharacter)
+        {
+            throw new FormatException("Entity stats with Bond=Ally must have Identifier=PlayerCharacter.");
+        }
+
         IEntity entity = entityData.Bond == Bond.Ally 
             ? new Player(entityData) as IEntity
             : CreateEnemy(entityData) as IEntity;
