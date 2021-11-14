@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Tooltip : MonoBehaviour
 {
@@ -9,7 +10,8 @@ public class Tooltip : MonoBehaviour
 
     [SerializeField] private Camera uiCamera;
 
-    private Text tooltipText;
+    [SerializeField] private TextMeshProUGUI _descriptionTextArea;
+    [SerializeField] private TextMeshProUGUI _titleTextArea; 
     private RectTransform backgroundRectTransform;
 
     private void Awake()
@@ -17,24 +19,28 @@ public class Tooltip : MonoBehaviour
         gameObject.SetActive(false);
         instance = this;
         backgroundRectTransform = transform.Find("background").GetComponent<RectTransform>();
-        tooltipText = transform.Find("text").GetComponent<Text>();
+        //_descriptionTextArea = transform.Find("text").GetComponent<Text>();
     }
 
     private void Update()
     {
-        Vector2 localPoint;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.GetComponent<RectTransform>(), Input.mousePosition, uiCamera, out localPoint);
-        transform.localPosition = localPoint;
+        //Vector2 localPoint;
+        //RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.GetComponent<RectTransform>(), Input.mousePosition, uiCamera, out localPoint);
+        //transform.localPosition = localPoint;
     }
 
-    private void ShowTooltip(string tooltipString)
+    private void ShowTooltip(string title, string description)
     {
-        gameObject.SetActive(true);
+        _descriptionTextArea.text = description;
+        _titleTextArea.text = title;
+        //float textPaddingSize = 4f;
+        //Vector2 backgroundSize = new Vector2(tooltipText.preferredWidth + textPaddingSize * 2f, tooltipText.preferredHeight + textPaddingSize * 2f);
 
-        tooltipText.text = tooltipString;
-        float textPaddingSize = 4f;
-        Vector2 backgroundSize = new Vector2(tooltipText.preferredWidth + textPaddingSize * 2f, tooltipText.preferredHeight + textPaddingSize * 2f);
-        this.backgroundRectTransform.sizeDelta = backgroundSize;
+        //var rectTransform = tooltipText.GetComponent<RectTransform>().rect;
+        //var backgroundSize = new Vector2(rectTransform.width, rectTransform.height);
+        //this.backgroundRectTransform.sizeDelta = backgroundSize;
+
+        gameObject.SetActive(true);
     }
 
     private void HideTooltip()
@@ -42,9 +48,9 @@ public class Tooltip : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public static void ShowTooltip_Static(string tooltipString)
+    public static void ShowTooltip_Static(string title, string description)
     {
-        instance.ShowTooltip(tooltipString);
+        instance.ShowTooltip(title, description);
     }
 
     public static void HideTooltip_Static()

@@ -66,7 +66,7 @@ public class GameController : MonoBehaviour
 
             _mapController.gameObject.SetActive(false);
         }
-        else if(scene.buildIndex == (int)SceneId.Map)
+        else if(SceneManager.GetActiveScene().buildIndex == (int)SceneId.Map)
         {
             foreach (CharacterPanel panel in FindObjectsOfType<CharacterPanel>())
             {

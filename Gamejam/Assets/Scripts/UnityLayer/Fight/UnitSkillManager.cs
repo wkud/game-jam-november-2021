@@ -16,9 +16,13 @@ public class UnitSkillManager
             var controller = skillControllers.FirstOrDefault(c => c.SkillSlotNumber == i);
             var skill = (unit.Entity as Player).GetSkill(i);
 
-            if (skill != null)
+            if (skill is null)
             {
-                controller.Hide();
+                controller.SetInteractable(false); // turn of this button
+            }
+            else
+            {
+                controller.UpdateSprite();
             }
         }
     }

@@ -17,6 +17,8 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
     private InitiativeTracker _initiativeTracker;
     private PlayerMoveMaker _playerMoveMaker;
 
+    private InitiativeController _initiativeUiController;
+
     private GameController _gameController;
     private IGameState _gameState;
 
@@ -46,6 +48,9 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
         // set intiative
         Entity[] entities = Enemies.Concat(Allies).ToArray();
         _initiativeTracker = new InitiativeTracker(entities);
+
+        _initiativeUiController = FindObjectOfType<InitiativeController>();
+        _initiativeUiController.Initialize(_initiativeTracker);
 
         // setup player move input system
         _playerMoveMaker = new PlayerMoveMaker(this);
@@ -93,6 +98,8 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
     private void OnFinishedTurn() // this function needs to be called when entity ends it's turn
     {
         _currentEntity = _initiativeTracker.GetNextEntity();
+
+        _initiativeUiController.OnFinishedTurn();
         StartTurn();
     }
 
