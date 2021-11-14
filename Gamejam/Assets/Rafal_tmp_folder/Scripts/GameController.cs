@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-
 public class GameController : MonoBehaviour
 {
     public static GameController Instance = null;
@@ -13,18 +12,9 @@ public class GameController : MonoBehaviour
     private FightController _fightController;
 
     [SerializeField] private ResourceContainer _resources = new ResourceContainer();
-    
-    public event UnityAction<int,Player> OnStatChanged;
 
     public GameState GameState { get; private set; }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            ChangeCharacterStat(StatType.Hp, -1, 0);
-        }
-    }
     private void Awake()
     {
         if (GameController.Instance == null)
@@ -37,17 +27,19 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
         GameState = new GameState(_resources);
 
         _mapController = FindObjectOfType<MapController>();
         _mapController.Initialize();
-        for (int i = 0; i < 4; i++)
-        {
-            OnStatChanged?.Invoke(i, GameState.Allies[i]);
-        }
 
         SceneManager.sceneLoaded += OnSceneLoaded;
-        //OpenScene(SceneId.Fight);
+
+        OpenScene(SceneId.Fight);
     }
 
     public void OpenScene(SceneId scene) // map or altar

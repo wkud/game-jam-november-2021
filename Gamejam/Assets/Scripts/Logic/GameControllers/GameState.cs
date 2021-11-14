@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 public class GameState : IGameState
 {
@@ -9,9 +7,10 @@ public class GameState : IGameState
 
     public MapNode CurrentNode { private get; set; }
 
-
+    private ResourceContainer _resourceContainer;
     public GameState(ResourceContainer resourceContainer)
     {
+        _resourceContainer = resourceContainer;
         Allies = resourceContainer.GetRandomCharacterPresets().Select(s => (Player)EntityFactory.CreateEntity(s)).ToList();
     }
 
@@ -20,7 +19,11 @@ public class GameState : IGameState
         List<EntityStats> test = ((FightNode)CurrentNode).Enemies; 
         //var fightNode = (FightNode)CurrentNode;
         //return fightNode.Enemies.Select(s => (Enemy)EntityFactory.CreateEntity(s)).ToList();
-        return null;
+
+        // return random enemies for testing
+        var enemyStats = _resourceContainer.EnemyStats.First();
+        var enemy = (Enemy)EntityFactory.CreateEntity(enemyStats);
+        return new List<Enemy>() { enemy, enemy };
     }
 
     public List<Player> GetCharacters()

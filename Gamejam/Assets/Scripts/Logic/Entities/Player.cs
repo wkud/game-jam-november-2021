@@ -1,65 +1,58 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 
-public enum StatType
+public class Player : Entity
 {
-    MaxHp,
-    Hp,
-    Initiative,
-    AttackModifier,
-    Defence,
-    CritChance,
-    Threat
-}
-public class Player : IEntity
-{
-    [SerializeField] private EntityStats _stats;
+    public Player(EntityStats initialStats) : base(initialStats) { }
 
-    public EntityStats Stats { get => _stats; }
-
-    public Player(EntityStats stats)
-    {
-        this._stats = stats;
-    }
-
-    public void TakeDamage(int damage)
-    {
-        this._stats.Hp -= damage;
-    }
-
-
-    public void SetBuff(int slotNumber, IBuff buff)
-    {
-        this._stats.Buffs[slotNumber]?.Deactivate(this);
-
-        this._stats.Buffs[slotNumber] = buff;
-        this._stats.Buffs[slotNumber].Activate(this);
-    }
-
-    public void SetDebuff(int slotNumber, IDebuff debuff)
-    {
-        this._stats.Debuffs[slotNumber]?.Deactivate(this);
-
-        this._stats.Debuffs[slotNumber] = debuff;
-        this._stats.Debuffs[slotNumber].Activate(this);
-
-    }
-
-
-    public void SetSkill(int slotNumber, ISkill skill)
+    public void SetSkill(int slotNumber, Skill skill)
     {
         this._stats.Skills[slotNumber] = skill;
     }
 
-    public void UseSkill(int slotNumber, IEntity[] targets)
+    public string GetSkillDescription(int slotNumber)
+    {
+        return this._stats.Skills[slotNumber]?.Data?.Description;
+    }
+
+    public string GetStatDescription(StatName statName)
+    {
+        switch (statName)
+        {
+            case StatName.AttackModifier:
+                return "AttackModifier: " + _stats.AttackModifier;
+            case StatName.CritChance:
+                return "CritChance: " + _stats.CritChance;
+            case StatName.Defence:
+                return "Defence: " + _stats.Defence;
+            case StatName.Hp:
+                return "Hp: " + _stats.CurrentHp;
+            case StatName.Initiative:
+                return "Initiative: " + _stats.Initiative;
+            case StatName.Threat:
+                return "Threat: " + _stats.Threat;
+            default:
+                return "";
+        }
+    }
+
+    public void UseSkill(int slotNumber, Entity[] targets)
     {
         this._stats.Skills[slotNumber].Use(this, targets);
     }
 
     public bool IsSkillSingleTarget(int skillIndex)
     {
-        return this._stats.Skills[skillIndex].Data.TargetCount == SkillTargetCount.One;
+        var skill = this._stats.Skills[skillIndex];
+        try
+        {
+            return skill.Data.TargetCount == SkillTargetCount.One;
+        }
+        catch (NullReferenceException)
+        {
+            Debug.LogError("There is no skill in that slot");
+            return false;
+        }
     }
 
     public Bond GetSkillTargetBond(int skillIndex)

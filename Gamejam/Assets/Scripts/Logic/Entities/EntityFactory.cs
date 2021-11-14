@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class EntityFactory 
+public static class EntityFactory
 {
     private static Dictionary<EntityId, IEnemyAi> _enemyAis = new Dictionary<EntityId, IEnemyAi>()
     {
@@ -11,18 +11,27 @@ public static class EntityFactory
         { EntityId.JaguarWarrior, new JaguarWarriorAi() },
     };
 
-    public static IEntity CreateEntity(EntityStats entityData)
+    public static Entity CreateEntity(EntityStats entityData)
     {
-        IEntity entity = entityData.Bond == Bond.Ally 
-            ? new Player(entityData) as IEntity
-            : CreateEnemy(entityData) as IEntity;
+        if (entityData.Bond == Bond.Ally && entityData.Identifier != EntityId.PlayerCharacter)
+        {
+            Debug.LogError("Entity stats with Bond=Ally must have Identifier=PlayerCharacter.");
+        }
+        if (entityData.Bond == Bond.Enemy && entityData.Identifier == EntityId.PlayerCharacter)
+        {
+            Debug.LogError("Entity stats with Bond=Enemy cannot have Identifier=PlayerCharacter.");
+        }
+
+        Entity entity = entityData.Bond == Bond.Ally
+            ? new Player(entityData) as Entity
+            : CreateEnemy(entityData) as Entity;
         return entity;
     }
 
     private static Enemy CreateEnemy(EntityStats entityData)
     {
         var enemyAi = _enemyAis[entityData.Identifier];
-        return new Enemy(enemyAi, entityData);
+        return new Enemy(entityData, enemyAi);
     }
 
 }
