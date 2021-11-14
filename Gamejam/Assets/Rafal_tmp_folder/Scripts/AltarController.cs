@@ -5,15 +5,9 @@ using UnityEngine;
 public class AltarController : MonoBehaviour
 {
     public static AltarController Instance = null;
-    
-    public StatName[] sacrifices = new StatName[4];
-    public int[] sacrificeAmount = new int[4] { -1,-1,-1,-1};
 
-    public StatName[] statGifts = new StatName[4];
-    public int[] statGiftAmount = new int[4] { -1, -1, -1, -1 };
-    public Skill[] skillGifts = new Skill[4];
-    [SerializeField] SkillData[] skills;
-    [SerializeField] Skill[] sk;
+    [SerializeField] Deal[] allDeals;
+    public Deal[] availableDeals = new Deal[4];
 
     public int offeringID = -1;
 
@@ -30,44 +24,23 @@ public class AltarController : MonoBehaviour
         //switch buttons
     }
 
-    /*public void ResetAltar()
+    public void GetNewDeals()
     {
-        offeringID = -1;
-
-        sacrifices = new StatType[4];
-        sacrificeAmount = new int[4] { -1, -1, -1, -1 };
-        statGifts = new StatType[4];
-        statGiftAmount = new int[4] { -1, -1, -1, -1 };
-        skillGifts = new ISkill[4];
+        int dealId1 = -1;
+        int dealId2 = -1;
+        int dealId3 = -1;
+        int dealId4 = -1;
+        for (int i = 0; i < 4; i++)
+        {
+            int id;
+            do
+            {
+                id = Random.Range(0, allDeals.Length);
+            }
+            while (id == dealId1 || id == dealId2 || id == dealId3 || id == dealId4);
+            availableDeals[i] = allDeals[id];
+            
+        }
     }
-
-    public void GenerateAltarOfferings()
-    {
-        //price
-        for (int i = 0; i < 4; i++)
-        {
-            sacrifices[i] = (StatType)Random.Range(0, (int)6);
-            sacrificeAmount[i] = Random.Range(1, (int)4);
-        }
-
-        for (int i = 0; i < 4; i++)
-        {
-            if (Random.Range(0, 1f) == 0)//0-stat, 1-skill
-            {
-                do
-                {
-                    statGifts[i] = (StatType)Random.Range(0, (int)6);
-                }
-                while (statGifts[i] == sacrifices[i]);
-
-                statGiftAmount[i] = Random.Range(3, (int)6);
-            }
-            else
-            {
-                //skillGifts[i] = //skills[Random.Range(0,skills.Length)];
-            }
-        }
-        
-    }*/
 }
 
