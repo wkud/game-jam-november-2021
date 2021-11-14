@@ -1,7 +1,7 @@
 
-public interface IFightStateHolder 
+public interface IFightStateHolder
 {
-    IEntity[] Enemies { get; }
-    IEntity[] Allies { get; }
+    Entity[] Enemies { get; }
+    Entity[] Allies { get; }
 
 }

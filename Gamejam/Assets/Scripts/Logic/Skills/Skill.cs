@@ -7,5 +7,5 @@ public abstract class Skill
         Data = data;
     }
 
-    public abstract void Use(IEntity user, IEntity[] targets);
+    public abstract void Use(Entity user, Entity[] targets);
 }

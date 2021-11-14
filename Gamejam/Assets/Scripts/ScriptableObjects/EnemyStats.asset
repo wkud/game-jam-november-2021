@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _identifier: 3
   _bond: 1
-  _hp: 10
+  _maxHp: 30
+  _currentHp: 30
   _initiative: 7
   _attackModifier: 4
   _defence: 12

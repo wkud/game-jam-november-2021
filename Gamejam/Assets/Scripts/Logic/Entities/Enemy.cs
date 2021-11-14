@@ -1,27 +1,20 @@
 using UnityEngine;
 using System.Linq;
 
-public class Enemy : IEntity
+public class Enemy : Entity
 {
     private IEnemyAi _ai;
-    private EntityStats _stats;
 
     //TODO add states and 
     //TODO add cooldown counter
 
 
-    public EntityStats Stats { get => _stats; }
 
-    public Enemy(IEnemyAi ai, EntityStats stats)
+    public Enemy(EntityStats initialStats, IEnemyAi ai) : base(initialStats)
     {
         _ai = ai;
-        _stats = stats;
     }
 
-    public void TakeDamage(int damage)
-    {
-        this._stats.Hp -= damage;
-    }
 
     public void MakeMove(IFightStateHolder fightState)
     {

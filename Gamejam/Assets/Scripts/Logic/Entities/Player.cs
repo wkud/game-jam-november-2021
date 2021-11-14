@@ -1,21 +1,9 @@
 using UnityEngine;
 using System;
 
-public class Player : IEntity
+public class Player : Entity
 {
-    [SerializeField] private EntityStats _stats;
-
-    public EntityStats Stats { get => _stats; }
-
-    public Player(EntityStats stats)
-    {
-        this._stats = stats;
-    }
-
-    public void TakeDamage(int damage)
-    {
-        this._stats.Hp -= damage;
-    }
+    public Player(EntityStats initialStats) : base(initialStats) { }
 
     public void SetSkill(int slotNumber, Skill skill)
     {
@@ -38,7 +26,7 @@ public class Player : IEntity
             case StatName.Defence:
                 return "Defence: " + _stats.Defence;
             case StatName.Hp:
-                return "Hp: " + _stats.Hp;
+                return "Hp: " + _stats.CurrentHp;
             case StatName.Initiative:
                 return "Initiative: " + _stats.Initiative;
             case StatName.Threat:
@@ -48,7 +36,7 @@ public class Player : IEntity
         }
     }
 
-    public void UseSkill(int slotNumber, IEntity[] targets)
+    public void UseSkill(int slotNumber, Entity[] targets)
     {
         this._stats.Skills[slotNumber].Use(this, targets);
     }
