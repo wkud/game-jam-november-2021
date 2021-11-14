@@ -67,7 +67,7 @@ public class GameController : MonoBehaviour
 
             _mapController.gameObject.SetActive(false);
         }
-        else if(SceneManager.GetActiveScene().buildIndex == (int)SceneId.Map)
+        /*else if(SceneManager.GetActiveScene().buildIndex == (int)SceneId.Map)
         {
             foreach (CharacterPanel panel in FindObjectsOfType<CharacterPanel>())
             {
@@ -77,7 +77,7 @@ public class GameController : MonoBehaviour
             {
                 OnStatChanged?.Invoke(i, GameState.Allies[i]);
             }
-        }
+        }*/
     }
 
     public void ChangeCharacterStat(StatName statType, int value, int unitId)

@@ -28,6 +28,8 @@ public class CharacterPanel : MonoBehaviour
     // Start is called before the first frame update
     public void Initialize()
     {
+        GameController.Instance.OnStatChanged -= UpdateUnitStatsUI;
+        GameController.Instance.OnSkillChanged -= UpdateUnitSkillUI;
         GameController.Instance.OnStatChanged += UpdateUnitStatsUI;
         GameController.Instance.OnSkillChanged += UpdateUnitSkillUI;
     }

@@ -156,6 +156,7 @@ public class MapController : MonoBehaviour
     }
     public void SelectRoom(MapNode room)
     {
+        room.LockRoom();
         foreach (MapNode n in _currentlySelectedNode.childNodes)
         {
             if (n != room) n.LockRoom();
@@ -174,7 +175,7 @@ public class MapController : MonoBehaviour
         }
         else if (room is AltarNode)
         {
-            AltarController.Instance.GetNewDeals();
+            AltarController.Instance.TurnChildrenOn();
         }
         
     }
