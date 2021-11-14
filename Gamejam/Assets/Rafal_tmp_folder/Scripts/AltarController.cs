@@ -11,8 +11,9 @@ public class AltarController : MonoBehaviour
 
     public StatType[] statGifts = new StatType[4];
     public int[] statGiftAmount = new int[4] { -1, -1, -1, -1 };
-    public SkillData[] skillGifts = new SkillData[4];
+    public ISkill[] skillGifts = new ISkill[4];
     [SerializeField] SkillData[] skills;
+    [SerializeField,SerializeReference] ISkill[] sk;
 
     public int offeringID = -1;
 
@@ -37,7 +38,7 @@ public class AltarController : MonoBehaviour
         sacrificeAmount = new int[4] { -1, -1, -1, -1 };
         statGifts = new StatType[4];
         statGiftAmount = new int[4] { -1, -1, -1, -1 };
-        skillGifts = new SkillData[4];
+        skillGifts = new ISkill[4];
     }
 
     public void GenerateAltarOfferings()
@@ -63,7 +64,7 @@ public class AltarController : MonoBehaviour
             }
             else
             {
-                skillGifts[i] = skills[Random.Range(0,skills.Length)];
+                //skillGifts[i] = //skills[Random.Range(0,skills.Length)];
             }
         }
         

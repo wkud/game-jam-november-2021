@@ -17,6 +17,7 @@ public class GameState : IGameState
 
     public List<Enemy> GetEnemiesForThisFight()
     {
+        List<EntityStats> test = ((FightNode)CurrentNode).Enemies; 
         //var fightNode = (FightNode)CurrentNode;
         //return fightNode.Enemies.Select(s => (Enemy)EntityFactory.CreateEntity(s)).ToList();
         return null;

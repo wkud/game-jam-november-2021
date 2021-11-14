@@ -70,33 +70,33 @@ public class GameController : MonoBehaviour
     {
         switch (statType)
         {
-            case StatType.MaxHp:
-                GameState.Allies[unitId].MaxHp += value;
+            /*case StatType.MaxHp:
+                GameState.Allies[unitId].Stats.MaxHp += value;
                 if (GameState.Allies[unitId].MaxHp < 0) GameState.Allies[unitId].MaxHp = 0;
-                break;
+                break;*/
             case StatType.Hp:
-                GameState.Allies[unitId].Hp += value;
-                if (GameState.Allies[unitId].Hp < 0) GameState.Allies[unitId].Hp = 0;
+                GameState.Allies[unitId].Stats.Hp += value;
+                if (GameState.Allies[unitId].Stats.Hp < 0) GameState.Allies[unitId].Stats.Hp = 0;
                 break;
             case StatType.Initiative:
-                GameState.Allies[unitId].Initiative += value;
-                if (GameState.Allies[unitId].Initiative < 0) GameState.Allies[unitId].Initiative = 0;
+                GameState.Allies[unitId].Stats.Initiative += value;
+                if (GameState.Allies[unitId].Stats.Initiative < 0) GameState.Allies[unitId].Stats.Initiative = 0;
                 break;
             case StatType.Defence:
-                GameState.Allies[unitId].Defence += value;
-                if (GameState.Allies[unitId].Defence < 0) GameState.Allies[unitId].Defence = 0;
+                GameState.Allies[unitId].Stats.Defence += value;
+                if (GameState.Allies[unitId].Stats.Defence < 0) GameState.Allies[unitId].Stats.Defence = 0;
                 break;
             case StatType.CritChance:
-                GameState.Allies[unitId].CritChance += value;
-                if (GameState.Allies[unitId].CritChance < 0) GameState.Allies[unitId].CritChance = 0;
+                GameState.Allies[unitId].Stats.CritChance += value;
+                if (GameState.Allies[unitId].Stats.CritChance < 0) GameState.Allies[unitId].Stats.CritChance = 0;
                 break;
             case StatType.AttackModifier:
-                GameState.Allies[unitId].AttackModifier += value;
-                if (GameState.Allies[unitId].AttackModifier < 0) GameState.Allies[unitId].AttackModifier = 0;
+                GameState.Allies[unitId].Stats.AttackModifier += value;
+                if (GameState.Allies[unitId].Stats.AttackModifier < 0) GameState.Allies[unitId].Stats.AttackModifier = 0;
                 break;
             case StatType.Threat:
-                GameState.Allies[unitId].Threat += value;
-                if (GameState.Allies[unitId].Threat < 0) GameState.Allies[unitId].Threat = 0;
+                GameState.Allies[unitId].Stats.Threat += value;
+                if (GameState.Allies[unitId].Stats.Threat < 0) GameState.Allies[unitId].Stats.Threat = 0;
                 break;
         }
         OnStatChanged?.Invoke(unitId, GameState.Allies[unitId]);
