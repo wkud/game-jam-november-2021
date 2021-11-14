@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _identifier: 0
   _bond: 0
+  _skills:
+  - {fileID: 11400000, guid: b39e5d11cfb42024380facc2f947e940, type: 2}
+  - {fileID: 11400000, guid: b39e5d11cfb42024380facc2f947e940, type: 2}
+  - {fileID: 0}
   _maxHp: 30
-  _currentHp: 30
   _initiative: 4
   _attackModifier: 10
   _defence: 10
