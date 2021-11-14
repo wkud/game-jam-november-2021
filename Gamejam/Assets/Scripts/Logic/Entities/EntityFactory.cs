@@ -7,7 +7,7 @@ public static class EntityFactory
 {
     private static Dictionary<EntityId, IEnemyAi> _enemyAis = new Dictionary<EntityId, IEnemyAi>()
     {
-        { EntityId.SpiritWarrior, new SpiritWarriorAi() },
+        { EntityId.SpiritWarriorBoss, new SpiritWarriorAi() },
         { EntityId.JaguarWarrior, new JaguarWarriorAi() },
     };
 
