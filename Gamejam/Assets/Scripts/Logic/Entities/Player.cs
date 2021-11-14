@@ -17,7 +17,7 @@ public class Player : IEntity
         this._stats.Hp -= damage;
     }
 
-    public void SetSkill(int slotNumber, ISkill skill)
+    public void SetSkill(int slotNumber, Skill skill)
     {
         this._stats.Skills[slotNumber] = skill;
     }
