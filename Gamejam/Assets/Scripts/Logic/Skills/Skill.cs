@@ -18,4 +18,14 @@ public abstract class Skill
     }
 
     public abstract void Use(Entity user, Entity[] targets);
+
+    public string GetTooltipDescription()
+    {
+        return Data.Description;
+    }
+
+    public string GetTooltipTitle()
+    {
+        return Data.Name;
+    }
 }
