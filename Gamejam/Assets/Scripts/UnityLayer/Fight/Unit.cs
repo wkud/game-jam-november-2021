@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
@@ -22,10 +23,9 @@ public class Unit : MonoBehaviour
     public void Initialize(FightController fightController, Entity entity)
     {
         _fightController = fightController;
+        Entity = entity;
 
         Show();
-
-        Entity = entity;
 
         var portraitButton = GetComponentInChildren<UnitPortraitButton>();
         portraitButton.Initialize(this);
