@@ -15,6 +15,11 @@ public class InitiativeTracker
         _currentEntity = this._initiativeQueue[0];
     }
 
+    public IEntity GetStartEntity()
+    {
+        return _currentEntity;
+    }
+
     public IEntity GetNextEntity()
     {
         int index = this._initiativeQueue.FindIndex(e => e == _currentEntity);

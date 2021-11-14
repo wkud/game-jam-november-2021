@@ -1,6 +1,5 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 
 public class Player : IEntity
 {
@@ -49,7 +48,15 @@ public class Player : IEntity
 
     public bool IsSkillSingleTarget(int skillIndex)
     {
-        return this._stats.Skills[skillIndex].Data.TargetCount == SkillTargetCount.One;
+        var skill = this._stats.Skills[skillIndex];
+        try
+        {
+            return skill.Data.TargetCount == SkillTargetCount.One;
+        }
+        catch (NullReferenceException)
+        {
+            throw new ArgumentOutOfRangeException("There is no skill in that slot");
+        }
     }
 
     public Bond GetSkillTargetBond(int skillIndex)

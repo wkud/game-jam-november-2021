@@ -26,11 +26,15 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
         GameState = new GameState(_resources);
 
         _mapController = FindObjectOfType<MapController>();
         _mapController.Initialize();
-
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 

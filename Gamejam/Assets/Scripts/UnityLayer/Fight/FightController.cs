@@ -6,8 +6,10 @@ using System;
 public class FightController : MonoBehaviour, IFightStateHolder  // class for main fight management logic 
 {
 
-    [SerializeField] private List<Unit> _enemies;
-    [SerializeField] private List<Unit> _allies;
+    [SerializeField] private List<Unit> _allAllies;
+    [SerializeField] private List<Unit> _allEnemies;
+    private List<Unit> _activeEnemies => _allEnemies.Where(e => e.IsActive).ToList();
+
 
     private List<Unit> _units = new List<Unit>();
 
@@ -20,44 +22,64 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
 
     public PlayerTurnState PlayerTurnState => _playerMoveMaker.State; // this enum informs buttons whether they should respond to events
 
-    public IEntity[] Enemies => _enemies.Select(u => u.Entity).ToArray();
-    public IEntity[] Allies => _allies.Select(u => u.Entity).ToArray();
+    public IEntity[] Enemies => _activeEnemies.Select(u => u.Entity).ToArray();
+    public IEntity[] Allies => _allAllies.Select(u => u.Entity).ToArray();
 
     public void Initialize(GameController gameController)
     {
+        // setup variables
         _gameController = gameController;
         _gameState = _gameController.GameState;
 
-        _units.AddRange(_enemies);
-        _units.AddRange(_allies);
+        _units.AddRange(_allEnemies);
+        _units.AddRange(_allAllies);
 
-        var allyPresets = _gameState.GetCharacters(); //_dataContainer.GetRandomCharacterPresets(); // TODO do this once per game
-        InitializeUnits(_allies, allyPresets.Select(e => (IEntity)e).ToList());
+        // initialize units
+        var allyPresets = _gameState.GetCharacters().Select(e => (IEntity)e).ToList(); 
+        InitializeUnits(_allAllies, allyPresets);
+        
+        var enemies = _gameState.GetEnemiesForThisFight() ?? new List<Enemy>();
+        var enemyPresets = enemies.Select(e => (IEntity)e).ToList();
+        HideUnusedUnits(_allEnemies, enemyPresets);
+        InitializeUnits(_activeEnemies, enemyPresets);
 
-        var enemyPresets = _gameState.GetEnemiesForThisFight() ?? new List<Enemy>();
-        InitializeUnits(_enemies, enemyPresets.Select(e => (IEntity)e).ToList());
-
+        // set intiative
         IEntity[] entities = Enemies.Concat(Allies).ToArray();
         _initiativeTracker = new InitiativeTracker(entities);
 
+        // setup player move input system
         _playerMoveMaker = new PlayerMoveMaker(this);
         _playerMoveMaker.OnPlayerTurnEnd.AddListener(OnFinishedTurn); // TODO: add listener for playing animations
+
+        //start turn
+        _currentEntity = _initiativeTracker.GetStartEntity();
+        StartTurn();
     }
 
     private void InitializeUnits(List<Unit> units, List<IEntity> presets)
     {
-        for (int i = 0; i < presets.Count; i++)
+        for (int i = 0; i < units.Count; i++)
         {
             units[i].Initialize(this, presets[i]);
         }
     }
-
-    public void OnFinishedTurn() // this function needs to be called when entity ends it's turn
+    private void HideUnusedUnits(List<Unit> units, List<IEntity> presets)
     {
-        _currentEntity = _initiativeTracker.GetNextEntity();
+        if (units.Count > presets.Count)
+        {
+            var unusedUnitCount = units.Count - presets.Count;
+            for (int i = 0; i < unusedUnitCount; i++)
+            {
+                units[i].Hide();
+            }
+        }
+    }
+
+    private void StartTurn()
+    {
         if (_currentEntity.Stats.Bond == Bond.Ally)
         {
-            _playerMoveMaker.OnPlayerStartTurn();
+            _playerMoveMaker.OnPlayerStartTurn(_currentEntity as Player);
             // TODO: play animations 
         }
         else
@@ -66,6 +88,12 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
             // TODO: play animations 
             OnFinishedTurn();
         }
+    }
+
+    private void OnFinishedTurn() // this function needs to be called when entity ends it's turn
+    {
+        _currentEntity = _initiativeTracker.GetNextEntity();
+        StartTurn();
     }
 
     public void OnSelectSkill(int skillIndex) => _playerMoveMaker.OnPlayerSelectSkill(skillIndex);
