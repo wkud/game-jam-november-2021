@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SkillData", menuName = "ScriptableObjects/SkillData", order = 1)]
 public class SkillData : ScriptableObject
 {
+    [SerializeField] private SkillName _skillCode;
     [SerializeField] private string _name;
     [SerializeField] private string _description;
     [SerializeField] private int _power = 9001;
@@ -18,5 +19,6 @@ public class SkillData : ScriptableObject
     public string Description { get => _description; set => _description = value; }
     public SkillTargetCount TargetCount { get => _targetCount; set => _targetCount = value; }
     public Bond TargetBond { get => _targetBond; set => _targetBond = value; }
+    public SkillName Identifier { get => _skillCode; set => _skillCode = value; }
     public StateData ImposedState { get => _imposedState; set => _imposedState = value; }
 }

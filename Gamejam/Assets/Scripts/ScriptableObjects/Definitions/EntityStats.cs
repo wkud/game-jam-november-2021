@@ -9,7 +9,7 @@ public class EntityStats : ScriptableObject
     [SerializeField] private Bond _bond;
 
     [SerializeField] private List<StateController> _states = new List<StateController>();
-    [SerializeField] private ISkill[] _skills = new ISkill[3];
+    [SerializeField] private Skill[] _skills = new Skill[3];
 
     [SerializeField] private int _hp = 30;
     [SerializeField] private int _initiative = 10;
@@ -22,7 +22,7 @@ public class EntityStats : ScriptableObject
     public Bond Bond { get => _bond; set => _bond = value; }
 
     public List<StateController> States { get => _states; set => _states = value; }
-    public ISkill[] Skills { get => _skills; set => _skills = value; }
+    public Skill[] Skills { get => _skills; set => _skills = value; }
 
     public int Hp { get => _hp; set => _hp = value; }
     public int Initiative { get => _initiative; set => _initiative = value; }
