@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b9a1e0739b4a8247b207a6157c9673b, type: 3}
   m_Name: SkillData
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 21300000, guid: 6d1c688b43c12764796f8d194f9db451, type: 3}
+  _sprite: {fileID: 21300000, guid: dcb832e5e0c4c9c4d8ba5c64b0e23599, type: 3}
+  _skillCode: 0
   _name: 
   _description: 
   _power: 9001

@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private ResourceContainer _resources = new ResourceContainer();
     public event UnityAction<int, Player> OnStatChanged;
+    public event UnityAction<int, int, Sprite> OnSkillChanged;
     public GameState GameState { get; private set; }
 
     private void Awake()
@@ -66,17 +67,6 @@ public class GameController : MonoBehaviour
 
             _mapController.gameObject.SetActive(false);
         }
-        else if(SceneManager.GetActiveScene().buildIndex == (int)SceneId.Map)
-        {
-            foreach (CharacterPanel panel in FindObjectsOfType<CharacterPanel>())
-            {
-                panel.Initialize();
-            }
-            for (int i = 0; i < 4; i++)
-            {
-                OnStatChanged?.Invoke(i, GameState.Allies[i]);
-            }
-        }
     }
 
     public void ChangeCharacterStat(StatName statType, int value, int unitId)
@@ -113,5 +103,11 @@ public class GameController : MonoBehaviour
                 break;
         }
         OnStatChanged?.Invoke(unitId, GameState.Allies[unitId]);
+    }
+
+    public void ChangeCharacterSkill(int playerId, int skillSlotId, Skill skill)
+    {
+        GameController.Instance.GameState.Allies[playerId].SetSkill(skillSlotId, skill);
+        OnSkillChanged?.Invoke(playerId, skillSlotId, skill.Data.Sprite);
     }
 }
