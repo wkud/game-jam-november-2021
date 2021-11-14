@@ -11,7 +11,6 @@ public class SkillButton : MonoBehaviour // TODO implement selecting skill
 
     public void Initialize(Unit unit)
     {
-        //_unit = GetComponentInParent<Unit>();
         _unit = unit;
         var button = GetComponent<Button>();
         button.onClick.AddListener(OnClick);

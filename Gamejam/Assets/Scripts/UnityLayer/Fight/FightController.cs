@@ -25,24 +25,31 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
 
     public void Initialize(GameController gameController)
     {
+        // setup variables
         _gameController = gameController;
         _gameState = _gameController.GameState;
 
         _units.AddRange(_enemies);
         _units.AddRange(_allies);
 
-        var allyPresets = _gameState.GetCharacters(); //_dataContainer.GetRandomCharacterPresets(); // TODO do this once per game
+        // initialize units
+        var allyPresets = _gameState.GetCharacters(); 
         InitializeUnits(_allies, allyPresets.Select(e => (IEntity)e).ToList());
-
+        
         var enemyPresets = _gameState.GetEnemiesForThisFight() ?? new List<Enemy>();
         InitializeUnits(_enemies, enemyPresets.Select(e => (IEntity)e).ToList());
 
+        // set intiative
         IEntity[] entities = Enemies.Concat(Allies).ToArray();
         _initiativeTracker = new InitiativeTracker(entities);
-        _currentEntity = _initiativeTracker.GetStartEntity();
 
+        // setup player move input system
         _playerMoveMaker = new PlayerMoveMaker(this);
         _playerMoveMaker.OnPlayerTurnEnd.AddListener(OnFinishedTurn); // TODO: add listener for playing animations
+
+        //start turn
+        _currentEntity = _initiativeTracker.GetStartEntity();
+        StartTurn();
     }
 
     private void InitializeUnits(List<Unit> units, List<IEntity> presets)
@@ -53,9 +60,8 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
         }
     }
 
-    public void OnFinishedTurn() // this function needs to be called when entity ends it's turn
+    private void StartTurn()
     {
-        _currentEntity = _initiativeTracker.GetNextEntity();
         if (_currentEntity.Stats.Bond == Bond.Ally)
         {
             _playerMoveMaker.OnPlayerStartTurn(_currentEntity as Player);
@@ -67,6 +73,12 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
             // TODO: play animations 
             OnFinishedTurn();
         }
+    }
+
+    private void OnFinishedTurn() // this function needs to be called when entity ends it's turn
+    {
+        _currentEntity = _initiativeTracker.GetNextEntity();
+        StartTurn();
     }
 
     public void OnSelectSkill(int skillIndex) => _playerMoveMaker.OnPlayerSelectSkill(skillIndex);

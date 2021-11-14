@@ -7,7 +7,7 @@ public class PlayerMoveMaker
     private int _selectedSkillIndex;
     private IEntity[] _targets;
 
-    public PlayerTurnState State { get; private set; } = PlayerTurnState.WaitingForSkill;
+    public PlayerTurnState State { get; private set; } = PlayerTurnState.WaitingForPlayerTurn;
     public UnityEvent OnPlayerTurnEnd { get; } = new UnityEvent();
 
 
@@ -30,7 +30,7 @@ public class PlayerMoveMaker
             return;
 
         SetSkillIndex(skillIndex);
-
+        
         if (_currentPlayer.IsSkillSingleTarget(skillIndex))
         {
             State = PlayerTurnState.WaitingForTarget;
