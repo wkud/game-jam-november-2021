@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 114e3f39a151a534abb9a7f37931f3b5, type: 3}
-  m_Name: DealStat
+  m_Name: DealStat 1
   m_EditorClassIdentifier: 
-  statName: 1
-  amount: -1
+  statName: 2
+  amount: 1

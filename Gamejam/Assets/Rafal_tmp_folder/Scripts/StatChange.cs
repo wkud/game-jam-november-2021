@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DealStat", menuName = "ScriptableObjects/DealStat", order = 1)]
 public class StatChange : Gain
 {
-    [SerializeField] StatName statName;
-    [SerializeField] int amount;
+    [SerializeField] public StatName statName;
+    [SerializeField] public int amount;
 }

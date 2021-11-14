@@ -1408,6 +1408,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   offeringID: -1
+  dealIsSkill: 0
+  skillSlotID: 0
 --- !u!1 &1546222596
 GameObject:
   m_ObjectHideFlags: 0
@@ -2197,6 +2199,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1064248211}
     m_Modifications:
+    - target: {fileID: 3574892373500013305, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3574892373500013305, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1522053860}
+    - target: {fileID: 3574892373500013305, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ProcessStatDeal
+      objectReference: {fileID: 0}
+    - target: {fileID: 3574892373500013305, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AltarController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3574892373500013305, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4604048954655723681, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
       propertyPath: m_Name
       value: CharacterPanel
@@ -2292,6 +2314,94 @@ PrefabInstance:
     - target: {fileID: 6932012415303351919, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7037595023500516230, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7037595023500516230, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1522053860}
+    - target: {fileID: 7037595023500516230, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ProcessStatDeal
+      objectReference: {fileID: 0}
+    - target: {fileID: 7037595023500516230, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AltarController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7037595023500516230, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684664781653563283, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684664781653563283, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684664781653563283, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684664781653563283, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1522053860}
+    - target: {fileID: 7684664781653563283, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1522053860}
+    - target: {fileID: 7684664781653563283, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684664781653563283, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeSkillSlotID
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684664781653563283, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ProcessSkillDeal
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684664781653563283, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AltarController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684664781653563283, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: AltarController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684664781653563283, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7684664781653563283, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 9063706407225842704, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9063706407225842704, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1522053860}
+    - target: {fileID: 9063706407225842704, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ProcessStatDeal
+      objectReference: {fileID: 0}
+    - target: {fileID: 9063706407225842704, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AltarController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 9063706407225842704, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe1c040295d51b04d9dcb30f3e203bc0, type: 3}

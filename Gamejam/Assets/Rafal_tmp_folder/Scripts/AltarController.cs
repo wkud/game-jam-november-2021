@@ -10,10 +10,14 @@ public class AltarController : MonoBehaviour
     public Deal[] availableDeals = new Deal[4];
 
     public int offeringID = -1;
+    public bool dealIsSkill = false;
 
+
+    public int skillSlotID;
     // Start is called before the first frame update
     void Start()
     {
+        GetNewDeals();
         if (AltarController.Instance != null) Destroy(gameObject);
         else AltarController.Instance = this;
     }
@@ -21,7 +25,45 @@ public class AltarController : MonoBehaviour
     public void ChangeOfferingID(int id)
     {
         offeringID = id;
+        if (availableDeals[id].profit is SkillGain)
+        {
+            dealIsSkill = true;
+        }
+        else dealIsSkill = false;
         //switch buttons
+    }
+
+    public void TurnChildrenOff()
+    { }
+    public void TurnChildrenOn()
+    { }
+    public void DeactivatePlayerButtons()
+    { }
+    public void ActivatePlayerButtons()
+    { }
+    public void ProcessStatDeal(int playerId)
+    {
+        if (dealIsSkill == false)
+        {
+            GameController.Instance.ChangeCharacterStat(availableDeals[offeringID].price.statName, availableDeals[offeringID].price.amount, playerId);
+            StatChange profit = (StatChange)availableDeals[offeringID].profit;
+            GameController.Instance.ChangeCharacterStat(profit.statName, profit.amount, playerId);
+        }
+    }
+
+    public void ChangeSkillSlotID(int id)
+    {
+        skillSlotID = id;
+    }
+    public void ProcessSkillDeal(int playerId)
+    {
+        if (dealIsSkill == true)
+        {
+            GameController.Instance.ChangeCharacterStat(availableDeals[offeringID].price.statName, availableDeals[offeringID].price.amount, playerId);
+            SkillGain profit = (SkillGain)availableDeals[offeringID].profit;
+            Skill skill = SkillFactory.CreateSkill(profit.skillData);
+            GameController.Instance.ChangeCharacterSkill(playerId,skillSlotID,skill);
+        }
     }
 
     public void GetNewDeals()

@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private ResourceContainer _resources = new ResourceContainer();
     public event UnityAction<int, Player> OnStatChanged;
+    public event UnityAction<int, int, Sprite> OnSkillChanged;
     public GameState GameState { get; private set; }
 
     private void Awake()
@@ -112,5 +113,11 @@ public class GameController : MonoBehaviour
                 break;
         }
         OnStatChanged?.Invoke(unitId, GameState.Allies[unitId]);
+    }
+
+    public void ChangeCharacterSkill(int playerId, int skillSlotId, Skill skill)
+    {
+        GameController.Instance.GameState.Allies[playerId].SetSkill(skillSlotId, skill);
+        OnSkillChanged?.Invoke(playerId, skillSlotId, skill.Data.Sprite);
     }
 }

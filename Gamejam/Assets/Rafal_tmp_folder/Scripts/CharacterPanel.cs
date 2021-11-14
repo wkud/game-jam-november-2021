@@ -29,6 +29,7 @@ public class CharacterPanel : MonoBehaviour
     public void Initialize()
     {
         GameController.Instance.OnStatChanged += UpdateUnitStatsUI;
+        GameController.Instance.OnSkillChanged += UpdateUnitSkillUI;
     }
 
     void UpdateUnitStatsUI(int unitID, Player unit)
@@ -48,6 +49,24 @@ public class CharacterPanel : MonoBehaviour
             /*if (unit.Skills[0]!=null && unit.Skills[0].Data.Sprite!=null) skill1Sprite.sprite = unit.Skills[0].Data.Sprite;
             if (unit.Skills[0] != null && unit.Skills[1].Data.Sprite != null) skill2Sprite.sprite = unit.Skills[1].Data.Sprite;
             if (unit.Skills[0] != null && unit.Skills[2].Data.Sprite != null) skill3Sprite.sprite = unit.Skills[2].Data.Sprite;*/
+        }
+    }
+    void UpdateUnitSkillUI(int playerId, int skillSlotId, Sprite sprite)
+    {
+        if (_id == playerId)
+        {
+            if (skillSlotId == 0)
+            {
+                skill1Sprite.sprite = sprite;
+            }
+            else if (skillSlotId == 1)
+            {
+                skill2Sprite.sprite = sprite;
+            }
+            else if (skillSlotId == 2)
+            {
+                skill3Sprite.sprite = sprite;
+            }
         }
     }
 }
