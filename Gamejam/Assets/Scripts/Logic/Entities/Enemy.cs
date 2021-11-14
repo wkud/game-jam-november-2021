@@ -10,10 +10,9 @@ public class Enemy : Entity
 
 
 
-    public Enemy(IEnemyAi ai, EntityStats stats)
+    public Enemy(EntityStats initialStats, IEnemyAi ai) : base(initialStats)
     {
         _ai = ai;
-        _stats = stats;
     }
 
 

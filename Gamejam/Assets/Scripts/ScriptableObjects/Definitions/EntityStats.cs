@@ -11,7 +11,7 @@ public class EntityStats : ScriptableObject
     [SerializeField] private Bond _bond;
 
     [SerializeField] private List<StateController> _states = new List<StateController>();
-    [SerializeField] private ISkill[] _skills = new ISkill[3];
+    [SerializeField] private Skill[] _skills = new Skill[3];
 
     [SerializeField] private int _maxHp = 30;
     [SerializeField] private int _currentHp = 30;
@@ -25,7 +25,7 @@ public class EntityStats : ScriptableObject
     public Bond Bond { get => _bond; set => _bond = value; }
 
     public List<StateController> States { get => _states; set => _states = value; }
-    public ISkill[] Skills { get => _skills; set => _skills = value; }
+    public Skill[] Skills { get => _skills; set => _skills = value; }
 
     public int MaxHp { get => _maxHp; set => _maxHp = value; }
     public int CurrentHp { get => _currentHp; set => _currentHp = value; }
@@ -37,7 +37,7 @@ public class EntityStats : ScriptableObject
 
     public void SetValues(
         List<StateController> states,
-        ISkill[] skills,
+        Skill[] skills,
         EntityId identifier,
         Bond bond,
         int maxHp,
@@ -49,7 +49,7 @@ public class EntityStats : ScriptableObject
         float threat)
     {
         _states = new List<StateController>(states);
-        _skills = _skills.ToArray<ISkill>();
+        _skills = _skills.ToArray<Skill>();
         _identifier = identifier;
         _bond = bond;
         _maxHp = maxHp;

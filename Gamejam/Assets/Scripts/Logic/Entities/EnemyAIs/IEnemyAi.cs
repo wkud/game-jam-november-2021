@@ -6,6 +6,6 @@ public interface IEnemyAi
     /// <param name="players"></param>
     /// <param name="monsters"></param>
     /// <param name="availableSkills">Collection of available spells that enemy can use</param>
-    void MakeMove(Entity[] players, Entity[] monsters, ISkill[] availableSkills);
+    void MakeMove(Entity[] players, Entity[] monsters, Skill[] availableSkills);
 
 }

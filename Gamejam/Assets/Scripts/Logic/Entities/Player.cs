@@ -3,15 +3,9 @@ using System;
 
 public class Player : Entity
 {
+    public Player(EntityStats initialStats) : base(initialStats) { }
 
-
-    public Player(EntityStats initialStats)
-    {
-        _stats = initialStats.GetClone();
-    }
-
-
-    public void SetSkill(int slotNumber, ISkill skill)
+    public void SetSkill(int slotNumber, Skill skill)
     {
         this._stats.Skills[slotNumber] = skill;
     }

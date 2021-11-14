@@ -2,9 +2,9 @@ public abstract class Entity
 {
     protected EntityStats _stats;
 
-    protected Entity(EntityStats stats)
+    public Entity(EntityStats initialStats)
     {
-        _stats = stats;
+        this._stats = initialStats.GetClone();
     }
 
     public EntityStats Stats => _stats;

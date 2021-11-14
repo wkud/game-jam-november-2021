@@ -31,7 +31,7 @@ public static class EntityFactory
     private static Enemy CreateEnemy(EntityStats entityData)
     {
         var enemyAi = _enemyAis[entityData.Identifier];
-        return new Enemy(enemyAi, entityData);
+        return new Enemy(entityData, enemyAi);
     }
 
 }
