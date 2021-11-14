@@ -1,14 +1,15 @@
-public enum EntityId 
+public enum EntityId
 {
     // Players:
     PlayerCharacter, // generic, becouse all character works the same way
 
     // Enemies:
     // enemies have different AI dependent on their Id
-    SpiritWarrior,
-    Aboriginal,
+    SpiritWarriorBoss,
     JaguarWarrior,
-    Eagle,
+    SnakeShaman,
+    WitchDoctor,
+    BloodShamanElite,
     Snake,
     HighShaman,
     BloodShaman,
@@ -16,5 +17,15 @@ public enum EntityId
     ClothArtist,
     CursedMummy,
     ToxicHunter,
+    Aboriginal,
+    //JaguarWarrior,
+    Eagle,
+    //Snake,
+    //HighShaman,
+    //BloodShaman,
+    //BlessShaman,
+    //ClothArtist,
+    //CursedMummy,
+    //ToxicHunter,
     // ...
 }

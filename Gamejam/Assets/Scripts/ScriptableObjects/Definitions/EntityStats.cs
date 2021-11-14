@@ -19,6 +19,7 @@ public class EntityStats : ScriptableObject
     [SerializeField] private int _defence = 10;
     [SerializeField] private float _critChance = 10;
     [SerializeField] private float _threat = 10;
+    [SerializeField] private Sprite _sprite; 
 
     public EntityId Identifier { get => _identifier; set => _identifier = value; }
     public Bond Bond { get => _bond; set => _bond = value; }
@@ -33,6 +34,7 @@ public class EntityStats : ScriptableObject
     public int Defence { get => _defence; set => _defence = value; }
     public float CritChance { get => _critChance; set => _critChance = value; }
     public float Threat { get => _threat; set => _threat = value; }
+    public Sprite Sprite { get => _sprite; }
 
     public void SetValues(
         List<StateController> states,
