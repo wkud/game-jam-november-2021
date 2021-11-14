@@ -43,7 +43,7 @@ public class Player : IEntity
 
     public string GetSkillDescription(int slotNumber)
     {
-        return this._stats.Skills[slotNumber].Data.Description;
+        return this._stats.Skills[slotNumber]?.Data?.Description;
     }
 
     public string GetStatDescription(StatName statName)
