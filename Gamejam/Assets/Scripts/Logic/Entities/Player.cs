@@ -3,15 +3,13 @@ using System;
 
 public class Player : IEntity
 {
-    [SerializeField] private EntityStats _initialStats;
     private EntityStats _stats;
 
     public EntityStats Stats { get => _stats; }
 
-    public Player(EntityStats stats)
+    public Player(EntityStats initialStats)
     {
-        this._initialStats = stats;
-        _stats = _initialStats.GetClone();
+        _stats = initialStats.GetClone();
     }
 
     public void TakeDamage(int damage)
