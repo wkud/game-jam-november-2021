@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -48,8 +49,7 @@ public class EntityStats : ScriptableObject
         float threat)
     {
         _states = new List<StateController>(states);
-        _skills = new ISkill[3];
-        Array.Copy(skills, _skills, skills.Length);
+        _skills = _skills.ToArray<ISkill>();
         _identifier = identifier;
         _bond = bond;
         _maxHp = maxHp;
