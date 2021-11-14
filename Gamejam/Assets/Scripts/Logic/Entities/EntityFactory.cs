@@ -9,7 +9,7 @@ public static class EntityFactory
 
     private static Dictionary<EntityId, EnemyAi> _enemyAis = new Dictionary<EntityId, EnemyAi>()
     {
-        { EntityId.SpiritWarrior, defaultEnemyAi },
+        { EntityId.SpiritWarrior, new SpiritWarriorAi() }, // Warning, has state!
         { EntityId.Aboriginal, defaultEnemyAi },
         { EntityId.JaguarWarrior, defaultEnemyAi },
         { EntityId.Eagle, defaultEnemyAi },

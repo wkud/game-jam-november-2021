@@ -11,23 +11,33 @@ public class EnemyAi
     /// <param name="players"></param>
     /// <param name="enemies"></param>
     /// <param name="availableSkills">Collection of available spells that enemy can use</param>
-    public void MakeMove(Entity user, Entity[] allies, Entity[] enemies, Skill[] availableSkills)
+    public virtual void MakeMove(Entity user, Entity[] allies, Entity[] enemies, Skill[] availableSkills)
     {
-        Skill selectedSkill = this.SelectRandomSkill(availableSkills);
+        Skill selectedSkill = this.SelectRandomSkill(availableSkills, allies, enemies);
         // if skill bond is ally, return Enemy's allies - enemies
 
-        Entity[] targets = GetkillTarget(selectedSkill, allies, enemies);
+        Entity[] targets = this.GetkillTarget(selectedSkill, allies, enemies);
 
         selectedSkill.Use(user, targets);
     }
 
-    private Skill SelectRandomSkill(Skill[] availableSkills)
+    public virtual void OnCreate(Entity user, Entity[] allies, Entity[] enemies, Skill[] availableSkills) { }
+
+    protected Skill SelectRandomSkill(Skill[] availableSkills, Entity[] allies, Entity[] enemies)
     {
-        int randomSkillId = random.Next(0, availableSkills.Length);
-        return availableSkills[randomSkillId];
+        bool isSingleAlly = allies.Count() == 1;
+        bool isSingleEnemy = allies.Count() == 1;
+        Skill[] prioritySkills = availableSkills.Where(x =>
+        (!isSingleAlly && x.Data.TargetBond == Bond.Enemy && x.Data.TargetCount == SkillTargetCount.All)
+        || (!isSingleEnemy && x.Data.TargetBond == Bond.Ally && x.Data.TargetCount == SkillTargetCount.All)).ToArray();
+
+        Skill[] skillsToPick = prioritySkills.Length > 0 ? prioritySkills : availableSkills;
+
+        int randomSkillId = random.Next(0, skillsToPick.Length);
+        return skillsToPick[randomSkillId];
     }
 
-    private Entity[] GetkillTarget(Skill skill, Entity[] allies, Entity[] enemies)
+    protected Entity[] GetkillTarget(Skill skill, Entity[] allies, Entity[] enemies)
     {
         Entity[] targetGroup = skill.Data.TargetBond == Bond.Ally ? enemies : allies;
 
