@@ -6,8 +6,10 @@ using System;
 public class FightController : MonoBehaviour, IFightStateHolder  // class for main fight management logic 
 {
 
-    [SerializeField] private List<Unit> _enemies;
-    [SerializeField] private List<Unit> _allies;
+    [SerializeField] private List<Unit> _allAllies;
+    [SerializeField] private List<Unit> _allEnemies;
+    private List<Unit> _activeEnemies => _allEnemies.Where(e => e.IsActive).ToList();
+
 
     private List<Unit> _units = new List<Unit>();
 
@@ -20,8 +22,8 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
 
     public PlayerTurnState PlayerTurnState => _playerMoveMaker.State; // this enum informs buttons whether they should respond to events
 
-    public IEntity[] Enemies => _enemies.Select(u => u.Entity).ToArray();
-    public IEntity[] Allies => _allies.Select(u => u.Entity).ToArray();
+    public IEntity[] Enemies => _activeEnemies.Select(u => u.Entity).ToArray();
+    public IEntity[] Allies => _allAllies.Select(u => u.Entity).ToArray();
 
     public void Initialize(GameController gameController)
     {
@@ -29,15 +31,17 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
         _gameController = gameController;
         _gameState = _gameController.GameState;
 
-        _units.AddRange(_enemies);
-        _units.AddRange(_allies);
+        _units.AddRange(_allEnemies);
+        _units.AddRange(_allAllies);
 
         // initialize units
-        var allyPresets = _gameState.GetCharacters(); 
-        InitializeUnits(_allies, allyPresets.Select(e => (IEntity)e).ToList());
+        var allyPresets = _gameState.GetCharacters().Select(e => (IEntity)e).ToList(); 
+        InitializeUnits(_allAllies, allyPresets);
         
-        var enemyPresets = _gameState.GetEnemiesForThisFight() ?? new List<Enemy>();
-        InitializeUnits(_enemies, enemyPresets.Select(e => (IEntity)e).ToList());
+        var enemies = _gameState.GetEnemiesForThisFight() ?? new List<Enemy>();
+        var enemyPresets = enemies.Select(e => (IEntity)e).ToList();
+        HideUnusedUnits(_allEnemies, enemyPresets);
+        InitializeUnits(_activeEnemies, enemyPresets);
 
         // set intiative
         IEntity[] entities = Enemies.Concat(Allies).ToArray();
@@ -54,9 +58,20 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
 
     private void InitializeUnits(List<Unit> units, List<IEntity> presets)
     {
-        for (int i = 0; i < presets.Count; i++)
+        for (int i = 0; i < units.Count; i++)
         {
             units[i].Initialize(this, presets[i]);
+        }
+    }
+    private void HideUnusedUnits(List<Unit> units, List<IEntity> presets)
+    {
+        if (units.Count > presets.Count)
+        {
+            var unusedUnitCount = units.Count - presets.Count;
+            for (int i = 0; i < unusedUnitCount; i++)
+            {
+                units[i].Hide();
+            }
         }
     }
 

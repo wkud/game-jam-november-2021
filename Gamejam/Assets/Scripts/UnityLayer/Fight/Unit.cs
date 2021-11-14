@@ -6,9 +6,20 @@ public class Unit : MonoBehaviour
 
     public IEntity Entity { get; private set; }
 
+    private bool _isActive = true;
+    public bool IsActive { get => _isActive; 
+        private set 
+        {
+            _isActive = value;
+            gameObject.SetActive(_isActive);
+        } 
+    }
+
     public void Initialize(FightController fightController, IEntity entity)
     {
         _fightController = fightController;
+
+        Show();
 
         Entity = entity;
 
@@ -39,4 +50,8 @@ public class Unit : MonoBehaviour
             _fightController.OnSelectSkill(skillIndex);
         }
     }
+
+    public void Hide() => IsActive = false;
+    public void Show() => IsActive = true;
+
 }
