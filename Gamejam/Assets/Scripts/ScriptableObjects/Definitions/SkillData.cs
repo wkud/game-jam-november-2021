@@ -4,7 +4,6 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "SkillData", menuName = "ScriptableObjects/SkillData", order = 1)]
 public class SkillData : ScriptableObject
 {
-    [SerializeField] private Sprite _sprite;
     [SerializeField] private SkillName _skillCode;
     [SerializeField] private string _name;
     [SerializeField] private string _description;
@@ -13,6 +12,7 @@ public class SkillData : ScriptableObject
     [SerializeField] private SkillTargetCount _targetCount;
     [SerializeField] private Bond _targetBond;
     [SerializeField] private StateData _imposedState;
+    [SerializeField] private Sprite _sprite;
 
     public string Name { get => _name; set => _name = value; }
     public int Power { get => _power; set => _power = value; }

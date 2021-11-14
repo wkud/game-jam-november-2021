@@ -4,6 +4,8 @@ public class Unit : MonoBehaviour
 {
     private FightController _fightController;
 
+    private UnitSkillManager _skillManager;
+
     public Entity Entity { get; private set; }
 
     private bool _isActive = true;
@@ -28,8 +30,8 @@ public class Unit : MonoBehaviour
         var portraitButton = GetComponentInChildren<UnitPortraitButton>();
         portraitButton.Initialize(this);
 
-        var skillButtons = GetComponentsInChildren<SkillButton>();
-        foreach (var skillButton in skillButtons)
+        var skillControllers = GetComponentsInChildren<SkillController>();
+        foreach (var skillButton in skillControllers)
         {
             skillButton.Initialize(this);
         }
@@ -39,6 +41,9 @@ public class Unit : MonoBehaviour
         {
             statController.Initialize(this);
         }
+
+        _skillManager = new UnitSkillManager(this, skillControllers);
+
     }
 
     public void OnPortraitClick()

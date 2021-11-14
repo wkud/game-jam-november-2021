@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 
 // Warning, has state!
-public class SpiritWarriorAi : EnemyAi
+public class SpiritWarriorBossAi : EnemyAi
 {
     private int lastEntityCount;
 

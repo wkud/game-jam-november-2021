@@ -7,5 +7,15 @@ public abstract class Skill
         Data = data;
     }
 
+    public Skill() // default constructor for SkillFactory instantiation
+    {
+
+    }
+
+    public void SetData(SkillData data)
+    {
+        Data = data;
+    }
+
     public abstract void Use(Entity user, Entity[] targets);
 }
