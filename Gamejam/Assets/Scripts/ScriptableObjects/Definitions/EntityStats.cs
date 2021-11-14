@@ -11,8 +11,6 @@ public class EntityStats : ScriptableObject
 
     [SerializeField] private List<StateController> _states = new List<StateController>();
     [SerializeField] private ISkill[] _skills = new ISkill[3];
-    [SerializeField] private IBuff[] _buffs = new IBuff[2];
-    [SerializeField] private IDebuff[] _debuffs = new IDebuff[2];
 
     [SerializeField] private int _maxHp = 30;
     [SerializeField] private int _currentHp = 30;
@@ -27,8 +25,6 @@ public class EntityStats : ScriptableObject
 
     public List<StateController> States { get => _states; set => _states = value; }
     public ISkill[] Skills { get => _skills; set => _skills = value; }
-    public IBuff[] Buffs { get => _buffs; set => _buffs = value; }
-    public IDebuff[] Debuffs { get => _debuffs; set => _debuffs = value; }
 
     public int MaxHp { get => _maxHp; set => _maxHp = value; }
     public int CurrentHp { get => _currentHp; set => _currentHp = value; }

@@ -15,7 +15,11 @@ public static class EntityFactory
     {
         if (entityData.Bond == Bond.Ally && entityData.Identifier != EntityId.PlayerCharacter)
         {
-            throw new FormatException("Entity stats with Bond=Ally must have Identifier=PlayerCharacter.");
+            Debug.LogError("Entity stats with Bond=Ally must have Identifier=PlayerCharacter.");
+        }
+        if (entityData.Bond == Bond.Enemy && entityData.Identifier == EntityId.PlayerCharacter)
+        {
+            Debug.LogError("Entity stats with Bond=Enemy cannot have Identifier=PlayerCharacter.");
         }
 
         IEntity entity = entityData.Bond == Bond.Ally
