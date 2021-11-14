@@ -123,7 +123,33 @@ public class AltarController : MonoBehaviour
                     sacrifices[i].sprite = sacrificeImages[5];
                     break;                
             }
-
+            if (availableDeals[i].profit is StatChange)
+            {
+                switch (availableDeals[i].price.statName)
+                {
+                    case StatName.Hp:
+                        gains[i].sprite = sacrificeImages[0];
+                        break;
+                    case StatName.CurrentHp:
+                        gains[i].sprite = sacrificeImages[0];
+                        break;
+                    case StatName.Initiative:
+                        gains[i].sprite = sacrificeImages[1];
+                        break;
+                    case StatName.AttackModifier:
+                        gains[i].sprite = sacrificeImages[2];
+                        break;
+                    case StatName.Defence:
+                        gains[i].sprite = sacrificeImages[3];
+                        break;
+                    case StatName.CritChance:
+                        gains[i].sprite = sacrificeImages[4];
+                        break;
+                    case StatName.Threat:
+                        gains[i].sprite = sacrificeImages[5];
+                        break;
+                }
+            }
         }
     }
 
