@@ -4,18 +4,8 @@ using UnityEngine;
 
 public class FightNode : MapNode
 {
-    [SerializeField] private List<EntityStats> _enemies;
-    public List<EntityStats> Enemies => _enemies;
+    private List<EntityStats> _enemies;
+    public List<EntityStats> Enemies { get => _enemies; set => _enemies = value; }
+    
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

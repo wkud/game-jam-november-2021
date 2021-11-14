@@ -78,3 +78,5 @@ public class EntityStats : ScriptableObject
         return stats;
     }
 }
+
+

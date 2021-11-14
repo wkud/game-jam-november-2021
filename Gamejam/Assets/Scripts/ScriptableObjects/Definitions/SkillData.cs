@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "SkillData", menuName = "ScriptableObjects/SkillData", order = 1)]
 public class SkillData : ScriptableObject
 {
+    [SerializeField] private Sprite _sprite;
     [SerializeField] private SkillName _skillCode;
     [SerializeField] private string _name;
     [SerializeField] private string _description;
@@ -21,4 +23,5 @@ public class SkillData : ScriptableObject
     public Bond TargetBond { get => _targetBond; set => _targetBond = value; }
     public SkillName Identifier { get => _skillCode; set => _skillCode = value; }
     public StateData ImposedState { get => _imposedState; set => _imposedState = value; }
+    public Sprite Sprite { get => _sprite; }
 }
