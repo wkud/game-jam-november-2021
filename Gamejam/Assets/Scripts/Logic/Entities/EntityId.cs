@@ -1,4 +1,4 @@
-public enum EntityId 
+public enum EntityId
 {
     // Players:
     PlayerCharacter, // generic, becouse all character works the same way
@@ -11,9 +11,15 @@ public enum EntityId
     WitchDoctor,
     BloodShamanElite,
     Snake,
-    //Aboriginal,
+    HighShaman,
+    BloodShaman,
+    BlessShaman,
+    ClothArtist,
+    CursedMummy,
+    ToxicHunter,
+    Aboriginal,
     //JaguarWarrior,
-    //Eagle,
+    Eagle,
     //Snake,
     //HighShaman,
     //BloodShaman,
