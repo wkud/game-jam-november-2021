@@ -30,7 +30,11 @@ public static class SkillFactory
         }
 
         var skillClass = _skillTypes[data.Identifier];
-        var instance = Activator.CreateInstance(skillClass, data);
-        return (Skill)instance;
+        var instance = Activator.CreateInstance(skillClass);
+
+        var skillInstance = (Skill)instance;
+        skillInstance.SetData(data);
+        
+        return skillInstance;
     }
 }
