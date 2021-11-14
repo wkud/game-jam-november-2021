@@ -24,6 +24,11 @@ public static class SkillFactory
 
     public static Skill CreateSkill(SkillData data)
     {
+        if (data is null)
+        {
+            return null;
+        }
+
         var skillClass = _skillTypes[data.Identifier];
         var instance = Activator.CreateInstance(skillClass, data);
         return (Skill)instance;
