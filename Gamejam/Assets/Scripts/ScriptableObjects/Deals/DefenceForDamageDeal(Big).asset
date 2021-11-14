@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 075cc780491a7a945bc6bb26b9f4747a, type: 3}
+  m_Name: DefenceForDamageDeal(Big)
+  m_EditorClassIdentifier: 
+  price: {fileID: 11400000, guid: 56b6d77bcf8733f42b68ea9ca7eaa1aa, type: 2}
+  profit: {fileID: 11400000, guid: f4ce6fbf5f555e240b7ef3e2f4975dbb, type: 2}
