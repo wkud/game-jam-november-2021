@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b9a1e0739b4a8247b207a6157c9673b, type: 3}
-  m_Name: Shield Bash
+  m_Name: SacrificialRite
   m_EditorClassIdentifier: 
-  _skillCode: 6
-  _name: Shield Bash
-  _description: Bash your enemy with a shield.
-  _power: 10
+  _skillCode: 0
+  _name: Sacrificial Rite
+  _description: Blood shaman buffs his allies a lot
+  _power: 5
   _maxCooldown: 0
-  _targetCount: 0
-  _targetBond: 1
+  _targetCount: 1
+  _targetBond: 0
   _imposedState: {fileID: 0}
-  _sprite: {fileID: 21300000, guid: 7c192bc605fa6244e9e9d2077c46103e, type: 3}
+  _sprite: {fileID: 0}
