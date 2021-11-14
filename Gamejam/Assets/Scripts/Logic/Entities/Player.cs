@@ -62,7 +62,8 @@ public class Player : IEntity
         }
         catch (NullReferenceException)
         {
-            throw new ArgumentOutOfRangeException("There is no skill in that slot");
+            Debug.LogError("There is no skill in that slot");
+            return false;
         }
     }
 
