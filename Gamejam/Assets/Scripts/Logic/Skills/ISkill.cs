@@ -2,5 +2,5 @@ public interface ISkill
 {
     SkillData Data { get; }
 
-    void Use(IEntity user, IEntity[] targets);
+    void Use(Entity user, Entity[] targets);
 }

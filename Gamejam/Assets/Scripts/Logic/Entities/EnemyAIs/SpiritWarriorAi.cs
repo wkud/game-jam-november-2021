@@ -1,6 +1,6 @@
 public class SpiritWarriorAi : IEnemyAi
 {
-    public void MakeMove(IEntity[] allies, IEntity[] enemies, ISkill[] availableSkills)
+    public void MakeMove(Entity[] allies, Entity[] enemies, ISkill[] availableSkills)
     {
         throw new System.NotImplementedException(); // TODO
     }

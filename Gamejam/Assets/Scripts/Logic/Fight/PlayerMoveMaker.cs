@@ -5,7 +5,7 @@ public class PlayerMoveMaker
     private Player _currentPlayer;
 
     private int _selectedSkillIndex;
-    private IEntity[] _targets;
+    private Entity[] _targets;
 
     public PlayerTurnState State { get; private set; } = PlayerTurnState.WaitingForPlayerTurn;
     public UnityEvent OnPlayerTurnEnd { get; } = new UnityEvent();
@@ -30,7 +30,7 @@ public class PlayerMoveMaker
             return;
 
         SetSkillIndex(skillIndex);
-        
+
         if (_currentPlayer.IsSkillSingleTarget(skillIndex))
         {
             State = PlayerTurnState.WaitingForTarget;
@@ -42,7 +42,7 @@ public class PlayerMoveMaker
         }
     }
 
-    public void OnPlayerSelectTarget(IEntity target) // state transition: WaitingForTarget -> WaitingForPlayerTurn
+    public void OnPlayerSelectTarget(Entity target) // state transition: WaitingForTarget -> WaitingForPlayerTurn
     {
         if (State != PlayerTurnState.WaitingForTarget)
             return;
@@ -72,9 +72,9 @@ public class PlayerMoveMaker
         _targets = targetBond == Bond.Ally ? _fightStateHolder.Allies : _fightStateHolder.Enemies;
     }
 
-    private void SetSingleTarget(IEntity target)
+    private void SetSingleTarget(Entity target)
     {
-        _targets = new IEntity[] { target };
+        _targets = new Entity[] { target };
     }
 
 

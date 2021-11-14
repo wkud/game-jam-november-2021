@@ -11,7 +11,7 @@ public static class EntityFactory
         { EntityId.JaguarWarrior, new JaguarWarriorAi() },
     };
 
-    public static IEntity CreateEntity(EntityStats entityData)
+    public static Entity CreateEntity(EntityStats entityData)
     {
         if (entityData.Bond == Bond.Ally && entityData.Identifier != EntityId.PlayerCharacter)
         {
@@ -22,9 +22,9 @@ public static class EntityFactory
             Debug.LogError("Entity stats with Bond=Enemy cannot have Identifier=PlayerCharacter.");
         }
 
-        IEntity entity = entityData.Bond == Bond.Ally
-            ? new Player(entityData) as IEntity
-            : CreateEnemy(entityData) as IEntity;
+        Entity entity = entityData.Bond == Bond.Ally
+            ? new Player(entityData) as Entity
+            : CreateEnemy(entityData) as Entity;
         return entity;
     }
 

@@ -11,7 +11,7 @@ public class KickSkill : ISkill
         _data = data;
     }
 
-    public void Use(IEntity user, IEntity[] targets)
+    public void Use(Entity user, Entity[] targets)
     {
         targets[0]?.TakeDamage(this._data.Power);
     }

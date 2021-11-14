@@ -1,21 +1,15 @@
 using UnityEngine;
 using System;
 
-public class Player : IEntity
+public class Player : Entity
 {
-    private EntityStats _stats;
 
-    public EntityStats Stats { get => _stats; }
 
     public Player(EntityStats initialStats)
     {
         _stats = initialStats.GetClone();
     }
 
-    public void TakeDamage(int damage)
-    {
-        this._stats.CurrentHp -= damage;
-    }
 
     public void SetSkill(int slotNumber, ISkill skill)
     {
@@ -48,7 +42,7 @@ public class Player : IEntity
         }
     }
 
-    public void UseSkill(int slotNumber, IEntity[] targets)
+    public void UseSkill(int slotNumber, Entity[] targets)
     {
         this._stats.Skills[slotNumber].Use(this, targets);
     }

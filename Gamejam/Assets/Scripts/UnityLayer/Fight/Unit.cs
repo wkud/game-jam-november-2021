@@ -4,18 +4,20 @@ public class Unit : MonoBehaviour
 {
     private FightController _fightController;
 
-    public IEntity Entity { get; private set; }
+    public Entity Entity { get; private set; }
 
     private bool _isActive = true;
-    public bool IsActive { get => _isActive; 
-        private set 
+    public bool IsActive
+    {
+        get => _isActive;
+        private set
         {
             _isActive = value;
             gameObject.SetActive(_isActive);
-        } 
+        }
     }
 
-    public void Initialize(FightController fightController, IEntity entity)
+    public void Initialize(FightController fightController, Entity entity)
     {
         _fightController = fightController;
 
@@ -47,7 +49,7 @@ public class Unit : MonoBehaviour
             _fightController.OnSelectTarget(this);
         }
     }
-    
+
     public void OnSkillClick(int skillIndex)
     {
         if (_fightController.PlayerTurnState == PlayerTurnState.WaitingForSkill)

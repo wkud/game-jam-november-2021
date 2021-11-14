@@ -13,7 +13,7 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
 
     private List<Unit> _units = new List<Unit>();
 
-    private IEntity _currentEntity; // an entity, which is currently making a move
+    private Entity _currentEntity; // an entity, which is currently making a move
     private InitiativeTracker _initiativeTracker;
     private PlayerMoveMaker _playerMoveMaker;
 
@@ -22,8 +22,8 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
 
     public PlayerTurnState PlayerTurnState => _playerMoveMaker.State; // this enum informs buttons whether they should respond to events
 
-    public IEntity[] Enemies => _activeEnemies.Select(u => u.Entity).ToArray();
-    public IEntity[] Allies => _allAllies.Select(u => u.Entity).ToArray();
+    public Entity[] Enemies => _activeEnemies.Select(u => u.Entity).ToArray();
+    public Entity[] Allies => _allAllies.Select(u => u.Entity).ToArray();
 
     public void Initialize(GameController gameController)
     {
@@ -35,16 +35,16 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
         _units.AddRange(_allAllies);
 
         // initialize units
-        var allyPresets = _gameState.GetCharacters().Select(e => (IEntity)e).ToList(); 
+        var allyPresets = _gameState.GetCharacters().Select(e => (Entity)e).ToList();
         InitializeUnits(_allAllies, allyPresets);
-        
+
         var enemies = _gameState.GetEnemiesForThisFight() ?? new List<Enemy>();
-        var enemyPresets = enemies.Select(e => (IEntity)e).ToList();
+        var enemyPresets = enemies.Select(e => (Entity)e).ToList();
         HideUnusedUnits(_allEnemies, enemyPresets);
         InitializeUnits(_activeEnemies, enemyPresets);
 
         // set intiative
-        IEntity[] entities = Enemies.Concat(Allies).ToArray();
+        Entity[] entities = Enemies.Concat(Allies).ToArray();
         _initiativeTracker = new InitiativeTracker(entities);
 
         // setup player move input system
@@ -56,14 +56,14 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
         StartTurn();
     }
 
-    private void InitializeUnits(List<Unit> units, List<IEntity> presets)
+    private void InitializeUnits(List<Unit> units, List<Entity> presets)
     {
         for (int i = 0; i < units.Count; i++)
         {
             units[i].Initialize(this, presets[i]);
         }
     }
-    private void HideUnusedUnits(List<Unit> units, List<IEntity> presets)
+    private void HideUnusedUnits(List<Unit> units, List<Entity> presets)
     {
         if (units.Count > presets.Count)
         {
