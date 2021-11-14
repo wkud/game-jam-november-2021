@@ -20,7 +20,7 @@ public class Enemy : IEntity
 
     public void TakeDamage(int damage)
     {
-        this._stats.Hp -= damage;
+        this._stats.CurrentHp -= damage;
     }
 
     public void MakeMove(IFightStateHolder fightState)

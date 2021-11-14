@@ -12,6 +12,7 @@ public class InitiativeTracker
     {
         this._initiativeQueue = new List<IEntity>(entityQueue);
         this._initiativeQueue.Sort((e1, e2) => e2?.Stats.Initiative.CompareTo(e1?.Stats.Initiative) ?? -1);
+        if (_initiativeQueue.Count == 0) return;
         _currentEntity = this._initiativeQueue[0];
     }
 

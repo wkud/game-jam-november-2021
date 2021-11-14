@@ -3,18 +3,20 @@ using System;
 
 public class Player : IEntity
 {
-    [SerializeField] private EntityStats _stats;
+    [SerializeField] private EntityStats _initialStats;
+    private EntityStats _stats;
 
     public EntityStats Stats { get => _stats; }
 
     public Player(EntityStats stats)
     {
-        this._stats = stats;
+        this._initialStats = stats;
+        _stats = _initialStats.GetClone();
     }
 
     public void TakeDamage(int damage)
     {
-        this._stats.Hp -= damage;
+        this._stats.CurrentHp -= damage;
     }
 
 

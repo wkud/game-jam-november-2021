@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class EntityFactory 
+public static class EntityFactory
 {
     private static Dictionary<EntityId, IEnemyAi> _enemyAis = new Dictionary<EntityId, IEnemyAi>()
     {
@@ -18,7 +18,7 @@ public static class EntityFactory
             throw new FormatException("Entity stats with Bond=Ally must have Identifier=PlayerCharacter.");
         }
 
-        IEntity entity = entityData.Bond == Bond.Ally 
+        IEntity entity = entityData.Bond == Bond.Ally
             ? new Player(entityData) as IEntity
             : CreateEnemy(entityData) as IEntity;
         return entity;
