@@ -196,7 +196,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stepsToBoss: 20
   _nodesPrefabs:
-  - {fileID: 8056116222520125886, guid: cc7d189415809004c9e6506479a5ba33, type: 3}
+  - {fileID: 8422979190526141215, guid: cc7d189415809004c9e6506479a5ba33, type: 3}
+  - {fileID: 8422979190526141215, guid: a11a778adc1f9ac4dbb0070cb3bcc3ec, type: 3}
+  - {fileID: 2382571684191151149, guid: 89a8c9c5da33d0243900e709091f7c84, type: 3}
+  - {fileID: 2382571684191151149, guid: f71e46cb6e357e24d88d679f2996e3c2, type: 3}
+  - {fileID: 2382571684191151149, guid: 37b1fa54572da514589f2dc8c3e1025d, type: 3}
+  - {fileID: 2382571684191151149, guid: 256661cfba9f269469b1f8121923885c, type: 3}
+  _normalEncounters:
+  - {fileID: 11400000, guid: 01599e66b1338ed43831eb1bc0086cc8, type: 2}
+  _eliteEncounters:
+  - {fileID: 11400000, guid: 01599e66b1338ed43831eb1bc0086cc8, type: 2}
+  _bossEncounters:
+  - {fileID: 11400000, guid: 01599e66b1338ed43831eb1bc0086cc8, type: 2}
   _nodesSpawnPoints:
   - {fileID: 7894028554016948703}
   - {fileID: 7894028553296012519}

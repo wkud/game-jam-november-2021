@@ -174,8 +174,7 @@ public class MapController : MonoBehaviour
         }
         else if (room is AltarNode)
         {
-            /*AltarController.Instance.ResetAltar();
-            AltarController.Instance.GenerateAltarOfferings();*/
+            AltarController.Instance.GetNewDeals();
         }
         
     }
