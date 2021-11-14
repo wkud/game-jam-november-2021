@@ -16,7 +16,7 @@ public class EnemyAi
         Skill selectedSkill = this.SelectRandomSkill(availableSkills, allies, enemies);
         // if skill bond is ally, return Enemy's allies - enemies
 
-        Entity[] targets = this.GetkillTarget(selectedSkill, allies, enemies);
+        Entity[] targets = this.GetSkillTarget(selectedSkill, allies, enemies);
 
         selectedSkill.Use(user, targets);
     }
@@ -27,9 +27,10 @@ public class EnemyAi
     {
         bool isSingleAlly = allies.Count() == 1;
         bool isSingleEnemy = allies.Count() == 1;
+        // Prefere single skill when target group has 1 entity
         Skill[] prioritySkills = availableSkills.Where(x =>
-        (!isSingleAlly && x.Data.TargetBond == Bond.Enemy && x.Data.TargetCount == SkillTargetCount.All)
-        || (!isSingleEnemy && x.Data.TargetBond == Bond.Ally && x.Data.TargetCount == SkillTargetCount.All)).ToArray();
+        (isSingleAlly && x.Data.TargetBond == Bond.Enemy && x.Data.TargetCount == SkillTargetCount.One)
+        || (isSingleEnemy && x.Data.TargetBond == Bond.Ally && x.Data.TargetCount == SkillTargetCount.One)).ToArray();
 
         Skill[] skillsToPick = prioritySkills.Length > 0 ? prioritySkills : availableSkills;
 
@@ -37,7 +38,7 @@ public class EnemyAi
         return skillsToPick[randomSkillId];
     }
 
-    protected Entity[] GetkillTarget(Skill skill, Entity[] allies, Entity[] enemies)
+    protected Entity[] GetSkillTarget(Skill skill, Entity[] allies, Entity[] enemies)
     {
         Entity[] targetGroup = skill.Data.TargetBond == Bond.Ally ? enemies : allies;
 

@@ -27,7 +27,7 @@ public class SpiritWarriorBossAi : EnemyAi
             selectedSkill = availableSkills.FirstOrDefault(s => s.Data.Name == "SummonDoctor") ?? selectedSkill;
         }
 
-        Entity[] targets = this.GetkillTarget(selectedSkill, allies, enemies);
+        Entity[] targets = this.GetSkillTarget(selectedSkill, allies, enemies);
 
         selectedSkill.Use(user, targets);
     }

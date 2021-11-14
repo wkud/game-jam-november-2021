@@ -13,7 +13,7 @@ public class WitchDoctorAi : EnemyAi
         : this.SelectRandomSkill(availableSkills.Where(x => x.Data.Name != SPECIAL_SKILL_NAME).ToArray(), allies, enemies);
         // if skill bond is ally, return Enemy's allies - enemies
 
-        Entity[] targets = isHealNeeded ? this.GetEnemyWithLowestHp(enemies) : this.GetkillTarget(selectedSkill, allies, enemies);
+        Entity[] targets = isHealNeeded ? this.GetEnemyWithLowestHp(enemies) : this.GetSkillTarget(selectedSkill, allies, enemies);
 
         selectedSkill.Use(user, targets);
     }

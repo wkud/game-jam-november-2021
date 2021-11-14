@@ -12,7 +12,7 @@ public class SnakeShamanAi : EnemyAi
         ? availableSkills.FirstOrDefault(s => s.Data.Name == SPECIAL_SKILL_NAME)
         : this.SelectRandomSkill(availableSkills.Where(x => x.Data.Name != SPECIAL_SKILL_NAME).ToArray(), allies, enemies);
 
-        Entity[] targets = this.GetkillTarget(selectedSkill, allies, enemies);
+        Entity[] targets = this.GetSkillTarget(selectedSkill, allies, enemies);
 
         selectedSkill.Use(user, targets);
     }
