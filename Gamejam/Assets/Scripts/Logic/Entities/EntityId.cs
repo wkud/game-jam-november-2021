@@ -5,16 +5,21 @@ public enum EntityId
 
     // Enemies:
     // enemies have different AI dependent on their Id
-    SpiritWarrior,
-    Aboriginal,
+    SpiritWarriorBoss,
     JaguarWarrior,
-    Eagle,
+    SnakeShaman,
+    WitchDoctor,
+    BloodShamanElite,
     Snake,
-    HighShaman,
-    BloodShaman,
-    BlessShaman,
-    ClothArtist,
-    CursedMummy,
-    ToxicHunter,
+    //Aboriginal,
+    //JaguarWarrior,
+    //Eagle,
+    //Snake,
+    //HighShaman,
+    //BloodShaman,
+    //BlessShaman,
+    //ClothArtist,
+    //CursedMummy,
+    //ToxicHunter,
     // ...
 }
