@@ -7,8 +7,14 @@ public class Tooltipable : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 {
     public void OnPointerEnter(PointerEventData data)
     {
-        string description = GetComponent<IDescriptable>()?.Description ?? "";
-        Tooltip.ShowTooltip_Static(description);
+        var descriptable = GetComponent<IDescriptable>();
+        string description = descriptable?.Description ?? "";
+        string title = descriptable?.Title ?? "";
+        
+        if (descriptable?.IsShowable ?? false)
+        {
+            Tooltip.ShowTooltip_Static(title, description);
+        }
     }
 
     public void OnPointerExit(PointerEventData data)

@@ -12,7 +12,8 @@ public class Player : Entity
 
     public string GetSkillDescription(int slotNumber)
     {
-        return this._stats.Skills[slotNumber]?.Data?.Description;
+        var skillData = this._stats.Skills[slotNumber];
+        return skillData?.GetTooltipDescription();
     }
 
     public string GetStatDescription(StatName statName)
