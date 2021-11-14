@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
     private FightController _fightController;
 
     [SerializeField] private ResourceContainer _resources = new ResourceContainer();
-
+    public event UnityAction<int, Player> OnStatChanged;
     public GameState GameState { get; private set; }
 
     private void Awake()
@@ -37,9 +37,14 @@ public class GameController : MonoBehaviour
         _mapController = FindObjectOfType<MapController>();
         _mapController.Initialize();
 
+        for (int i = 0; i < 4; i++)
+        {
+            OnStatChanged?.Invoke(i, GameState.Allies[i]);
+        }
+
         SceneManager.sceneLoaded += OnSceneLoaded;
 
-        OpenScene(SceneId.Fight);
+        //OpenScene(SceneId.Fight);
     }
 
     public void OpenScene(SceneId scene) // map or altar
@@ -58,7 +63,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void ChangeCharacterStat(StatType statType, int value, int unitId)
+    public void ChangeCharacterStat(StatName statType, int value, int unitId)
     {
         switch (statType)
         {
@@ -66,27 +71,27 @@ public class GameController : MonoBehaviour
                 GameState.Allies[unitId].Stats.MaxHp += value;
                 if (GameState.Allies[unitId].MaxHp < 0) GameState.Allies[unitId].MaxHp = 0;
                 break;*/
-            case StatType.Hp:
-                GameState.Allies[unitId].Stats.Hp += value;
-                if (GameState.Allies[unitId].Stats.Hp < 0) GameState.Allies[unitId].Stats.Hp = 0;
+            case StatName.Hp:
+                GameState.Allies[unitId].Stats.CurrentHp += value;
+                if (GameState.Allies[unitId].Stats.CurrentHp < 0) GameState.Allies[unitId].Stats.CurrentHp = 0;
                 break;
-            case StatType.Initiative:
+            case StatName.Initiative:
                 GameState.Allies[unitId].Stats.Initiative += value;
                 if (GameState.Allies[unitId].Stats.Initiative < 0) GameState.Allies[unitId].Stats.Initiative = 0;
                 break;
-            case StatType.Defence:
+            case StatName.Defence:
                 GameState.Allies[unitId].Stats.Defence += value;
                 if (GameState.Allies[unitId].Stats.Defence < 0) GameState.Allies[unitId].Stats.Defence = 0;
                 break;
-            case StatType.CritChance:
+            case StatName.CritChance:
                 GameState.Allies[unitId].Stats.CritChance += value;
                 if (GameState.Allies[unitId].Stats.CritChance < 0) GameState.Allies[unitId].Stats.CritChance = 0;
                 break;
-            case StatType.AttackModifier:
+            case StatName.AttackModifier:
                 GameState.Allies[unitId].Stats.AttackModifier += value;
                 if (GameState.Allies[unitId].Stats.AttackModifier < 0) GameState.Allies[unitId].Stats.AttackModifier = 0;
                 break;
-            case StatType.Threat:
+            case StatName.Threat:
                 GameState.Allies[unitId].Stats.Threat += value;
                 if (GameState.Allies[unitId].Stats.Threat < 0) GameState.Allies[unitId].Stats.Threat = 0;
                 break;

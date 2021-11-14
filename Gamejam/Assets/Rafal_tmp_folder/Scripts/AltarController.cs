@@ -6,14 +6,14 @@ public class AltarController : MonoBehaviour
 {
     public static AltarController Instance = null;
     
-    public StatType[] sacrifices = new StatType[4];
+    public StatName[] sacrifices = new StatName[4];
     public int[] sacrificeAmount = new int[4] { -1,-1,-1,-1};
 
-    public StatType[] statGifts = new StatType[4];
+    public StatName[] statGifts = new StatName[4];
     public int[] statGiftAmount = new int[4] { -1, -1, -1, -1 };
-    public ISkill[] skillGifts = new ISkill[4];
+    public Skill[] skillGifts = new Skill[4];
     [SerializeField] SkillData[] skills;
-    [SerializeField,SerializeReference] ISkill[] sk;
+    [SerializeField] Skill[] sk;
 
     public int offeringID = -1;
 
@@ -30,7 +30,7 @@ public class AltarController : MonoBehaviour
         //switch buttons
     }
 
-    public void ResetAltar()
+    /*public void ResetAltar()
     {
         offeringID = -1;
 
@@ -68,6 +68,6 @@ public class AltarController : MonoBehaviour
             }
         }
         
-    }
+    }*/
 }
 
