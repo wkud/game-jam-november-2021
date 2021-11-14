@@ -14,12 +14,14 @@ public static class EntityFactory
         { EntityId.JaguarWarrior, defaultEnemyAi },
         { EntityId.Eagle, defaultEnemyAi },
         { EntityId.Snake, defaultEnemyAi },
+        { EntityId.SnakeShaman, new SnakeShamanAi() },
         { EntityId.HighShaman, defaultEnemyAi },
         { EntityId.BloodShaman, defaultEnemyAi },
         { EntityId.BlessShaman, defaultEnemyAi },
         { EntityId.ClothArtist, defaultEnemyAi },
         { EntityId.CursedMummy, defaultEnemyAi },
         { EntityId.ToxicHunter, defaultEnemyAi },
+        { EntityId.WitchDoctor, new WitchDoctorAi() },
     };
 
     public static Entity CreateEntity(EntityStats entityData)
