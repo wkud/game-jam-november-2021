@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 public class EnemyAi
 {
@@ -42,7 +43,22 @@ public class EnemyAi
         int randomSkillId = random.Next(0, targetGroup.Length);
         Entity target = targetGroup[randomSkillId];
 
-        return new Entity[] { target };
+        float randomChance = random.Next(0, 100);
+
+        float[] threats = targetGroup.Select(e => e.Stats.Threat).ToArray();
+        float threatSum = threats.Sum();
+
+        float[] threatChances = threats.Select(e => e * 100 / threatSum).ToArray();
+
+        int selectedId = 0;
+
+        for (int i = 0; i < threatChances.Length && randomChance > 0; i++)
+        {
+            randomChance -= threatChances[i];
+            selectedId = i;
+        }
+
+        return new Entity[] { targetGroup[selectedId] };
     }
 
 }
