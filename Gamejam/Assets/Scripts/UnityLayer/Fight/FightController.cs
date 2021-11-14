@@ -99,7 +99,7 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
     {
         _currentEntity = _initiativeTracker.GetNextEntity();
 
-        _initiativeUiController.OnFinishedTurn();
+        _initiativeUiController.OnFinishedTurn(_initiativeTracker);
         StartTurn();
     }
 

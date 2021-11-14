@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b9a1e0739b4a8247b207a6157c9673b, type: 3}
   m_Name: SpiritWarriorBuffSkill
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 0}
   _skillCode: 0
-  _name: 
+  _name: SpiritWarriorBuffSkill
   _description: 
-  _power: 9001
+  _power: 2
   _maxCooldown: 5
   _targetCount: 0
   _targetBond: 0
   _imposedState: {fileID: 0}
+  _sprite: {fileID: 0}
