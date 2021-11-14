@@ -5,10 +5,21 @@ using UnityEngine;
 
 public static class EntityFactory
 {
-    private static Dictionary<EntityId, IEnemyAi> _enemyAis = new Dictionary<EntityId, IEnemyAi>()
+    private static EnemyAi defaultEnemyAi = new EnemyAi();
+
+    private static Dictionary<EntityId, EnemyAi> _enemyAis = new Dictionary<EntityId, EnemyAi>()
     {
-        { EntityId.SpiritWarrior, new SpiritWarriorAi() },
-        { EntityId.JaguarWarrior, new JaguarWarriorAi() },
+        { EntityId.SpiritWarrior, defaultEnemyAi },
+        { EntityId.Aboriginal, defaultEnemyAi },
+        { EntityId.JaguarWarrior, defaultEnemyAi },
+        { EntityId.Eagle, defaultEnemyAi },
+        { EntityId.Snake, defaultEnemyAi },
+        { EntityId.HighShaman, defaultEnemyAi },
+        { EntityId.BloodShaman, defaultEnemyAi },
+        { EntityId.BlessShaman, defaultEnemyAi },
+        { EntityId.ClothArtist, defaultEnemyAi },
+        { EntityId.CursedMummy, defaultEnemyAi },
+        { EntityId.ToxicHunter, defaultEnemyAi },
     };
 
     public static Entity CreateEntity(EntityStats entityData)
