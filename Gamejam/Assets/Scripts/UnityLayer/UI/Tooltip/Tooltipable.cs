@@ -7,7 +7,8 @@ public class Tooltipable : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 {
     public void OnPointerEnter(PointerEventData data)
     {
-        Tooltip.ShowTooltip_Static(this.gameObject.name);
+        string description = GetComponent<IDescriptable>()?.Description ?? "";
+        Tooltip.ShowTooltip_Static(description);
     }
 
     public void OnPointerExit(PointerEventData data)
