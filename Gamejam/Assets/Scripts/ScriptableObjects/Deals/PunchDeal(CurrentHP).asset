@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 075cc780491a7a945bc6bb26b9f4747a, type: 3}
+  m_Name: PunchDeal(CurrentHP)
+  m_EditorClassIdentifier: 
+  price: {fileID: 11400000, guid: 033be1895d8d35940bf26667c574b49c, type: 2}
+  profit: {fileID: 11400000, guid: 370abea97d4a3fd40848932a2650bb65, type: 2}
