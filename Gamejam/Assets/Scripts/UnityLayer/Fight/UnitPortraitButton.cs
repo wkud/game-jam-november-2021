@@ -11,6 +11,12 @@ public class UnitPortraitButton : MonoBehaviour
     {
         _unit = unit;
 
+        if (_unit.Entity.Stats.Sprite != null)
+        {
+            GetComponent<Image>().sprite = _unit.Entity.Stats.Sprite;
+        }
+
+
         var button = GetComponent<Button>();
         button.onClick.AddListener(OnClick);
     }
