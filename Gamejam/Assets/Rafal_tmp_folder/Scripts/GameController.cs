@@ -57,7 +57,7 @@ public class GameController : MonoBehaviour
         if (SceneManagerExtension.GetCurrentScene() == SceneId.Fight)
         {
             _fightController = FindObjectOfType<FightController>();
-            _fightController.Initialize(this);
+            _fightController.Initialize(GameState);
 
             _mapController?.gameObject.SetActive(false);
         }

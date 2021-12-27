@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "EntityStats", menuName = "ScriptableObjects/EntityStats", order = 2)]
 public class EntityStats : ScriptableObject
@@ -19,7 +20,7 @@ public class EntityStats : ScriptableObject
     [SerializeField] private int _defence = 10;
     [SerializeField] private float _critChance = 10;
     [SerializeField] private float _threat = 10;
-    [SerializeField] private Sprite _sprite; 
+    [SerializeField] public Sprite _sprite; 
 
     public EntityId Identifier { get => _identifier; set => _identifier = value; }
     public Bond Bond { get => _bond; set => _bond = value; }

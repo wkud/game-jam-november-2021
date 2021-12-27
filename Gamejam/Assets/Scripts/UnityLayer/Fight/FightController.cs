@@ -3,78 +3,35 @@ using UnityEngine;
 using System.Linq;
 using System;
 
-public class FightController : MonoBehaviour, IFightStateHolder  // class for main fight management logic 
+public class FightController : MonoBehaviour  // class for main fight management logic 
 {
-
-    [SerializeField] private List<Unit> _allAllies;
-    [SerializeField] private List<Unit> _allEnemies;
-    private List<Unit> _activeEnemies => _allEnemies.Where(e => e.IsActive).ToList();
-
-    private List<Unit> _units = new List<Unit>();
-
-    private Entity _currentEntity; // an entity, which is currently making a move
     private InitiativeTracker _initiativeTracker;
     private PlayerMoveMaker _playerMoveMaker;
-
     private InitiativeController _initiativeUiController;
+    [SerializeField] private FightUnitManager _unitManager;
 
-    private IGameState _gameState;
+    private Entity _currentEntity => _initiativeTracker.GetCurrentEntity(); // an entity, which is currently making a move
 
     public PlayerTurnState PlayerTurnState => _playerMoveMaker.State; // this enum informs buttons whether they should respond to events
 
-    public Entity[] Enemies => _activeEnemies.Select(u => u.Entity).ToArray();
-    public Entity[] Allies => _allAllies.Select(u => u.Entity).ToArray();
-
-    public void Initialize(GameController gameController)
+    public void Initialize(IGameState gameState)
     {
         // setup variables
-        _gameState = gameController.GameState;
-
-        _units.AddRange(_allEnemies);
-        _units.AddRange(_allAllies);
-
-        // initialize units
-        var allyPresets = _gameState.GetCharacters().Select(e => (Entity)e).ToList();
-        InitializeUnits(_allAllies, allyPresets);
-
-        var enemies = _gameState.GetEnemiesForThisFight() ?? new List<Enemy>();
-        var enemyPresets = enemies.Select(e => (Entity)e).ToList();
-        HideUnusedUnits(_allEnemies, enemyPresets);
-        InitializeUnits(_activeEnemies, enemyPresets);
+        var units = FindObjectsOfType<Unit>();
+        _unitManager.Initialize(gameState, units, this);
 
         // set intiative
-        Entity[] entities = Enemies.Concat(Allies).ToArray();
-        _initiativeTracker = new InitiativeTracker(entities);
+        _initiativeTracker = new InitiativeTracker(_unitManager.ActiveEntities);
 
         _initiativeUiController = FindObjectOfType<InitiativeController>();
         _initiativeUiController.Initialize(_initiativeTracker);
 
         // setup player move input system
-        _playerMoveMaker = new PlayerMoveMaker(this);
+        _playerMoveMaker = new PlayerMoveMaker(_unitManager);
         _playerMoveMaker.OnPlayerTurnEnd.AddListener(OnFinishedTurn); // TODO: add listener for playing animations
 
         //start turn
-        _currentEntity = _initiativeTracker.GetStartEntity();
         StartTurn();
-    }
-
-    private void InitializeUnits(List<Unit> units, List<Entity> presets)
-    {
-        for (int i = 0; i < units.Count; i++)
-        {
-            units[i].Initialize(this, presets[i]);
-        }
-    }
-    private void HideUnusedUnits(List<Unit> units, List<Entity> presets)
-    {
-        if (units.Count > presets.Count)
-        {
-            var unusedUnitCount = units.Count - presets.Count;
-            for (int i = 0; i < unusedUnitCount; i++)
-            {
-                units[i].Hide();
-            }
-        }
     }
 
     private void StartTurn()
@@ -82,19 +39,23 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
         if (_currentEntity.Stats.Bond == Bond.Ally)
         {
             _playerMoveMaker.OnPlayerStartTurn(_currentEntity as Player);
+            Debug.Log("Player's turn starts");
             // TODO: play animations 
         }
         else
         {
-            (_currentEntity as Enemy)?.MakeMove(this);
+            Debug.Log("Enemy's turn starts");
+            (_currentEntity as Enemy)?.MakeMove(_unitManager);
             // TODO: play animations 
+
             OnFinishedTurn();
+            Debug.Log("Enemy's turn ends");
         }
     }
 
     private void OnFinishedTurn() // this function needs to be called when entity ends it's turn
     {
-        _currentEntity = _initiativeTracker.GetNextEntity();
+        _initiativeTracker.SetNextEntity();
 
         _initiativeUiController.OnFinishedTurn();
         StartTurn();

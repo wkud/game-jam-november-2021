@@ -76,10 +76,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resources:
     _characterStats:
-    - {fileID: 11400000, guid: 4df18efcfad73254fab04bf5c5aad2f3, type: 2}
-    - {fileID: 11400000, guid: 1ed4cd18514fc2744ae078c468e8201b, type: 2}
-    - {fileID: 11400000, guid: 4df18efcfad73254fab04bf5c5aad2f3, type: 2}
-    - {fileID: 11400000, guid: 1ed4cd18514fc2744ae078c468e8201b, type: 2}
+    - {fileID: 11400000, guid: 25c4dd508a1b7984186c0c2f67aa57eb, type: 2}
+    - {fileID: 11400000, guid: 770aa935b7444cb49a08caaff68a114d, type: 2}
+    - {fileID: 11400000, guid: 2192ddf76a0c87f4999cc1809a54e9f9, type: 2}
+    - {fileID: 11400000, guid: ef7267439a1db6248b1930e4ce62f516, type: 2}
+    - {fileID: 11400000, guid: b449a348f2b539347a2817d0ae8bb4d1, type: 2}
     _enemyStats:
     - {fileID: 11400000, guid: e458eb2634bcf564092732d79defdb4d, type: 2}
     - {fileID: 11400000, guid: e458eb2634bcf564092732d79defdb4d, type: 2}
