@@ -40,8 +40,7 @@ public class SkillController : MonoBehaviour, IDescriptable
         _image = GetComponent<Image>();
         _button = GetComponent<Button>();
 
-        var button = GetComponent<Button>();
-        button.onClick.AddListener(OnClick);
+        _button.onClick.AddListener(OnClick);
     }
 
     public void OnClick() => _unit.OnSkillClick(_skillSlotNumber);

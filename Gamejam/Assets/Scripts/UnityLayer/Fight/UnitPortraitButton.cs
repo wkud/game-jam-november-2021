@@ -11,9 +11,10 @@ public class UnitPortraitButton : MonoBehaviour
     {
         _unit = unit;
 
-        if (_unit.Entity.Stats.Sprite != null)
+        var sprite = _unit.Entity.Stats.Sprite;
+        if (sprite != null)
         {
-            GetComponent<Image>().sprite = _unit.Entity.Stats.Sprite;
+            GetComponent<Image>().sprite = sprite;
         }
 
 

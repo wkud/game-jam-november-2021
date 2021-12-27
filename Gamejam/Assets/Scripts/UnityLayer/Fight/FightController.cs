@@ -10,7 +10,6 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
     [SerializeField] private List<Unit> _allEnemies;
     private List<Unit> _activeEnemies => _allEnemies.Where(e => e.IsActive).ToList();
 
-
     private List<Unit> _units = new List<Unit>();
 
     private Entity _currentEntity; // an entity, which is currently making a move
@@ -19,7 +18,6 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
 
     private InitiativeController _initiativeUiController;
 
-    private GameController _gameController;
     private IGameState _gameState;
 
     public PlayerTurnState PlayerTurnState => _playerMoveMaker.State; // this enum informs buttons whether they should respond to events
@@ -30,8 +28,7 @@ public class FightController : MonoBehaviour, IFightStateHolder  // class for ma
     public void Initialize(GameController gameController)
     {
         // setup variables
-        _gameController = gameController;
-        _gameState = _gameController.GameState;
+        _gameState = gameController.GameState;
 
         _units.AddRange(_allEnemies);
         _units.AddRange(_allAllies);
