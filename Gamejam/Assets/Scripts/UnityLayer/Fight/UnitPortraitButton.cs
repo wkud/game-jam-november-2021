@@ -14,7 +14,7 @@ public class UnitPortraitButton : MonoBehaviour
         var sprite = _unit.Entity.Stats.Sprite;
         if (sprite != null)
         {
-            GetComponent<Image>().overrideSprite = sprite;
+            GetComponent<Image>().sprite = sprite;
         }
 
 

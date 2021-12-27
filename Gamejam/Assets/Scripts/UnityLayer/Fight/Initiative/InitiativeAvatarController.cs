@@ -12,6 +12,6 @@ public class InitiativeAvatarController : MonoBehaviour
     {
         Entity = entity;
         _image = GetComponent<Image>();
-        //_image. = entity.Stats.Sprite;
+        _image.sprite = entity.Stats.Sprite;
     }
 }

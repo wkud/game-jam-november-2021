@@ -8,6 +8,9 @@ using UnityEngine.UIElements;
 [CreateAssetMenu(fileName = "EntityStats", menuName = "ScriptableObjects/EntityStats", order = 2)]
 public class EntityStats : ScriptableObject
 {
+    public int UniqueId { get; private set; }
+    private static int lastAssignedId = 0;
+
     [SerializeField] private EntityId _identifier;
     [SerializeField] private Bond _bond;
 
@@ -47,7 +50,8 @@ public class EntityStats : ScriptableObject
         int attackModifier,
         int defence,
         float critChance,
-        float threat)
+        float threat,
+        Sprite sprite)
     {
         _states = new List<StateController>(states);
         Skills = skills.Select(d => SkillFactory.CreateSkill(d)).ToArray();
@@ -60,6 +64,9 @@ public class EntityStats : ScriptableObject
         _defence = defence;
         _critChance = critChance;
         _threat = threat;
+        _sprite = sprite;
+        UniqueId = lastAssignedId;
+        lastAssignedId++;
     }
 
     public EntityStats GetClone()
@@ -74,7 +81,8 @@ public class EntityStats : ScriptableObject
          _attackModifier,
          _defence,
          _critChance,
-         _threat);
+         _threat,
+         _sprite);
         return stats;
     }
 }
