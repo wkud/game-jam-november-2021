@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
-using System;
+﻿using UnityEngine;
+using System.Text;
 
 public class FightController : MonoBehaviour  // class for main fight management logic 
 {
-    private InitiativeTracker _initiativeTracker;
     private PlayerMoveMaker _playerMoveMaker;
+    private PlayerMoveUiUpdater _playerMoveUiUpdater;
+    private InitiativeTracker _initiativeTracker;
     private InitiativeController _initiativeUiController;
-    [SerializeField] private FightUnitManager _unitManager;
+    private FightUnitManager _unitManager;
 
     private Entity _currentEntity => _initiativeTracker.GetCurrentEntity(); // an entity, which is currently making a move
 
@@ -18,7 +17,7 @@ public class FightController : MonoBehaviour  // class for main fight management
     {
         // setup variables
         var units = FindObjectsOfType<Unit>();
-        _unitManager.Initialize(gameState, units, this);
+        _unitManager = new FightUnitManager(gameState, units, this);
 
         // set intiative
         _initiativeTracker = new InitiativeTracker(_unitManager.ActiveEntities);
@@ -27,11 +26,22 @@ public class FightController : MonoBehaviour  // class for main fight management
         _initiativeUiController.Initialize(_initiativeTracker);
 
         // setup player move input system
-        _playerMoveMaker = new PlayerMoveMaker(_unitManager);
+        _playerMoveUiUpdater = new PlayerMoveUiUpdater(_unitManager);
+
+        _playerMoveMaker = new PlayerMoveMaker(_unitManager, _playerMoveUiUpdater);
         _playerMoveMaker.OnPlayerTurnEnd.AddListener(OnFinishedTurn); // TODO: add listener for playing animations
 
         //start turn
         StartTurn();
+
+        // TODO remove this after debugging
+        var stringBuilder = new StringBuilder("Initiative Queue:\n");
+        var queue = _initiativeTracker.GetInitiativeQueue();
+        foreach (var entity in queue)
+        {
+            stringBuilder.AppendLine($"{queue.IndexOf(entity) + 1}. {entity.Stats.Identifier} Stats.UniqueId: {entity.Stats.UniqueId}");
+        }
+        Debug.Log(stringBuilder.ToString());
     }
 
     private void StartTurn()
@@ -39,7 +49,7 @@ public class FightController : MonoBehaviour  // class for main fight management
         if (_currentEntity.Stats.Bond == Bond.Ally)
         {
             _playerMoveMaker.OnPlayerStartTurn(_currentEntity as Player);
-            Debug.Log("Player's turn starts");
+            Debug.Log($"Player's turn starts. Stats.UniqueId: {_currentEntity.Stats.UniqueId}");
             // TODO: play animations 
         }
         else

@@ -1,11 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UnitPortraitButton : MonoBehaviour
 {
     private Unit _unit;
+
+    private Button _button;
+
+    public bool IsInteractable
+    {
+        get => _button.interactable;
+        set => _button.interactable = value;
+    }
 
     public void Initialize(Unit unit)
     {
@@ -18,8 +24,8 @@ public class UnitPortraitButton : MonoBehaviour
         }
 
 
-        var button = GetComponent<Button>();
-        button.onClick.AddListener(OnClick);
+        _button = GetComponent<Button>();
+        _button.onClick.AddListener(OnClick);
     }
 
     public void OnClick() => _unit.OnPortraitClick();

@@ -8,20 +8,29 @@ public class PlayerMoveMaker
     private Entity[] _targets;
 
     public PlayerTurnState State { get; private set; } = PlayerTurnState.WaitingForPlayerTurn;
+
     public UnityEvent OnPlayerTurnEnd { get; } = new UnityEvent();
 
-
+    private IPlayerMoveUiUpdater _uiUpdater;
     private IFightStateHolder _fightStateHolder;
-    public PlayerMoveMaker(IFightStateHolder fightStateHolder)
+
+    public PlayerMoveMaker(IFightStateHolder fightStateHolder, IPlayerMoveUiUpdater uiUpdater)
     {
         _fightStateHolder = fightStateHolder;
+        _uiUpdater = uiUpdater;
+
+        _uiUpdater.LockAllSkills();
+        _uiUpdater.LockAllTargets();
     }
 
     #region StateMachine
     public void OnPlayerStartTurn(Player currentPlayer) // state transition: WaitingForPlayerTurn -> WaitingForSkill
     {
-        _currentPlayer = currentPlayer;
+        _currentPlayer = currentPlayer; // TODO only this player can use skills
+
         State = PlayerTurnState.WaitingForSkill;
+
+        _uiUpdater.UnlockSkills(_currentPlayer);
     }
 
     public void OnPlayerSelectSkill(int skillIndex) // state transition: WaitingForSkill -> WaitingForTarget or -> WaitingForPlayerTurn
@@ -29,11 +38,16 @@ public class PlayerMoveMaker
         if (State != PlayerTurnState.WaitingForSkill)
             return;
 
+        _uiUpdater.LockAllSkills(); // UI: end waiting for skill
+
         SetSkillIndex(skillIndex);
 
         if (_currentPlayer.IsSkillSingleTarget(skillIndex))
         {
             State = PlayerTurnState.WaitingForTarget;
+
+            var skillTargetBond = _currentPlayer.GetSkillTargetBond(skillIndex);
+            _uiUpdater.UnlockTargets(skillTargetBond); // UI: unlock valid targets for this skill
         }
         else
         {
@@ -46,6 +60,8 @@ public class PlayerMoveMaker
     {
         if (State != PlayerTurnState.WaitingForTarget)
             return;
+
+        _uiUpdater.LockAllTargets(); // UI: end waiting for target
 
         SetSingleTarget(target);
         UseSkill();
