@@ -5,5 +5,5 @@ using UnityEngine;
 public interface IGameState
 {
     List<Enemy> GetEnemiesForThisFight();
-    List<Player> GetCharacters();
+    List<Player> Allies { get; }
 }

@@ -28,8 +28,5 @@ public class GameState : IGameState
         return enemies;
     }
 
-    public List<Player> GetCharacters()
-    {
-        return Allies;
-    }
+    
 }
