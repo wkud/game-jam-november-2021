@@ -1,34 +1,42 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
     private FightController _fightController;
 
     private UnitSkillManager _skillManager;
+    private UnitPortraitButton _portraitButton;
 
     public Entity Entity { get; private set; }
 
-    private bool _isActive = true;
     public bool IsActive
     {
-        get => _isActive;
-        private set
-        {
-            _isActive = value;
-            gameObject.SetActive(_isActive);
-        }
+        get => gameObject.activeSelf;
+        private set => gameObject.SetActive(value);
+    }
+
+    public bool IsPortraitInteractable
+    {
+        get => _portraitButton.IsInteractable;
+        set => _portraitButton.IsInteractable = value;
+    }
+
+    public bool AreSkillsInteractable
+    {
+        get => _skillManager.AreSkillsInteractable;
+        set => _skillManager.AreSkillsInteractable = value;
     }
 
     public void Initialize(FightController fightController, Entity entity)
     {
         _fightController = fightController;
+        Entity = entity;
 
         Show();
 
-        Entity = entity;
-
-        var portraitButton = GetComponentInChildren<UnitPortraitButton>();
-        portraitButton.Initialize(this);
+        _portraitButton = GetComponentInChildren<UnitPortraitButton>();
+        _portraitButton.Initialize(this);
 
         var skillControllers = GetComponentsInChildren<SkillController>();
         foreach (var skillButton in skillControllers)
@@ -50,7 +58,7 @@ public class Unit : MonoBehaviour
     {
         if (_fightController.PlayerTurnState == PlayerTurnState.WaitingForTarget)
         {
-            Debug.Log("Portrait click " + this);
+            //Debug.Log("Portrait click " + this);
             _fightController.OnSelectTarget(this);
         }
     }
@@ -59,10 +67,12 @@ public class Unit : MonoBehaviour
     {
         if (_fightController.PlayerTurnState == PlayerTurnState.WaitingForSkill)
         {
-            Debug.Log("Skill click " + skillIndex);
+            //Debug.Log("Skill click " + skillIndex);
             _fightController.OnSelectSkill(skillIndex);
         }
     }
+
+    
 
     public void Hide() => IsActive = false;
     public void Show() => IsActive = true;

@@ -16,10 +16,9 @@ public class Enemy : Entity
         _ai = ai;
     }
 
-
     public void MakeMove(IFightStateHolder fightState)
     {
-        var availableSkills = _stats.Skills.Where(s => s.Data.CurrentCooldown <= 0).ToArray();
+        var availableSkills = _stats.Skills.Where(s => (s?.Data?.CurrentCooldown ?? int.MaxValue) <= 0).ToArray();
         if (!this._hasStarted)
         {
             this._ai.OnCreate(this, fightState.Allies, fightState.Enemies, availableSkills);

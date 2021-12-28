@@ -16,10 +16,11 @@ public class Tooltip : MonoBehaviour
 
     private void Awake()
     {
-        gameObject.SetActive(false);
         instance = this;
         backgroundRectTransform = transform.Find("background").GetComponent<RectTransform>();
         //_descriptionTextArea = transform.Find("text").GetComponent<Text>();
+
+        gameObject.SetActive(false);
     }
 
     private void Update()

@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e79fdded53be5149b1fe91a4aeb8dd1, type: 3}
-  m_Name: EnemyStats
+  m_Name: Character3
   m_EditorClassIdentifier: 
-  _identifier: 2
-  _bond: 1
+  _identifier: 0
+  _bond: 0
   _skills:
-  - {fileID: 11400000, guid: 47c31daa5145d9645b8edf3c5d739771, type: 2}
-  - {fileID: 11400000, guid: 70c783ba65f0f47499ca935bf1387106, type: 2}
+  - {fileID: 11400000, guid: 4c39435fe8aa3d44e8916b99cb2d2617, type: 2}
+  - {fileID: 11400000, guid: 0973bbc6618168b459aeeebfb9e8ea54, type: 2}
   - {fileID: 0}
   _maxHp: 30
-  _initiative: 7
-  _attackModifier: 4
-  _defence: 12
-  _critChance: 7
-  _threat: 3
-  _sprite: {fileID: 21300000, guid: 99720bd60e85dbf47a33d2574cfd2b21, type: 3}
+  _initiative: 10
+  _attackModifier: 10
+  _defence: 10
+  _critChance: 10
+  _threat: 10
+  _sprite: {fileID: 21300000, guid: 81aa2d3507d3b62458ddcc58f3c1838e, type: 3}

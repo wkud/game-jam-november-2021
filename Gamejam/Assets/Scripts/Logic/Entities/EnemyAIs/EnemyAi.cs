@@ -25,12 +25,17 @@ public class EnemyAi
 
     protected Skill SelectRandomSkill(Skill[] availableSkills, Entity[] allies, Entity[] enemies)
     {
-        bool isSingleAlly = allies.Count() == 1;
-        bool isSingleEnemy = allies.Count() == 1;
-        // Prefere single skill when target group has 1 entity
-        Skill[] prioritySkills = availableSkills.Where(x =>
-        (isSingleAlly && x.Data.TargetBond == Bond.Enemy && x.Data.TargetCount == SkillTargetCount.One)
-        || (isSingleEnemy && x.Data.TargetBond == Bond.Ally && x.Data.TargetCount == SkillTargetCount.One)).ToArray();
+        bool isSingleMemberInTargetParty(Skill skill)
+        {
+            var targetParty = skill.Data.TargetBond == Bond.Ally ? allies : enemies;
+            return targetParty.Count() == 1;
+        }
+
+        // Prefer single-target skills when target group has 1 entity
+        Skill[] prioritySkills = availableSkills.Where(
+            x => x.Data.TargetCount == SkillTargetCount.One 
+                && isSingleMemberInTargetParty(x)
+            ).ToArray();
 
         Skill[] skillsToPick = prioritySkills.Length > 0 ? prioritySkills : availableSkills;
 
@@ -51,16 +56,16 @@ public class EnemyAi
 
     private Entity[] GetOneSkillTarget(Entity[] targetGroup)
     {
-        int randomSkillId = random.Next(0, targetGroup.Length);
-        Entity target = targetGroup[randomSkillId];
+        int randomTargetId = random.Next(0, targetGroup.Length);
+        Entity target = targetGroup[randomTargetId];
 
-        float randomChance = random.Next(0, 100);
 
         float[] threats = targetGroup.Select(e => e.Stats.Threat).ToArray();
         float threatSum = threats.Sum();
 
         float[] threatChances = threats.Select(e => e * 100 / threatSum).ToArray();
 
+        float randomChance = random.Next(0, 100);
         int selectedId = 0;
 
         for (int i = 0; i < threatChances.Length && randomChance > 0; i++)

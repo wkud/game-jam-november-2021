@@ -37,18 +37,12 @@ public class GameController : MonoBehaviour
         GameState = new GameState(_resources);
 
         _mapController = FindObjectOfType<MapController>();
-        _mapController.Initialize();
+        _mapController?.Initialize();
 
-        foreach (CharacterPanel panel in FindObjectsOfType<CharacterPanel>())
-        {
-            panel.Initialize();
-        }
-        for (int i = 0; i < 4; i++)
-        {
-            OnStatChanged?.Invoke(i, GameState.Allies[i]);
-        }
+        TryInitializeMapController();
 
         SceneManager.sceneLoaded += (Scene scena, LoadSceneMode mode) => TryInitializeFightController();
+        SceneManager.sceneLoaded += (Scene scena, LoadSceneMode mode) => TryInitializeMapController();
     }
 
     public void OpenScene(SceneId scene)
@@ -60,20 +54,24 @@ public class GameController : MonoBehaviour
 
     private void TryInitializeFightController()
     {
-        if (SceneManager.GetActiveScene().buildIndex == (int)SceneId.Fight)
+        if (SceneManagerExtension.GetCurrentScene() == SceneId.Fight)
         {
             _fightController = FindObjectOfType<FightController>();
-            _fightController.Initialize(this);
+            _fightController.Initialize(GameState);
 
-            _mapController.gameObject.SetActive(false);
+            _mapController?.gameObject.SetActive(false);
         }
-        else if(SceneManager.GetActiveScene().buildIndex == (int)SceneId.Map)
+    }
+
+    private void TryInitializeMapController()
+    {
+        if (SceneManagerExtension.GetCurrentScene() == SceneId.Map)
         {
             foreach (CharacterPanel panel in FindObjectsOfType<CharacterPanel>())
             {
                 panel.Initialize();
             }
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < GameState.Allies.Count; i++)
             {
                 OnStatChanged?.Invoke(i, GameState.Allies[i]);
             }
@@ -82,38 +80,39 @@ public class GameController : MonoBehaviour
 
     public void ChangeCharacterStat(StatName statType, int value, int unitId)
     {
+        var ally = GameState.Allies[unitId];
         switch (statType)
         {
             case StatName.Hp:
-                GameState.Allies[unitId].Stats.MaxHp += value;
-                if (GameState.Allies[unitId].Stats.MaxHp < 0) GameState.Allies[unitId].Stats.MaxHp = 0;
+                ally.Stats.MaxHp += value;
+                if (ally.Stats.MaxHp < 0) ally.Stats.MaxHp = 0;
                 break;
             case StatName.CurrentHp:
-                GameState.Allies[unitId].Stats.CurrentHp += value;
-                if (GameState.Allies[unitId].Stats.CurrentHp < 0) GameState.Allies[unitId].Stats.CurrentHp = 0;
+                ally.Stats.CurrentHp += value;
+                if (ally.Stats.CurrentHp < 0) ally.Stats.CurrentHp = 0;
                 break;
             case StatName.Initiative:
-                GameState.Allies[unitId].Stats.Initiative += value;
-                if (GameState.Allies[unitId].Stats.Initiative < 0) GameState.Allies[unitId].Stats.Initiative = 0;
+                ally.Stats.Initiative += value;
+                if (ally.Stats.Initiative < 0) ally.Stats.Initiative = 0;
                 break;
             case StatName.Defence:
-                GameState.Allies[unitId].Stats.Defence += value;
-                if (GameState.Allies[unitId].Stats.Defence < 0) GameState.Allies[unitId].Stats.Defence = 0;
+                ally.Stats.Defence += value;
+                if (ally.Stats.Defence < 0) ally.Stats.Defence = 0;
                 break;
             case StatName.CritChance:
-                GameState.Allies[unitId].Stats.CritChance += value;
-                if (GameState.Allies[unitId].Stats.CritChance < 0) GameState.Allies[unitId].Stats.CritChance = 0;
+                ally.Stats.CritChance += value;
+                if (ally.Stats.CritChance < 0) ally.Stats.CritChance = 0;
                 break;
             case StatName.AttackModifier:
-                GameState.Allies[unitId].Stats.AttackModifier += value;
-                if (GameState.Allies[unitId].Stats.AttackModifier < 0) GameState.Allies[unitId].Stats.AttackModifier = 0;
+                ally.Stats.AttackModifier += value;
+                if (ally.Stats.AttackModifier < 0) ally.Stats.AttackModifier = 0;
                 break;
             case StatName.Threat:
-                GameState.Allies[unitId].Stats.Threat += value;
-                if (GameState.Allies[unitId].Stats.Threat < 0) GameState.Allies[unitId].Stats.Threat = 0;
+                ally.Stats.Threat += value;
+                if (ally.Stats.Threat < 0) ally.Stats.Threat = 0;
                 break;
         }
-        OnStatChanged?.Invoke(unitId, GameState.Allies[unitId]);
+        OnStatChanged?.Invoke(unitId, ally);
     }
 
     public void ChangeCharacterSkill(int playerId, int skillSlotId, Skill skill)

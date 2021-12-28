@@ -15,23 +15,27 @@ public class InitiativeTracker
         _currentEntity = this._initiativeQueue[0];
     }
 
-    public Entity GetStartEntity()
+    public Entity GetCurrentEntity()
     {
         return _currentEntity;
     }
 
-    public Entity GetNextEntity()
+    public List<Entity> GetInitiativeQueue()
+    {
+        return _initiativeQueue;
+    }
+
+    public void SetNextEntity()
     {
         int index = this._initiativeQueue.FindIndex(e => e == _currentEntity);
         int nextIndex = (index + 1) % this._initiativeQueue.Count;
         this._currentEntity = this._initiativeQueue[nextIndex];
-        return this._currentEntity;
     }
 
     public void KillEntity(Entity entity)
     {
         if (entity == this._currentEntity)
-            this.GetNextEntity();
+            this.SetNextEntity();
 
         this._initiativeQueue.Remove(entity);
     }

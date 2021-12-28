@@ -3,10 +3,14 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "EntityStats", menuName = "ScriptableObjects/EntityStats", order = 2)]
 public class EntityStats : ScriptableObject
 {
+    public int UniqueId { get; private set; }
+    private static int lastAssignedId = 0;
+
     [SerializeField] private EntityId _identifier;
     [SerializeField] private Bond _bond;
 
@@ -19,7 +23,7 @@ public class EntityStats : ScriptableObject
     [SerializeField] private int _defence = 10;
     [SerializeField] private float _critChance = 10;
     [SerializeField] private float _threat = 10;
-    [SerializeField] private Sprite _sprite; 
+    [SerializeField] public Sprite _sprite; 
 
     public EntityId Identifier { get => _identifier; set => _identifier = value; }
     public Bond Bond { get => _bond; set => _bond = value; }
@@ -46,7 +50,8 @@ public class EntityStats : ScriptableObject
         int attackModifier,
         int defence,
         float critChance,
-        float threat)
+        float threat,
+        Sprite sprite)
     {
         _states = new List<StateController>(states);
         Skills = skills.Select(d => SkillFactory.CreateSkill(d)).ToArray();
@@ -59,6 +64,9 @@ public class EntityStats : ScriptableObject
         _defence = defence;
         _critChance = critChance;
         _threat = threat;
+        _sprite = sprite;
+        UniqueId = lastAssignedId;
+        lastAssignedId++;
     }
 
     public EntityStats GetClone()
@@ -73,7 +81,8 @@ public class EntityStats : ScriptableObject
          _attackModifier,
          _defence,
          _critChance,
-         _threat);
+         _threat,
+         _sprite);
         return stats;
     }
 }

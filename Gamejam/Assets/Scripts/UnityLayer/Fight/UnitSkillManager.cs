@@ -6,6 +6,17 @@ public class UnitSkillManager
     private Unit _unit;
     private SkillController[] _skillControllers;
 
+    bool _areSkillsInteractable = true;
+    public bool AreSkillsInteractable
+    {
+        get => _areSkillsInteractable;
+        set
+        {
+            _areSkillsInteractable = value;
+            SetInteractableToAllSkills(value);
+        }
+    }
+
     public UnitSkillManager(Unit unit, SkillController[] skillControllers)
     {
         _unit = unit;
@@ -18,7 +29,7 @@ public class UnitSkillManager
 
             if (skill is null)
             {
-                controller.SetInteractable(false); // turn of this button
+                controller.IsInteractable = false; // turn of this button
             }
             else
             {
@@ -26,5 +37,12 @@ public class UnitSkillManager
             }
         }
     }
-    
+
+    private void SetInteractableToAllSkills(bool interactable)
+    {
+        foreach (var skillController in _skillControllers)
+        {
+            skillController.IsInteractable = interactable;
+        }
+    }
 }
