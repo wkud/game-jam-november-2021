@@ -170,12 +170,12 @@ public class MapController : MonoBehaviour
 
         if (room is FightNode)
         {
-            //GameController.Instance.GameState.CurrentNode = room;
-            //GameController.Instance.OpenScene(SceneId.Fight);
-            for (int i = 0; i < 4; i++)
-            {
-                GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, Random.Range(-4, 0), i);                
-            }
+            GameController.Instance.GameState.CurrentNode = room;
+            GameController.Instance.OpenScene(SceneId.Fight);
+            //for (int i = 0; i < 4; i++)
+            //{
+            //    GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, Random.Range(-4, 0), i);                
+            //}
         }
         else if (room is AltarNode)
         {

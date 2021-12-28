@@ -7,7 +7,7 @@ public class AltarController : MonoBehaviour
 {
     public static AltarController Instance = null;
 
-    [SerializeField] Deal[] allDeals;
+    [SerializeField] Deal[] allDeals;//TODO przeniesc do resource containera i zrobic refke do GameControllera
     public Deal[] availableDeals = new Deal[4];
 
     public int offeringID = -1;
@@ -16,7 +16,7 @@ public class AltarController : MonoBehaviour
     public int skillSlotID;
 
     public Image[] sacrifices;
-    public Sprite[] sacrificeImages = new Sprite[6];
+    public Sprite[] _statImages = new Sprite[6];
     public Image[] gains;
 
     // Start is called before the first frame update
@@ -102,53 +102,57 @@ public class AltarController : MonoBehaviour
             switch (availableDeals[i].price.statName)
             {
                 case StatName.Hp:
-                    sacrifices[i].sprite = sacrificeImages[0];
+                    sacrifices[i].sprite = _statImages[0];//te cyferki odpowiaaja kolejnosci w altar controllerze w insopektorze, handluj z tym
                     break;
                 case StatName.CurrentHp:
-                    sacrifices[i].sprite = sacrificeImages[0];
+                    sacrifices[i].sprite = _statImages[0];
                     break;
                 case StatName.Initiative:
-                    sacrifices[i].sprite = sacrificeImages[1];
+                    sacrifices[i].sprite = _statImages[1];
                     break;
                 case StatName.AttackModifier:
-                    sacrifices[i].sprite = sacrificeImages[2];
+                    sacrifices[i].sprite = _statImages[2];
                     break;
                 case StatName.Defence:
-                    sacrifices[i].sprite = sacrificeImages[3];
+                    sacrifices[i].sprite = _statImages[3];
                     break;
                 case StatName.CritChance:
-                    sacrifices[i].sprite = sacrificeImages[4];
+                    sacrifices[i].sprite = _statImages[4];
                     break;
                 case StatName.Threat:
-                    sacrifices[i].sprite = sacrificeImages[5];
+                    sacrifices[i].sprite = _statImages[5];
                     break;                
             }
             if (availableDeals[i].profit is StatChange)
             {
-                switch (availableDeals[i].price.statName)
+                switch (((StatChange)availableDeals[i].profit).statName)
                 {
                     case StatName.Hp:
-                        gains[i].sprite = sacrificeImages[0];
+                        gains[i].sprite = _statImages[0];
                         break;
                     case StatName.CurrentHp:
-                        gains[i].sprite = sacrificeImages[0];
+                        gains[i].sprite = _statImages[0];
                         break;
                     case StatName.Initiative:
-                        gains[i].sprite = sacrificeImages[1];
+                        gains[i].sprite = _statImages[1];
                         break;
                     case StatName.AttackModifier:
-                        gains[i].sprite = sacrificeImages[2];
+                        gains[i].sprite = _statImages[2];
                         break;
                     case StatName.Defence:
-                        gains[i].sprite = sacrificeImages[3];
+                        gains[i].sprite = _statImages[3];
                         break;
                     case StatName.CritChance:
-                        gains[i].sprite = sacrificeImages[4];
+                        gains[i].sprite = _statImages[4];
                         break;
                     case StatName.Threat:
-                        gains[i].sprite = sacrificeImages[5];
+                        gains[i].sprite = _statImages[5];
                         break;
                 }
+            }
+            else if (availableDeals[i].profit is SkillGain)
+            {
+                gains[i].sprite = ((SkillGain)availableDeals[i].profit).skillData.Sprite;
             }
         }
     }

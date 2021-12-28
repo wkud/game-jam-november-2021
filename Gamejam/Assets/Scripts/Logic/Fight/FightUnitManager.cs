@@ -22,7 +22,7 @@ public class FightUnitManager : IFightStateHolder, IUnitReferenceHolder
         _allEnemies = units.Where(u => u.CompareTag("Enemy")).ToList();
 
         // initialize allies
-        var allyPresets = gameState.GetCharacters().Select(e => (Entity)e).ToList();
+        var allyPresets = gameState.Allies.Select(e => (Entity)e).ToList();
         InitializeUnits(AllAllyUnits, allyPresets, fightController);
 
         // initialize enemies
