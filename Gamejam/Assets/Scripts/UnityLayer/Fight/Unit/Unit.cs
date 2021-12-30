@@ -35,6 +35,9 @@ public class Unit : MonoBehaviour
 
         Show();
 
+        var hpBar = GetComponentInChildren<HpBar>();
+        hpBar.Initialize(Entity);
+
         _portraitButton = GetComponentInChildren<UnitPortraitButton>();
         _portraitButton.Initialize(this);
 
@@ -72,7 +75,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    
+
 
     public void Hide() => IsActive = false;
     public void Show() => IsActive = true;
