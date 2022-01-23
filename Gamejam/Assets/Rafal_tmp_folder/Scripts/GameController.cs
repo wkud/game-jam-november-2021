@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
     private MapController _mapController;
     private FightController _fightController;
 
-    [SerializeField] private ResourceContainer _resources = new ResourceContainer();
+    [SerializeField] public ResourceContainer ResourceContainer = new ResourceContainer(); // TODO consider dependency injection (Unit needs ResourceContainer.DeadCharacterPortrait)
     public event UnityAction<int, Player> OnStatChanged;
     public event UnityAction<int, int, Sprite> OnSkillChanged;
     public GameState GameState { get; private set; }
@@ -34,7 +34,7 @@ public class GameController : MonoBehaviour
 
     public void Initialize()
     {
-        GameState = new GameState(_resources);
+        GameState = new GameState(ResourceContainer);
 
         _mapController = FindObjectOfType<MapController>();
         _mapController?.Initialize();

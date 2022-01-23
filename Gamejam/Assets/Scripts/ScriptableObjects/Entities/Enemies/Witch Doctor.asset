@@ -15,8 +15,8 @@ MonoBehaviour:
   _identifier: 4
   _bond: 1
   _skills:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 3e6a6d9b1086c6343b3cba8dd6988e80, type: 2}
+  - {fileID: 11400000, guid: c9937f6f1d52e8c4ba20dc500434d818, type: 2}
   - {fileID: 0}
   _maxHp: 35
   _initiative: 6

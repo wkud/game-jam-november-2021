@@ -58,8 +58,8 @@ public class FightController : MonoBehaviour  // class for main fight management
             (_currentEntity as Enemy)?.MakeMove(_unitManager);
             // TODO: play animations 
 
-            OnFinishedTurn();
             Debug.Log("Enemy's turn ends");
+            OnFinishedTurn();
         }
     }
 
@@ -74,5 +74,10 @@ public class FightController : MonoBehaviour  // class for main fight management
     public void OnSelectSkill(int skillIndex) => _playerMoveMaker.OnPlayerSelectSkill(skillIndex);
 
     public void OnSelectTarget(Unit targetUnit) => _playerMoveMaker.OnPlayerSelectTarget(targetUnit.Entity);
+
+    public void RemoveUnitFromFight(Entity entity)
+    {
+        _initiativeTracker.OnEntityDied(entity);
+    }
 
 }
