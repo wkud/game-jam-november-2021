@@ -532,42 +532,6 @@ PrefabInstance:
       propertyPath: _resources._enemyStats.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: de350960f3d47f0408e9ea1c586e10bc, type: 2}
-    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
-      propertyPath: ResourceContainer._deadCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 322f8d2358ad0ad40a04b9f13f063ae3, type: 3}
-    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
-      propertyPath: ResourceContainer._enemyStats.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
-      propertyPath: ResourceContainer._enemyStats.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: de350960f3d47f0408e9ea1c586e10bc, type: 2}
-    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
-      propertyPath: ResourceContainer._characterStats.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
-      propertyPath: ResourceContainer._characterStats.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 25c4dd508a1b7984186c0c2f67aa57eb, type: 2}
-    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
-      propertyPath: ResourceContainer._characterStats.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 770aa935b7444cb49a08caaff68a114d, type: 2}
-    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
-      propertyPath: ResourceContainer._characterStats.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 2192ddf76a0c87f4999cc1809a54e9f9, type: 2}
-    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
-      propertyPath: ResourceContainer._characterStats.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: b449a348f2b539347a2817d0ae8bb4d1, type: 2}
-    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
-      propertyPath: ResourceContainer._characterStats.Array.data[4]
-      value: 
-      objectReference: {fileID: 11400000, guid: ef7267439a1db6248b1930e4ce62f516, type: 2}
     - target: {fileID: 1943255943669464061, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
       propertyPath: m_RootOrder
       value: 4

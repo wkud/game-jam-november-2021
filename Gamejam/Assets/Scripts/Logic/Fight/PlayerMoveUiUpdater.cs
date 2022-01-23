@@ -1,6 +1,4 @@
 ﻿using System.Linq;
-using UnityEngine;
-using UnityEngine.Events;
 
 public class PlayerMoveUiUpdater : IPlayerMoveUiUpdater
 {
@@ -13,7 +11,7 @@ public class PlayerMoveUiUpdater : IPlayerMoveUiUpdater
 
     public void LockAllSkills()
     {
-        foreach (var playerUnit in _unitManager.AllAllyUnits)
+        foreach (var playerUnit in _unitManager.ActiveAllyUnits)
         {
             playerUnit.AreSkillsInteractable = false;
         }
@@ -29,13 +27,13 @@ public class PlayerMoveUiUpdater : IPlayerMoveUiUpdater
 
     public void UnlockSkills(Player currentPlayer)
     {
-        var unit = _unitManager.AllAllyUnits.FirstOrDefault(u => u.Entity == currentPlayer);
+        var unit = _unitManager.ActiveAllyUnits.FirstOrDefault(u => u.Entity == currentPlayer);
         unit.AreSkillsInteractable = true;
     }
 
     public void UnlockTargets(Bond skillTargetBond)
     {
-        var targetGroup = skillTargetBond == Bond.Ally ? _unitManager.AllAllyUnits : _unitManager.ActiveEnemyUnits;
+        var targetGroup = skillTargetBond == Bond.Ally ? _unitManager.ActiveAllyUnits : _unitManager.ActiveEnemyUnits;
         foreach (var unit in targetGroup)
         {
             unit.IsPortraitInteractable = true;

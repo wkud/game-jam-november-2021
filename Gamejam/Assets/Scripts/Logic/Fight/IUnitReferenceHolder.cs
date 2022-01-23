@@ -4,7 +4,7 @@ public interface IUnitReferenceHolder
 {
     List<Unit> ActiveUnits { get; }
 
-    List<Unit> AllAllyUnits { get; }
+    List<Unit> ActiveAllyUnits { get; }
 
     List<Unit> ActiveEnemyUnits { get; }
 
