@@ -41,8 +41,8 @@ public class GameController : MonoBehaviour
 
         TryInitializeMapController();
 
-        SceneManager.sceneLoaded += (Scene scena, LoadSceneMode mode) => TryInitializeFightController();
-        SceneManager.sceneLoaded += (Scene scena, LoadSceneMode mode) => TryInitializeMapController();
+        SceneManager.sceneLoaded += (Scene scene, LoadSceneMode mode) => TryInitializeFightController();
+        SceneManager.sceneLoaded += (Scene scene, LoadSceneMode mode) => TryInitializeMapController();
     }
 
     public void OpenScene(SceneId scene)

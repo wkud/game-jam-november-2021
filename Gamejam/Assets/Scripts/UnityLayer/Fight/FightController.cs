@@ -8,6 +8,7 @@ public class FightController : MonoBehaviour  // class for main fight management
     private InitiativeTracker _initiativeTracker;
     private InitiativeController _initiativeUiController;
     private FightUnitManager _unitManager;
+    private FightOverResolver _fightOverResolver;
 
     private Entity _currentEntity => _initiativeTracker.GetCurrentEntity(); // an entity, which is currently making a move
 
@@ -18,6 +19,8 @@ public class FightController : MonoBehaviour  // class for main fight management
         // setup variables
         var units = FindObjectsOfType<Unit>();
         _unitManager = new FightUnitManager(gameState, units, this);
+
+        _fightOverResolver = new FightOverResolver(_unitManager);
 
         // set intiative
         _initiativeTracker = new InitiativeTracker(_unitManager.ActiveEntities);
@@ -65,6 +68,13 @@ public class FightController : MonoBehaviour  // class for main fight management
 
     private void OnFinishedTurn() // this function needs to be called when entity ends it's turn
     {
+        if(_fightOverResolver.IsFightOver())
+        {
+            Debug.Log("Fight is over");
+            _fightOverResolver.OnFightEnd();
+            return;
+        }
+
         _initiativeTracker.SetNextEntity();
 
         _initiativeUiController.OnFinishedTurn();
@@ -75,9 +85,9 @@ public class FightController : MonoBehaviour  // class for main fight management
 
     public void OnSelectTarget(Unit targetUnit) => _playerMoveMaker.OnPlayerSelectTarget(targetUnit.Entity);
 
-    public void RemoveUnitFromFight(Entity entity)
+    public void OnEntityDied(Entity entity)
     {
-        _initiativeTracker.OnEntityDied(entity);
+        _initiativeTracker.RemoveFromQueue(entity);
     }
 
 }

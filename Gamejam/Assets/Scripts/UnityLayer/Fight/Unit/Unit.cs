@@ -64,7 +64,7 @@ public class Unit : MonoBehaviour
         {
             Entity.OnDeath.AddListener(() =>
             {
-                _fightController.RemoveUnitFromFight(Entity);
+                _fightController.OnEntityDied(Entity);
                 Hide();
             });
 
@@ -73,7 +73,7 @@ public class Unit : MonoBehaviour
         {
             Entity.OnDeath.AddListener(() =>
             {
-                _fightController.RemoveUnitFromFight(Entity);
+                _fightController.OnEntityDied(Entity);
                 _portraitButton.ChangePortaitOnDeath();
             });
         }
