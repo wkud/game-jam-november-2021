@@ -1,11 +1,15 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UnitPortraitButton : MonoBehaviour
+public class UnitPortrait : MonoBehaviour
 {
     private Unit _unit;
 
     private Button _button;
+    private Image _image;
+
+    //private static Sprite ;
 
     public bool IsInteractable
     {
@@ -16,11 +20,13 @@ public class UnitPortraitButton : MonoBehaviour
     public void Initialize(Unit unit)
     {
         _unit = unit;
-
+        
+        _image = GetComponent<Image>();
+        
         var sprite = _unit.Entity.Stats.Sprite;
         if (sprite != null)
         {
-            GetComponent<Image>().sprite = sprite;
+            _image.sprite = sprite;
         }
 
 
@@ -29,4 +35,10 @@ public class UnitPortraitButton : MonoBehaviour
     }
 
     public void OnClick() => _unit.OnPortraitClick();
+
+    public void ChangePortaitOnDeath()
+    {
+        var imageAfterDeath = GameController.Instance.ResourceContainer.DeadCharacterPortrait;
+        _image.sprite = imageAfterDeath;
+    }
 }

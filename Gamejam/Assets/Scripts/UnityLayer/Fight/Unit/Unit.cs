@@ -1,12 +1,11 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
     private FightController _fightController;
 
     private UnitSkillManager _skillManager;
-    private UnitPortraitButton _portraitButton;
+    private UnitPortrait _portraitButton;
 
     public Entity Entity { get; private set; }
 
@@ -35,7 +34,12 @@ public class Unit : MonoBehaviour
 
         Show();
 
-        _portraitButton = GetComponentInChildren<UnitPortraitButton>();
+        var hpBar = GetComponentInChildren<HpBar>();
+        hpBar.Initialize(Entity);
+
+        SetupOnDeathEffects();
+
+        _portraitButton = GetComponentInChildren<UnitPortrait>();
         _portraitButton.Initialize(this);
 
         var skillControllers = GetComponentsInChildren<SkillController>();
@@ -54,11 +58,31 @@ public class Unit : MonoBehaviour
 
     }
 
+    private void SetupOnDeathEffects()
+    {
+        if (Entity is Enemy)
+        {
+            Entity.OnDeath.AddListener(() =>
+            {
+                _fightController.OnEntityDied(Entity);
+                Hide();
+            });
+
+        }
+        else if (Entity is Player)
+        {
+            Entity.OnDeath.AddListener(() =>
+            {
+                _fightController.OnEntityDied(Entity);
+                _portraitButton.ChangePortaitOnDeath();
+            });
+        }
+    }
+
     public void OnPortraitClick()
     {
         if (_fightController.PlayerTurnState == PlayerTurnState.WaitingForTarget)
         {
-            //Debug.Log("Portrait click " + this);
             _fightController.OnSelectTarget(this);
         }
     }
@@ -67,12 +91,10 @@ public class Unit : MonoBehaviour
     {
         if (_fightController.PlayerTurnState == PlayerTurnState.WaitingForSkill)
         {
-            //Debug.Log("Skill click " + skillIndex);
             _fightController.OnSelectSkill(skillIndex);
         }
     }
 
-    
 
     public void Hide() => IsActive = false;
     public void Show() => IsActive = true;

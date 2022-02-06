@@ -16,7 +16,6 @@ public class AltarController : MonoBehaviour
     public int skillSlotID;
 
     public Image[] sacrifices;
-    public Sprite[] _statImages = new Sprite[6];
     public Image[] gains;
 
     // Start is called before the first frame update
@@ -99,56 +98,13 @@ public class AltarController : MonoBehaviour
             }
             while (id == dealId1 || id == dealId2 || id == dealId3 || id == dealId4);
             availableDeals[i] = allDeals[id];
-            switch (availableDeals[i].price.statName)
-            {
-                case StatName.Hp:
-                    sacrifices[i].sprite = _statImages[0];//te cyferki odpowiaaja kolejnosci w altar controllerze w insopektorze, handluj z tym
-                    break;
-                case StatName.CurrentHp:
-                    sacrifices[i].sprite = _statImages[0];
-                    break;
-                case StatName.Initiative:
-                    sacrifices[i].sprite = _statImages[1];
-                    break;
-                case StatName.AttackModifier:
-                    sacrifices[i].sprite = _statImages[2];
-                    break;
-                case StatName.Defence:
-                    sacrifices[i].sprite = _statImages[3];
-                    break;
-                case StatName.CritChance:
-                    sacrifices[i].sprite = _statImages[4];
-                    break;
-                case StatName.Threat:
-                    sacrifices[i].sprite = _statImages[5];
-                    break;                
-            }
+            var statName = availableDeals[i].price.statName;
+            sacrifices[i].sprite = GameController.Instance.ResourceContainer.GetStatSprite(statName);
+
             if (availableDeals[i].profit is StatChange)
             {
-                switch (((StatChange)availableDeals[i].profit).statName)
-                {
-                    case StatName.Hp:
-                        gains[i].sprite = _statImages[0];
-                        break;
-                    case StatName.CurrentHp:
-                        gains[i].sprite = _statImages[0];
-                        break;
-                    case StatName.Initiative:
-                        gains[i].sprite = _statImages[1];
-                        break;
-                    case StatName.AttackModifier:
-                        gains[i].sprite = _statImages[2];
-                        break;
-                    case StatName.Defence:
-                        gains[i].sprite = _statImages[3];
-                        break;
-                    case StatName.CritChance:
-                        gains[i].sprite = _statImages[4];
-                        break;
-                    case StatName.Threat:
-                        gains[i].sprite = _statImages[5];
-                        break;
-                }
+                statName = ((StatChange)availableDeals[i].profit).statName;
+                gains[i].sprite = GameController.Instance.ResourceContainer.GetStatSprite(statName);
             }
             else if (availableDeals[i].profit is SkillGain)
             {

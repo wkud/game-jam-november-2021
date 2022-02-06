@@ -2791,6 +2791,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameController
       objectReference: {fileID: 0}
+    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
+      propertyPath: ResourceContainer._enemyStats.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: de350960f3d47f0408e9ea1c586e10bc, type: 2}
     - target: {fileID: 1943255943669464061, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
       propertyPath: m_RootOrder
       value: 2
