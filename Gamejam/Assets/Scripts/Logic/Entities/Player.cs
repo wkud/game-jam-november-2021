@@ -20,10 +20,10 @@ public class Player : Entity
     {
         switch (statName)
         {
-            case StatName.AttackModifier:
-                return "AttackModifier: " + _stats.AttackModifier;
+            case StatName.Attack:
+                return "Attack: " + _stats.AttackModifier;
             case StatName.CritChance:
-                return "CritChance: " + _stats.CritChance;
+                return "Crit chance: " + _stats.CritChance;
             case StatName.Defence:
                 return "Defence: " + _stats.Defence;
             case StatName.MaxHp:
@@ -61,7 +61,7 @@ public class Player : Entity
             case StatName.CritChance:
                 Stats.CritChance = Math.Max(Stats.CritChance + statIncrease, 0);
                 break;
-            case StatName.AttackModifier:
+            case StatName.Attack:
                 Stats.AttackModifier = Math.Max(Stats.AttackModifier + statIncrease, 0);
                 break;
             case StatName.Threat:

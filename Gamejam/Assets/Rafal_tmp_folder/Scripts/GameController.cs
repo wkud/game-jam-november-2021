@@ -34,7 +34,6 @@ public class GameController : MonoBehaviour
     {
         GameState = new GameState(ResourceContainer);
 
-        _mapController = FindObjectOfType<MapController>();
         _mapController?.Initialize();
 
         TryInitializeMapController();
