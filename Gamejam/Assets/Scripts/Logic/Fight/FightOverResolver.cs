@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public class FightOverResolver 
+public class FightOverResolver
 {
     private IUnitReferenceHolder _unitManager;
     private FightOverUi _fightOverUi;
@@ -38,9 +38,6 @@ public class FightOverResolver
         {
             _fightOverUi.ShowLosePanel();
         }
-
-        // TODO add separated UI for "Game over" on lose + Quit / Restart button
-        // TODO add separated UI for "Each character gain 5-10 points in random stat" // 5 for casual, 10 for elite
     }
 
     private string IncreaseRandomStatForeachAlly()
@@ -53,7 +50,7 @@ public class FightOverResolver
             (unit.Entity as Player).AddStat(randomStat, statIncrease);
         }
 
-        var statMessage = $"Each character gains {statIncrease} points of {randomStat}";
+        var statMessage = $"Each character gains {statIncrease} points of {randomStat.GetDescription()}";
         return statMessage;
     }
 

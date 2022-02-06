@@ -11,11 +11,8 @@ public class FightOverUi : MonoBehaviour
 
     private void Awake()
     {
-        //_winPanel = GameObject.FindGameObjectWithTag("WinPanel");
-        //_losePanel = GameObject.FindGameObjectWithTag("LosePanel");
-
-        //_winPanel.SetActive(false); // hide them at the start of the fight to reveal them later
-        //_losePanel.SetActive(false);
+        _winPanel.SetActive(false); // hide them at the start of the fight to reveal them later
+        _losePanel.SetActive(false);
     }
 
     public void HideMainCanvas()
