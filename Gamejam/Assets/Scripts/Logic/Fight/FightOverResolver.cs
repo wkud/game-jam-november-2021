@@ -7,9 +7,6 @@ public class FightOverResolver
     private IUnitReferenceHolder _unitManager;
     private FightOverUi _fightOverUi;
 
-    [SerializeField] private const string _winMessage = "Congratulations! You won!";
-    [SerializeField] private const string _loseMessage = "Game Over! Try again";
-
     public FightOverResolver(IUnitReferenceHolder unitManager)
     {
         _unitManager = unitManager;
@@ -23,8 +20,14 @@ public class FightOverResolver
         _fightOverUi.gameObject.SetActive(true);
         _fightOverUi.HideMainCanvas();
 
-        var message = HaveCharacterWon() ? _winMessage : _loseMessage;
-        _fightOverUi.SetMessage(message);
+        if (HaveCharacterWon())
+        {
+            _fightOverUi.ShowWinPanel();
+        }
+        else if (HaveCharacterLose())
+        {
+            _fightOverUi.ShowLosePanel();
+        }
 
         // TODO add separated UI for "Game over" on lose + Quit / Restart button
         // TODO add separated UI for "Each character gain 5-10 points in random stat" // 5 for casual, 10 for elite
