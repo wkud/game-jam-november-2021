@@ -74,6 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 712c5b9736303b544a63f2b78ac396d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mapController: {fileID: 1943255944913551635}
   ResourceContainer:
     _characterStats:
     - {fileID: 11400000, guid: 25c4dd508a1b7984186c0c2f67aa57eb, type: 2}
@@ -84,6 +85,14 @@ MonoBehaviour:
     _enemyStats:
     - {fileID: 11400000, guid: de350960f3d47f0408e9ea1c586e10bc, type: 2}
     _deadCharacterPortrait: {fileID: 21300000, guid: 322f8d2358ad0ad40a04b9f13f063ae3, type: 3}
+    _statImages:
+    - {fileID: 21300000, guid: 93a7985e7e931dd49802aab5b96be0e7, type: 3}
+    - {fileID: 21300000, guid: 93a7985e7e931dd49802aab5b96be0e7, type: 3}
+    - {fileID: 21300000, guid: baa96a2999471874ea48bc9a439ba1ca, type: 3}
+    - {fileID: 21300000, guid: 01689b250a4d4564ca66a7ede41365c8, type: 3}
+    - {fileID: 21300000, guid: 992bec0b3a3250a4f864e09285bc1595, type: 3}
+    - {fileID: 21300000, guid: 0a4f443e5d21dcc46a725d414d58015c, type: 3}
+    - {fileID: 21300000, guid: 6d1c688b43c12764796f8d194f9db451, type: 3}
 --- !u!1 &1943255943687026601
 GameObject:
   m_ObjectHideFlags: 0

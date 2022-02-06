@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -8,10 +6,10 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance = null;
 
-    private MapController _mapController;
+    [SerializeField] private MapController _mapController;
     private FightController _fightController;
 
-    [SerializeField] public ResourceContainer ResourceContainer = new ResourceContainer(); // TODO consider dependency injection (Unit needs ResourceContainer.DeadCharacterPortrait)
+    [SerializeField] public ResourceContainer ResourceContainer = new ResourceContainer();
     public event UnityAction<int, Player> OnStatChanged;
     public event UnityAction<int, int, Sprite> OnSkillChanged;
     public GameState GameState { get; private set; }
@@ -81,37 +79,7 @@ public class GameController : MonoBehaviour
     public void ChangeCharacterStat(StatName statType, int value, int unitId)
     {
         var ally = GameState.Allies[unitId];
-        switch (statType)
-        {
-            case StatName.Hp:
-                ally.Stats.MaxHp += value;
-                if (ally.Stats.MaxHp < 0) ally.Stats.MaxHp = 0;
-                break;
-            case StatName.CurrentHp:
-                ally.Stats.CurrentHp += value;
-                if (ally.Stats.CurrentHp < 0) ally.Stats.CurrentHp = 0;
-                break;
-            case StatName.Initiative:
-                ally.Stats.Initiative += value;
-                if (ally.Stats.Initiative < 0) ally.Stats.Initiative = 0;
-                break;
-            case StatName.Defence:
-                ally.Stats.Defence += value;
-                if (ally.Stats.Defence < 0) ally.Stats.Defence = 0;
-                break;
-            case StatName.CritChance:
-                ally.Stats.CritChance += value;
-                if (ally.Stats.CritChance < 0) ally.Stats.CritChance = 0;
-                break;
-            case StatName.AttackModifier:
-                ally.Stats.AttackModifier += value;
-                if (ally.Stats.AttackModifier < 0) ally.Stats.AttackModifier = 0;
-                break;
-            case StatName.Threat:
-                ally.Stats.Threat += value;
-                if (ally.Stats.Threat < 0) ally.Stats.Threat = 0;
-                break;
-        }
+        ally.AddStat(statType, value);
         OnStatChanged?.Invoke(unitId, ally);
     }
 

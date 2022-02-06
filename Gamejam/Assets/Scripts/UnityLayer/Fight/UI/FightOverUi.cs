@@ -1,21 +1,21 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class FightOverUi : MonoBehaviour
 {
 
-    private GameObject _winPanel;
-    private GameObject _losePanel;
+    [SerializeField] private GameObject _winPanel;
+    [SerializeField] private GameObject _losePanel;
+    
+    [SerializeField] private TextMeshProUGUI _winStatMessage;
 
     private void Awake()
     {
-        _winPanel = GameObject.FindGameObjectWithTag("WinPanel");
-        _losePanel = GameObject.FindGameObjectWithTag("LosePanel");
+        //_winPanel = GameObject.FindGameObjectWithTag("WinPanel");
+        //_losePanel = GameObject.FindGameObjectWithTag("LosePanel");
 
-        _winPanel.SetActive(false); // hide them at the start of the fight to reveal them later
-        _losePanel.SetActive(false);
+        //_winPanel.SetActive(false); // hide them at the start of the fight to reveal them later
+        //_losePanel.SetActive(false);
     }
 
     public void HideMainCanvas()
@@ -32,5 +32,20 @@ public class FightOverUi : MonoBehaviour
     public void ShowLosePanel()
     {
         _losePanel.SetActive(true);
+    }
+
+    public void SetTextToStatMessage(string text)
+    {
+        _winStatMessage.text = text;
+    }
+
+    public void OnClickContinue()
+    {
+        GameController.Instance.OpenScene(SceneId.Map);
+    }
+
+    public void OnClickQuit()
+    {
+        Application.Quit();
     }
 }

@@ -26,8 +26,8 @@ public class Player : Entity
                 return "CritChance: " + _stats.CritChance;
             case StatName.Defence:
                 return "Defence: " + _stats.Defence;
-            case StatName.Hp:
-                return "Hp: " + _stats.CurrentHp;
+            case StatName.MaxHp:
+                return $"Hp: {_stats.CurrentHp}/{_stats.MaxHp}";
             case StatName.Initiative:
                 return "Initiative: " + _stats.Initiative;
             case StatName.Threat:
@@ -40,6 +40,34 @@ public class Player : Entity
     public void UseSkill(int slotNumber, Entity[] targets)
     {
         this._stats.Skills[slotNumber].Use(this, targets);
+    }
+
+    public void AddStat(StatName statName, int statIncrease)
+    {
+        switch (statName)
+        {
+            case StatName.MaxHp:
+                Stats.MaxHp = Math.Max(Stats.MaxHp + statIncrease, 0);
+                break;
+            case StatName.CurrentHp:
+                Stats.CurrentHp = Math.Max(Stats.CurrentHp + statIncrease, 0);
+                break;
+            case StatName.Initiative:
+                Stats.Initiative = Math.Max(Stats.Initiative + statIncrease, 0);
+                break;
+            case StatName.Defence:
+                Stats.Defence = Math.Max(Stats.Defence + statIncrease, 0);
+                break;
+            case StatName.CritChance:
+                Stats.CritChance = Math.Max(Stats.CritChance + statIncrease, 0);
+                break;
+            case StatName.AttackModifier:
+                Stats.AttackModifier = Math.Max(Stats.AttackModifier + statIncrease, 0);
+                break;
+            case StatName.Threat:
+                Stats.Threat = Math.Max(Stats.Threat + statIncrease, 0);
+                break;
+        }
     }
 
     public Skill GetSkill(int slotNumber)
@@ -82,6 +110,4 @@ public class Player : Entity
             if (state.TurnsLeft <= 0) this._stats.States.Remove(state);
         }
     }
-
-
 }
