@@ -12,10 +12,12 @@ public class SkillController : MonoBehaviour, IDescriptable
 
     private Player _player => (_unit?.Entity as Player);
 
+    private bool _isNotEmptySkillSlot => _player?.GetSkill(_skillSlotNumber) != null;
+
     public bool IsInteractable
     {
-        get => _button.interactable;
-        set => _button.interactable = value;
+        get => _button.interactable && _isNotEmptySkillSlot;
+        set => _button.interactable = value && _isNotEmptySkillSlot;
     }
 
     public string Description => _player?.GetSkill(_skillSlotNumber)?.GetTooltipDescription();
