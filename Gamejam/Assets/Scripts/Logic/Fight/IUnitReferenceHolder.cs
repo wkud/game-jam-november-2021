@@ -8,4 +8,5 @@ public interface IUnitReferenceHolder
 
     List<Unit> ActiveEnemyUnits { get; }
 
+    Unit GetUnitOfEntity(Entity entity);
 }

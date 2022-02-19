@@ -42,7 +42,15 @@ public class FightUiUpdater : IFightUiUpdater
 
     public void SetHighlightToCurrentUnit(Entity currentEntity, bool shoudlBeHighlighted)
     {
-        var unit = _unitManager.ActiveUnits.FirstOrDefault(u => u.Entity == currentEntity);
+        var unit = _unitManager.GetUnitOfEntity(currentEntity);
         unit.IsCurrentTurnMaker = shoudlBeHighlighted;
     }
+
+    public void SetHighlightToSelectedSkill(Player currentPlayer, int skillIndex, bool shouldBeHighlighted)
+    {
+        var unit = _unitManager.GetUnitOfEntity(currentPlayer);
+        unit.HighlightSkill(skillIndex, shouldBeHighlighted);
+    }
+
+    
 }

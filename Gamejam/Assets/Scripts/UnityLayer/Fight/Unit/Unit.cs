@@ -64,6 +64,8 @@ public class Unit : MonoBehaviour
 
     }
 
+    public void HighlightSkill(int skillIndex, bool shouldBeHighlighted) => _skillManager.HighlightSkill(skillIndex, shouldBeHighlighted);
+
     private void SetupOnDeathEffects()
     {
         if (Entity is Enemy)

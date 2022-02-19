@@ -71,6 +71,8 @@ public class PlayerMoveMaker
     {
         _currentPlayer.UseSkill(_selectedSkillIndex, _targets);
 
+        _uiUpdater.SetHighlightToSelectedSkill(_currentPlayer, _selectedSkillIndex, false);
+
         State = PlayerTurnState.WaitingForPlayerTurn;
         OnPlayerTurnEnd.Invoke();
     }
@@ -80,6 +82,7 @@ public class PlayerMoveMaker
     private void SetSkillIndex(int skillIndex)
     {
         _selectedSkillIndex = skillIndex;
+        _uiUpdater.SetHighlightToSelectedSkill(_currentPlayer, skillIndex, true);
     }
 
     private void SetManyTargets()

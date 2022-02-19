@@ -45,4 +45,6 @@ public class UnitSkillManager
             skillController.IsInteractable = interactable;
         }
     }
+
+    public void HighlightSkill(int skillIndex, bool shouldBeHighlighted) => _skillControllers[skillIndex].IsSelected = shouldBeHighlighted;
 }

@@ -52,4 +52,6 @@ public class FightUnitManager : IFightStateHolder, IUnitReferenceHolder
             }
         }
     }
+
+    public Unit GetUnitOfEntity(Entity entity) => _units.FirstOrDefault(u => u.Entity == entity);
 }

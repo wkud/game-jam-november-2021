@@ -9,4 +9,6 @@
 
     /// <summary> This is only activated when player is a caster (when it is player's turn) </summary>
     void UnlockSkills(Player currentEntity);
+
+    void SetHighlightToSelectedSkill(Player currentPlayer, int skillIndex, bool shouldBeHighlighted);
 }
