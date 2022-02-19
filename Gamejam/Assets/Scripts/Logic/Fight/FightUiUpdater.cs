@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 
-public class PlayerMoveUiUpdater : IPlayerMoveUiUpdater
+public class FightUiUpdater : IFightUiUpdater
 {
     private IUnitReferenceHolder _unitManager;
 
-    public PlayerMoveUiUpdater(IUnitReferenceHolder unitManager)
+    public FightUiUpdater(IUnitReferenceHolder unitManager)
     {
         _unitManager = unitManager;
     }
@@ -38,5 +38,11 @@ public class PlayerMoveUiUpdater : IPlayerMoveUiUpdater
         {
             unit.IsPortraitInteractable = true;
         }
+    }
+
+    public void SetHighlightToCurrentUnit(Entity currentEntity, bool shoudlBeHighlighted)
+    {
+        var unit = _unitManager.ActiveUnits.FirstOrDefault(u => u.Entity == currentEntity);
+        unit.IsCurrentTurnMaker = shoudlBeHighlighted;
     }
 }

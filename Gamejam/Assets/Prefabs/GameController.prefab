@@ -85,6 +85,8 @@ MonoBehaviour:
     _enemyStats:
     - {fileID: 11400000, guid: de350960f3d47f0408e9ea1c586e10bc, type: 2}
     _deadCharacterPortrait: {fileID: 21300000, guid: 322f8d2358ad0ad40a04b9f13f063ae3, type: 3}
+    _silverUnitFrame: {fileID: 21300000, guid: 8b63524406d8c78469ed9465381b0484, type: 3}
+    _goldenUnitFrame: {fileID: 21300000, guid: 5805517947fb7b547bd7aa8258122bd6, type: 3}
     _statImages:
     - {fileID: 21300000, guid: 93a7985e7e931dd49802aab5b96be0e7, type: 3}
     - {fileID: 21300000, guid: 93a7985e7e931dd49802aab5b96be0e7, type: 3}

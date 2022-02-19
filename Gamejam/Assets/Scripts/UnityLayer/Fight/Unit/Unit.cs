@@ -15,6 +15,12 @@ public class Unit : MonoBehaviour
         private set => gameObject.SetActive(value);
     }
 
+    public bool IsCurrentTurnMaker
+    {
+        get => _portraitButton.IsCurrentTurnMaker;
+        set => _portraitButton.IsCurrentTurnMaker = value;
+    }
+
     public bool IsPortraitInteractable
     {
         get => _portraitButton.IsInteractable;

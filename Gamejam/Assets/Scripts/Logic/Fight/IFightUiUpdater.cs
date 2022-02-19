@@ -1,4 +1,4 @@
-﻿public interface IPlayerMoveUiUpdater
+﻿public interface IFightUiUpdater
 {
     void LockAllTargets();
     

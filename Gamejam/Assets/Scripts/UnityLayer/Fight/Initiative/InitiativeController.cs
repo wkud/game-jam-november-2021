@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,10 +26,5 @@ public class InitiativeController : MonoBehaviour
         InitiativeAvatarController initiativeAvatarController = childObject.GetComponentInChildren<InitiativeAvatarController>();
         initiativeAvatarController.Initialize(entity);
         _initiativeControllersQueue.Add(initiativeAvatarController);
-    }
-
-    internal void OnFinishedTurn()
-    {
-
     }
 }
