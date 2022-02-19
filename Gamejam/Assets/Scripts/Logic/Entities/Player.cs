@@ -1,8 +1,11 @@
 using UnityEngine;
 using System;
+using UnityEngine.Events;
 
 public class Player : Entity
 {
+    public UnityEvent<StatName> OnStatChanged = new UnityEvent<StatName>();
+
     public Player(EntityStats initialStats) : base(initialStats) { }
 
     public void SetSkill(int slotNumber, Skill skill)
@@ -67,6 +70,30 @@ public class Player : Entity
             case StatName.Threat:
                 Stats.Threat = Math.Max(Stats.Threat + statIncrease, 0);
                 break;
+        }
+        OnStatChanged.Invoke(statName);
+    }
+
+    public int GetStat(StatName statName)
+    {
+        switch (statName)
+        {
+            case StatName.MaxHp:
+                return Stats.MaxHp;
+            case StatName.CurrentHp:
+                return Stats.CurrentHp;
+            case StatName.Initiative:
+                return Stats.Initiative;
+            case StatName.Defence:
+                return Stats.Defence;
+            case StatName.CritChance:
+                return Stats.CritChance;
+            case StatName.Attack:
+                return Stats.AttackModifier;
+            case StatName.Threat:
+                return Stats.Threat;
+            default:
+                return -1;
         }
     }
 

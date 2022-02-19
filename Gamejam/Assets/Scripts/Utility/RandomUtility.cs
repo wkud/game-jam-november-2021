@@ -13,17 +13,9 @@ static class RandomUtility
 
     public static T GetRandomEnumValueOf<T>(params T[] itemsToRemove) where T:Enum
     {
-        var enumValues = GetAllEnumValuesAsCollection<T>().Except(itemsToRemove);
+        var enumValues = EnumUtility.GetAllEnumValuesAsCollection<T>().Except(itemsToRemove);
         var randomEnum = RandomizeFrom(enumValues);
 
         return randomEnum;
     }
-
-    private static List<T> GetAllEnumValuesAsCollection<T>() where T : Enum
-    {
-        var values = Enum.GetValues(typeof(T));
-        var valueList = values.Cast<T>().ToList();
-        return valueList;
-    }
-
 }

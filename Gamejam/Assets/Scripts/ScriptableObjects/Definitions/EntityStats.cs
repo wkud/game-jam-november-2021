@@ -21,8 +21,8 @@ public class EntityStats : ScriptableObject
     [SerializeField] private int _initiative = 10;
     [SerializeField] private int _attackModifier = 10;
     [SerializeField] private int _defence = 10;
-    [SerializeField] private float _critChance = 10;
-    [SerializeField] private float _threat = 10;
+    [SerializeField] private int _critChance = 10;
+    [SerializeField] private int _threat = 10;
     [SerializeField] public Sprite _sprite; 
 
     public EntityId Identifier { get => _identifier; set => _identifier = value; }
@@ -36,8 +36,8 @@ public class EntityStats : ScriptableObject
     public int Initiative { get => _initiative; set => _initiative = value; }
     public int AttackModifier { get => _attackModifier; set => _attackModifier = value; }
     public int Defence { get => _defence; set => _defence = value; }
-    public float CritChance { get => _critChance; set => _critChance = value; }
-    public float Threat { get => _threat; set => _threat = value; }
+    public int CritChance { get => _critChance; set => _critChance = value; } // 0 = never crit, 100 = always crit
+    public int Threat { get => _threat; set => _threat = value; }
     public Sprite Sprite { get => _sprite; }
 
     public void SetValues(
@@ -49,8 +49,8 @@ public class EntityStats : ScriptableObject
         int initiative,
         int attackModifier,
         int defence,
-        float critChance,
-        float threat,
+        int critChance,
+        int threat,
         Sprite sprite)
     {
         _states = new List<StateController>(states);

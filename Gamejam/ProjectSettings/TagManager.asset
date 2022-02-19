@@ -6,8 +6,6 @@ TagManager:
   tags:
   - Enemy
   - FightCanvas
-  - WinPanel
-  - LosePanel
   layers:
   - Default
   - TransparentFX
