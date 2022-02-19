@@ -29,7 +29,7 @@ public class AltarController : MonoBehaviour
     public void ChangeOfferingID(int id)
     {
         offeringID = id;
-        if (availableDeals[id].profit is SkillGain)
+        if (availableDeals[id].SkillToGain!=null)
         {
             dealIsSkill = true;
         }
@@ -57,9 +57,8 @@ public class AltarController : MonoBehaviour
         Transform firstChild = transform.GetChild(0);
         if (offeringID != -1 && firstChild.gameObject.activeSelf && dealIsSkill == false)
         {
-            GameController.Instance.ChangeCharacterStat(availableDeals[offeringID].price.statName, availableDeals[offeringID].price.amount, playerId);
-            StatChange profit = (StatChange)availableDeals[offeringID].profit;
-            GameController.Instance.ChangeCharacterStat(profit.statName, profit.amount, playerId);
+            GameController.Instance.ChangeCharacterStat(availableDeals[offeringID].StatToLose, availableDeals[offeringID].LoseAmount, playerId);
+            GameController.Instance.ChangeCharacterStat(availableDeals[offeringID].StatToGain, availableDeals[offeringID].GainAmount, playerId);
             TurnChildrenOff();
         }
     }
@@ -73,9 +72,8 @@ public class AltarController : MonoBehaviour
         Transform firstChild = transform.GetChild(0);
         if (offeringID != -1 && firstChild.gameObject.activeSelf && dealIsSkill == true)
         {
-            GameController.Instance.ChangeCharacterStat(availableDeals[offeringID].price.statName, availableDeals[offeringID].price.amount, playerId);
-            SkillGain profit = (SkillGain)availableDeals[offeringID].profit;
-            Skill skill = SkillFactory.CreateSkill(profit.skillData);
+            GameController.Instance.ChangeCharacterStat(availableDeals[offeringID].StatToLose, availableDeals[offeringID].LoseAmount, playerId);
+            Skill skill = SkillFactory.CreateSkill(availableDeals[offeringID].SkillToGain);
             GameController.Instance.ChangeCharacterSkill(playerId,skillSlotID,skill);
             TurnChildrenOff();
         }
@@ -106,22 +104,26 @@ public class AltarController : MonoBehaviour
                 statName = ((StatChange)availableDeals[i].profit).statName;
                 gains[i].sprite = GameController.Instance.ResourceContainer.GetStatSprite(statName);
             }
-            else if (availableDeals[i].profit is SkillGain)
+            else 
             {
-                gains[i].sprite = ((SkillGain)availableDeals[i].profit).skillData.Sprite;
+                Debug.LogError("Deal: " + availableDeals[i].name + " doesn't have reward");
             }
         }
     }
 
     public void RejectDeal()
     {
-        if (dealIsSkill == false)
-        {
-            GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -10, 0);
-            GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -10, 1);
-            GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -10, 2);
-            GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -10, 3);
-        }
+        GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -10, 0);
+        GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -10, 1);
+        GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -10, 2);
+        GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -10, 3);
+        //if (dealIsSkill == false)
+        //{
+        //    GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -10, 0);
+        //    GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -10, 1);
+        //    GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -10, 2);
+        //    GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -10, 3);
+        //}
         TurnChildrenOff();
     }
 }

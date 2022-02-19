@@ -9,7 +9,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private MapController _mapController;
     private FightController _fightController;
 
-    [SerializeField] public ResourceContainer ResourceContainer = new ResourceContainer();
+    [SerializeField] private ResourceContainer _resources = new ResourceContainer();
+    public ResourceContainer Resources{ get => _resources; }
     public event UnityAction<int, Player> OnStatChanged;
     public event UnityAction<int, int, Sprite> OnSkillChanged;
     public GameState GameState { get; private set; }
@@ -32,7 +33,7 @@ public class GameController : MonoBehaviour
 
     public void Initialize()
     {
-        GameState = new GameState(ResourceContainer);
+        GameState = new GameState(_resources);
 
         _mapController?.Initialize();
 

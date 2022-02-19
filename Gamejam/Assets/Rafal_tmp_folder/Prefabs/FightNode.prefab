@@ -98,7 +98,7 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.00000047683716, y: -0.00306952}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0.47, y: 0.28, z: 0.29, w: 0.28}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2.4, y: 2.4}
     newSize: {x: 0.16, y: 0.16}
@@ -162,6 +162,27 @@ MonoBehaviour:
   depth: 0
   canBeSelected: 0
   _renderer: {fileID: 7317635208476408467}
+  possibleEncounters:
+  - {fileID: 11400000, guid: be4fa179ffeb8a344a077a269247c13b, type: 2}
+  nodeSprites:
+  - {fileID: 21300000, guid: d1ac7d4c11364114a942785f9fd5367f, type: 3}
+  - {fileID: 21300000, guid: c8b8874a425ff9d4b928424a57d37e0a, type: 3}
+  - {fileID: 21300000, guid: d5a27bf6eb6a53e41a40c16751c86f27, type: 3}
+  - {fileID: 21300000, guid: 014d8624ca3fff148b850a64ce17981a, type: 3}
+  spriteRenderer: {fileID: 7317635208476408467}
+  normalEasyEncounters:
+  - {fileID: 11400000, guid: 3d8a68b7ff5092d40ae95158a1764674, type: 2}
+  - {fileID: 11400000, guid: e2521859d7290994f95069e82e10c5c2, type: 2}
+  normalMediumEncounters:
+  - {fileID: 11400000, guid: 35be20ea16f33a14cb87c6fff9b7503d, type: 2}
+  - {fileID: 11400000, guid: 2f043d1ce5f31794a838442f214c3bc8, type: 2}
+  normalHardEncounters:
+  - {fileID: 11400000, guid: 097b84877858a984a9c7df64639aa71f, type: 2}
+  - {fileID: 11400000, guid: 858c77f3cf398e249945d2c5ebb99de6, type: 2}
+  eliteEncounters:
+  - {fileID: 11400000, guid: 6928f7a34866d194f812853f27b78800, type: 2}
+  bossEncounters:
+  - {fileID: 11400000, guid: f9d36567cd9e3f146aca3ee23f3fd8f7, type: 2}
 --- !u!50 &1061318865638702278
 Rigidbody2D:
   serializedVersion: 4

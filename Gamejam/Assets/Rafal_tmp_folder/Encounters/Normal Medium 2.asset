@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f053b7fb8ab45b4dad394eb45ad968c, type: 3}
-  m_Name: EncounterData
+  m_Name: Normal Medium 2
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 39f0ba25c5f89cb4c9bc312aff6c37b1, type: 2}
+  - {fileID: 11400000, guid: 03ea3d5f842a2a04291c9a337b060829, type: 2}
+  - {fileID: 11400000, guid: 03ea3d5f842a2a04291c9a337b060829, type: 2}
+  - {fileID: 11400000, guid: 03ea3d5f842a2a04291c9a337b060829, type: 2}
   encounterType: 0

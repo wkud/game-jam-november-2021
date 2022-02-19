@@ -6,6 +6,18 @@ using System.Linq;
 [Serializable]
 public class ResourceContainer
 {
+    [SerializeField] List<EncounterData> _normalEasyEncounters;
+    [SerializeField] List<EncounterData> _normalMediumEncounters;
+    [SerializeField] List<EncounterData> _normalHardEncounters;
+    [SerializeField] List<EncounterData> _eliteEncounters;
+    [SerializeField] List<EncounterData> _bossEncounters;
+
+    public List<EncounterData> NormalEasyEncounters { get => _normalEasyEncounters; }
+    public List<EncounterData> NormalMediumEncounters { get => _normalMediumEncounters; }
+    public List<EncounterData> NormalHardEncounters { get => _normalHardEncounters; }
+    public List<EncounterData> EliteEncounters { get => _eliteEncounters; }
+    public List<EncounterData> BossEncounters { get => _bossEncounters; }
+
     [SerializeField] private List<EntityStats> _characterStats;
     [SerializeField] private List<EntityStats> _enemyStats;
     [SerializeField] private Sprite _deadCharacterPortrait;
