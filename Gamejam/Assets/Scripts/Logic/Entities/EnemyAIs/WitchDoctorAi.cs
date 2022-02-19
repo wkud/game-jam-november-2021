@@ -15,7 +15,7 @@ public class WitchDoctorAi : EnemyAi
         : SelectRandomSkill(regularSkills, allies, enemies);
         // if skill bond is ally, return Enemy's allies - enemies
 
-        Entity[] targets = isHealNeeded ? this.GetEnemyWithLowestHp(enemies) : GetSkillTarget(selectedSkill, allies, enemies);
+        Entity[] targets = isHealNeeded ? GetEnemyWithLowestHp(enemies) : GetSkillTarget(selectedSkill, allies, enemies);
         
         return new EnemyAiMoveDecission(selectedSkill, targets);
     }

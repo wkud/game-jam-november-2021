@@ -24,10 +24,10 @@ public class EnemyAi
     /// <param name="availableSkills">Collection of available spells that enemy can use</param>
     public virtual EnemyAiMoveDecission MakeMove(Entity[] allies, Entity[] enemies, Skill[] availableSkills)
     {
-        Skill selectedSkill = this.SelectRandomSkill(availableSkills, allies, enemies);
+        Skill selectedSkill = SelectRandomSkill(availableSkills, allies, enemies);
 
         // if skill bond is ally, return Enemy's allies - enemies
-        Entity[] targets = this.GetSkillTarget(selectedSkill, allies, enemies);
+        Entity[] targets = GetSkillTarget(selectedSkill, allies, enemies);
 
         return new EnemyAiMoveDecission(selectedSkill, targets);
     }
@@ -57,7 +57,7 @@ public class EnemyAi
         Entity[] targetGroup = skill.Data.TargetBond == Bond.Ally ? enemies : allies;
 
         Entity[] targets = skill.Data.TargetCount == SkillTargetCount.One
-        ? this.GetOneSkillTarget(targetGroup)
+        ? GetOneSkillTarget(targetGroup)
         : targetGroup;
 
         return targets;
