@@ -26,7 +26,7 @@ public class Player : Entity
                 return "CritChance: " + _stats.CritChance;
             case StatName.Defence:
                 return "Defence: " + _stats.Defence;
-            case StatName.Hp:
+            case StatName.MaxHp:
                 return "Hp: " + _stats.CurrentHp;
             case StatName.Initiative:
                 return "Initiative: " + _stats.Initiative;

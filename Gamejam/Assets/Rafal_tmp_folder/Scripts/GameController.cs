@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     private FightController _fightController;
 
     [SerializeField] private ResourceContainer _resources = new ResourceContainer();
+    public ResourceContainer Resources{ get => _resources; }
     public event UnityAction<int, Player> OnStatChanged;
     public event UnityAction<int, int, Sprite> OnSkillChanged;
     public GameState GameState { get; private set; }
@@ -83,7 +84,7 @@ public class GameController : MonoBehaviour
         var ally = GameState.Allies[unitId];
         switch (statType)
         {
-            case StatName.Hp:
+            case StatName.MaxHp:
                 ally.Stats.MaxHp += value;
                 if (ally.Stats.MaxHp < 0) ally.Stats.MaxHp = 0;
                 break;

@@ -16,16 +16,14 @@ public class GameState : IGameState
 
     public List<Enemy> GetEnemiesForThisFight()
     {
-        var enemyStats = _resourceContainer.EnemyStats.First();
-        
-        var enemies = new List<Enemy>(); // TODO replace this code with actual getting enemies assigned to map node
-        for (int i = 0; i < 2; i++)
-        {
-            var enemy = (Enemy)EntityFactory.CreateEntity(enemyStats);
-            enemies.Add(enemy);
-        }
-
-        return enemies;
+        EncounterData encounter = ((FightNode)CurrentNode).EncounterData;
+        //var enemies = new List<Enemy>();
+        //for (int i = 0; i < encounter.Enemies.Length; i++)
+        //{
+        //    var enemy = (Enemy)EntityFactory.CreateEntity(encounter.Enemies[i]);
+        //    enemies.Add(enemy);
+        //}
+        return encounter.Enemies.Select(s => (Enemy)EntityFactory.CreateEntity(s)).ToList();
     }
 
     

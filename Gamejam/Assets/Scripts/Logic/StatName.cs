@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum StatName
 {
-    Hp,
+    MaxHp,
     CurrentHp,
     Initiative,
     AttackModifier,

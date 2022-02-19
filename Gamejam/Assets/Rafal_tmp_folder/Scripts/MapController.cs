@@ -8,17 +8,13 @@ public class MapController : MonoBehaviour
 {
     public static MapController Instance = null;
     [SerializeField] int _stepsToBoss = 11;//-1 for starting node
-    [SerializeField] MapNode[] _nodesPrefabs = new MapNode[0];//nodes/room prefabs //0-altar, 1-hiden altar, 2-enemy, 3-hidden enemy, 4-elite, 5-boss
-    [SerializeField] EncounterData[] _normalEncounters;
-    [SerializeField] EncounterData[] _eliteEncounters;
-    [SerializeField] EncounterData[] _bossEncounters;
+    [SerializeField] MapNode[] _nodesPrefabs = new MapNode[0];//nodes/room prefabs //0-altar, 1-hiden altar, 2-enemy////////////////////////////////, 3-hidden enemy, 4-elite, 5-boss
     [SerializeField] Transform[] _nodesSpawnPoints = new Transform[3];//used on start to create node tree, then used to move camera
     List<MapNode> _allNodes = new List<MapNode>();
     MapNode _currentlySelectedNode;
     [SerializeField] Transform _nodesContainer;//here i spawn nodes
     [SerializeField] Transform _playerPawn;//current position indicator
     float _yAxisSpawnShift = 2.5f;//space between 2 nodes in y axis
-    
     public event UnityAction OnIntersectionsRemoved;
 
     public void Initialize()
@@ -59,28 +55,35 @@ public class MapController : MonoBehaviour
                     spawnChance = 40;//%
 
                     int nodeRandomizer = Random.Range(0, 100);
-                    if (nodeRandomizer < 25)//altar
+                    if (nodeRandomizer < 30)//altar
                     {
                         nodeInstance = Instantiate(_nodesPrefabs[0]);
                     }
-                    else if (nodeRandomizer >= 25 && nodeRandomizer<50)//encounter
-                    {
-                        nodeInstance = Instantiate(_nodesPrefabs[2]);
-                        ((FightNode)nodeInstance).Enemies = _normalEncounters[Random.Range(0, _normalEncounters.Length)]._enemies;
-                    }
-                    else if (nodeRandomizer >= 50 && nodeRandomizer < 70)//hidenaltar
+                    else if (nodeRandomizer >= 30 && nodeRandomizer < 50)//hidden altar
                     {
                         nodeInstance = Instantiate(_nodesPrefabs[1]);
                     }
-                    else if (nodeRandomizer >= 70 && nodeRandomizer < 90)//hidden encounter
+                    else//encounter
                     {
-                        nodeInstance = Instantiate(_nodesPrefabs[3]);
-                        ((FightNode)nodeInstance).Enemies = _normalEncounters[Random.Range(0, _normalEncounters.Length)]._enemies;
-                    }
-                    else if (nodeRandomizer >= 90 && nodeRandomizer < 100)//elite encounter
-                    {
-                        nodeInstance = Instantiate(_nodesPrefabs[4]);
-                        ((FightNode)nodeInstance).Enemies = _normalEncounters[Random.Range(0, _eliteEncounters.Length)]._enemies;
+                        nodeInstance = Instantiate(_nodesPrefabs[2]);                        
+                        int mapCompleteness = 100 * i / _stepsToBoss;
+                        if (mapCompleteness > 50)
+                        {
+                            nodeRandomizer = Random.Range(0, 100);
+                            if (nodeRandomizer < mapCompleteness * 3 / 5)//elite encounter
+                            {
+                                ((FightNode)nodeInstance).EncounterData = GetEncounterData(EncounterType.Elite, mapCompleteness);//normal encounter
+                            }
+                            else//normal encounter
+                            {
+                                ((FightNode)nodeInstance).EncounterData = GetEncounterData(EncounterType.Normal, mapCompleteness);//normal encounter
+                            }
+                        }
+                        else
+                        {
+                            ((FightNode)nodeInstance).EncounterData = GetEncounterData(EncounterType.Normal, mapCompleteness);//normal encounter
+                        }
+                        ((FightNode)nodeInstance).SetEncounterSprite(((FightNode)nodeInstance).EncounterData.EncounterType);
                     }
 
                     nodeInstance.transform.parent = _nodesContainer;
@@ -102,13 +105,14 @@ public class MapController : MonoBehaviour
         }        
 
         //create boss node
-        nodeInstance = Instantiate(_nodesPrefabs[5]);
-        ((FightNode)nodeInstance).Enemies = _normalEncounters[Random.Range(0, _bossEncounters.Length)]._enemies;
+        nodeInstance = Instantiate(_nodesPrefabs[2]);
+        ((FightNode)nodeInstance).EncounterData = GetEncounterData(EncounterType.Boss, 1);
         nodeInstance.transform.parent = _nodesContainer;
         spawnPos = new Vector3(_nodesSpawnPoints[1].position.x, _nodesSpawnPoints[1].position.y + _stepsToBoss * _yAxisSpawnShift, _nodesSpawnPoints[1].position.z);
         nodeInstance.transform.position = spawnPos;
         nodeInstance.depth = _stepsToBoss;
         nodeInstance.spawnPointId = 1;
+        ((FightNode)nodeInstance).SetEncounterSprite(EncounterType.Boss);
         _allNodes.Add(nodeInstance);
 
         //post creation stuff
@@ -182,5 +186,37 @@ public class MapController : MonoBehaviour
             AltarController.Instance.TurnChildrenOn();
         }
         
+    }
+    public EncounterData GetEncounterData(EncounterType encounterType, float mapProgressPercentage = 0)//randomly select 1 encounter from all similar encounters
+    {
+        if (encounterType == EncounterType.Normal)
+        {
+            if (mapProgressPercentage < 0.33f)
+            {
+                return GameController.Instance.Resources.NormalEasyEncounters[Random.Range(0, GameController.Instance.Resources.NormalEasyEncounters.Count)];
+
+            }
+            else if (mapProgressPercentage < 0.66f)
+            {
+                return GameController.Instance.Resources.NormalMediumEncounters[Random.Range(0, GameController.Instance.Resources.NormalMediumEncounters.Count)];
+            }
+            else
+            {
+                return GameController.Instance.Resources.NormalHardEncounters[Random.Range(0, GameController.Instance.Resources.NormalHardEncounters.Count)];
+            }
+        }
+        else if (encounterType == EncounterType.Elite)
+        {
+            return GameController.Instance.Resources.EliteEncounters[Random.Range(0, GameController.Instance.Resources.EliteEncounters.Count)];
+        }
+        else if (encounterType == EncounterType.Boss)
+        {
+            return GameController.Instance.Resources.BossEncounters[Random.Range(0, GameController.Instance.Resources.BossEncounters.Count)];
+        }
+        else
+        {
+            Debug.LogError("TUTAJ COŒ POSZ£O NIE TAK I NULL PEWNIE BÊDZIE SYPA£ B£ÊDY");
+            return null;
+        }
     }
 }
