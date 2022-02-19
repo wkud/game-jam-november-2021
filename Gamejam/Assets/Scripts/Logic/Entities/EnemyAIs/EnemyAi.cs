@@ -60,7 +60,7 @@ public class EnemyAi
         Entity target = targetGroup[randomTargetId];
 
 
-        float[] threats = targetGroup.Select(e => e.Stats.Threat).ToArray();
+        int[] threats = targetGroup.Select(e => e.Stats.Threat).ToArray();
         float threatSum = threats.Sum();
 
         float[] threatChances = threats.Select(e => e * 100 / threatSum).ToArray();

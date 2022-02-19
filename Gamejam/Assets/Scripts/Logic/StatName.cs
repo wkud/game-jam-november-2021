@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public enum StatName
 {
-    MaxHp,
-    CurrentHp,
-    Initiative,
-    AttackModifier,
-    Defence,
-    CritChance,
-    Threat
+    [Description("Max Hp")] MaxHp,
+    [Description("Current Hp")] CurrentHp,
+    [Description("Initiative")] Initiative,
+    [Description("Attack")] Attack,
+    [Description("Defence")] Defence,
+    [Description("Crit Chance")] CritChance,
+    [Description("Threat")] Threat
 }

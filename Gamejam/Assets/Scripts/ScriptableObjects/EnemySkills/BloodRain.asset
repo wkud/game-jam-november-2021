@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BloodRain
   m_EditorClassIdentifier: 
   _skillCode: 0
-  _name: Blood StRain
+  _name: Blood Rain
   _description: Blood shaman hits all enemies
   _power: 10
   _maxCooldown: 0

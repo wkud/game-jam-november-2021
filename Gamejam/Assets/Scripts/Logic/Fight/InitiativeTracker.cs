@@ -32,7 +32,7 @@ public class InitiativeTracker
         this._currentEntity = this._initiativeQueue[nextIndex];
     }
 
-    public void KillEntity(Entity entity)
+    public void RemoveFromQueue(Entity entity)
     {
         if (entity == this._currentEntity)
             this.SetNextEntity();

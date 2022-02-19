@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -21,9 +20,13 @@ public class ResourceContainer
 
     [SerializeField] private List<EntityStats> _characterStats;
     [SerializeField] private List<EntityStats> _enemyStats;
+    [SerializeField] private Sprite _deadCharacterPortrait;
 
     public List<EntityStats> CharacterStats => _characterStats;
     public List<EntityStats> EnemyStats => _enemyStats;
+    public Sprite DeadCharacterPortrait => _deadCharacterPortrait;
+
+    [SerializeField] private Sprite[] _statImages = new Sprite[6];
 
     public List<EntityStats> GetRandomCharacterPresets(int partySize = 4)
     {
@@ -39,5 +42,10 @@ public class ResourceContainer
         }
 
         return randomCharacters;
+    }
+
+    public Sprite GetStatSprite(StatName statName)
+    {
+        return _statImages[(int)statName];
     }
 }
