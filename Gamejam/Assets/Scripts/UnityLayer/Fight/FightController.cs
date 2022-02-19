@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Events;
 
 public class FightController : MonoBehaviour  // class for main fight management logic 
 {
@@ -78,9 +80,11 @@ public class FightController : MonoBehaviour  // class for main fight management
 
     public void OnSelectTarget(Unit targetUnit) => _playerMoveMaker.OnPlayerSelectTarget(targetUnit.Entity);
 
-    public void OnEntityDied(Entity entity)
+    public void OnEntityDied(Entity entity) => _initiativeTracker.RemoveFromQueue(entity);
+
+    public static void SpawnEntity()
     {
-        _initiativeTracker.RemoveFromQueue(entity);
+        // TODO add summon logic
     }
 
 }

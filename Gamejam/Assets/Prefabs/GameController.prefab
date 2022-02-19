@@ -87,6 +87,8 @@ MonoBehaviour:
     _deadCharacterPortrait: {fileID: 21300000, guid: 322f8d2358ad0ad40a04b9f13f063ae3, type: 3}
     _silverUnitFrame: {fileID: 21300000, guid: 8b63524406d8c78469ed9465381b0484, type: 3}
     _goldenUnitFrame: {fileID: 21300000, guid: 5805517947fb7b547bd7aa8258122bd6, type: 3}
+    _summonableSnakeStats: {fileID: 11400000, guid: 03ea3d5f842a2a04291c9a337b060829, type: 2}
+    _summonableWitchDoctorStats: {fileID: 11400000, guid: 799e6f78cba16d141b4af8b6b5c5335f, type: 2}
     _statImages:
     - {fileID: 21300000, guid: 93a7985e7e931dd49802aab5b96be0e7, type: 3}
     - {fileID: 21300000, guid: 93a7985e7e931dd49802aab5b96be0e7, type: 3}

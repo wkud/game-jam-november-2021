@@ -11,6 +11,9 @@ public class ResourceContainer
     [SerializeField] private Sprite _deadCharacterPortrait;
     [SerializeField] private Sprite _silverUnitFrame;
     [SerializeField] private Sprite _goldenUnitFrame;
+    [SerializeField] private EntityStats _summonableSnakeStats;
+    [SerializeField] private EntityStats _summonableWitchDoctorStats;
+
     public List<EntityStats> CharacterStats => _characterStats;
     public List<EntityStats> EnemyStats => _enemyStats;
     public Sprite DeadCharacterPortrait => _deadCharacterPortrait;
@@ -38,5 +41,19 @@ public class ResourceContainer
     public Sprite GetStatSprite(StatName statName)
     {
         return _statImages[(int)statName];
+    }
+
+    public EntityStats GetSummonableEntityStats(EntityId entityId)
+    {
+        switch(entityId)
+        {
+            case EntityId.Snake:
+                return _summonableSnakeStats;
+            case EntityId.WitchDoctor:
+                return _summonableWitchDoctorStats;
+            default:
+                Debug.LogError($"Entity Id of: {entityId} was not designed to be summoned");
+                return null;
+        }
     }
 }

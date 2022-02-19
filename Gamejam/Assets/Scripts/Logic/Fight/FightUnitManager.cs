@@ -31,6 +31,8 @@ public class FightUnitManager : IFightStateHolder, IUnitReferenceHolder
         var enemyPresets = enemies.Select(e => (Entity)e).ToList();
         HideUnusedUnits(_allEnemies, enemyPresets);
         InitializeUnits(ActiveEnemyUnits, enemyPresets, fightController);
+
+        TrySetupUnitsForBossFight();
     }
 
     private void InitializeUnits(List<Unit> units, List<Entity> presets, FightController fightController)
@@ -50,6 +52,20 @@ public class FightUnitManager : IFightStateHolder, IUnitReferenceHolder
             {
                 units[i].Hide();
             }
+        }
+    }
+
+    private void TrySetupUnitsForBossFight()
+    {
+        var boss = Enemies.FirstOrDefault(e => e.Stats.Identifier == EntityId.SpiritWarriorBoss) as SpiritWarriorBoss;
+        if(boss == null) // if there is no boss in this fight, ignore further logic
+        {
+            return;
+        }
+
+        foreach (var entity in ActiveEntities)
+        {
+            entity.OnDeath.AddListener(boss.UsePassiveSkill); // buff boss with his passive skill on every character death
         }
     }
 

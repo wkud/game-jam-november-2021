@@ -1,20 +1,22 @@
-using System;
 using System.Linq;
 
 public class SnakeShamanAi : EnemyAi
 {
-    private const string SPECIAL_SKILL_NAME = "SummonDoctor";
+    private const SkillName SPECIAL_SKILL_ID = SkillName.SummonSnake;
     private const int MAX_ENEMY_COUNT = 4;
 
-    public override void MakeMove(Entity user, Entity[] allies, Entity[] enemies, Skill[] availableSkills)
+    public override EnemyAiMoveDecission MakeMove(Entity[] allies, Entity[] enemies, Skill[] availableSkills)
     {
+        var summonSkill = availableSkills.FirstOrDefault(s => s.Data.Identifier == SPECIAL_SKILL_ID);
+        var regularSkills = availableSkills.Where(s => s != summonSkill);
+
         Skill selectedSkill = enemies.Count() < MAX_ENEMY_COUNT
-        ? availableSkills.FirstOrDefault(s => s.Data.Name == SPECIAL_SKILL_NAME)
-        : this.SelectRandomSkill(availableSkills.Where(x => x.Data.Name != SPECIAL_SKILL_NAME).ToArray(), allies, enemies);
+        ? summonSkill
+        : SelectRandomSkill(regularSkills, allies, enemies);
 
-        Entity[] targets = this.GetSkillTarget(selectedSkill, allies, enemies);
+        Entity[] targets = GetSkillTarget(selectedSkill, allies, enemies);
 
-        selectedSkill.Use(user, targets);
+        return new EnemyAiMoveDecission(selectedSkill, targets);
     }
 
 }

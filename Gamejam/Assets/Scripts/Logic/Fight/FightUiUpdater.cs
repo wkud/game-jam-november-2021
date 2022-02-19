@@ -1,7 +1,10 @@
 ﻿using System.Linq;
+using UnityEngine;
 
 public class FightUiUpdater : IFightUiUpdater
 {
+    [SerializeField] private DamageInfo _damageInfo;
+
     private IUnitReferenceHolder _unitManager;
 
     public FightUiUpdater(IUnitReferenceHolder unitManager)
@@ -52,5 +55,9 @@ public class FightUiUpdater : IFightUiUpdater
         unit.HighlightSkill(skillIndex, shouldBeHighlighted);
     }
 
-    
+    public void DisplayDamageInfo(Unit unit, int damage)
+    {
+        _damageInfo.DisplayDamage(unit, damage);
+    }
+
 }

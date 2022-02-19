@@ -1,9 +1,6 @@
 using UnityEngine;
-using System;
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "EntityStats", menuName = "ScriptableObjects/EntityStats", order = 2)]
 public class EntityStats : ScriptableObject
