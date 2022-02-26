@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class InitiativeController : MonoBehaviour
     {
         _initiativeTracker = initiativeTracker;
         _initiativeTracker.OnCurrentEntityChange.AddListener(UpdateHighlightOnCurrentUnit);
+        _initiativeTracker.OnEntityRemoved.AddListener(DestroyAvatarOfRemovedEntity);
 
         foreach (Entity entity in initiativeTracker.GetInitiativeQueue())
         {
@@ -21,7 +23,7 @@ public class InitiativeController : MonoBehaviour
         _avatars[_initiativeTracker.GetCurrentEntity()].IsCurrentTurnMaker = true;
     }
 
-    public void SpawnAvatar(Entity entity)
+    private void SpawnAvatar(Entity entity)
     {
         GameObject instance = Instantiate(InitiativeAvatarPrefab) as GameObject;
         instance.transform.parent = gameObject.transform;
@@ -32,10 +34,15 @@ public class InitiativeController : MonoBehaviour
         _avatars.Add(entity, initiativeAvatarController);
     }
 
-    public void UpdateHighlightOnCurrentUnit(Entity previousEntity, Entity currentEntity)
+    private void UpdateHighlightOnCurrentUnit(Entity previousEntity, Entity currentEntity)
     {
         _avatars[previousEntity].IsCurrentTurnMaker = false; // hide for previous
         _avatars[currentEntity].IsCurrentTurnMaker = true; // show for current
     }
 
+    private void DestroyAvatarOfRemovedEntity(Entity entity)
+    {
+        Destroy(_avatars[entity].gameObject);
+        _avatars.Remove(entity);
+    }
 }

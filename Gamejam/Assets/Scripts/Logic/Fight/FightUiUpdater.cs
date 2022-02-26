@@ -14,7 +14,7 @@ public class FightUiUpdater : IFightUiUpdater
 
     public void LockAllSkills()
     {
-        foreach (var playerUnit in _unitManager.ActiveAllyUnits)
+        foreach (var playerUnit in _unitManager.AllAllyUnits)
         {
             playerUnit.AreSkillsInteractable = false;
         }
@@ -22,7 +22,7 @@ public class FightUiUpdater : IFightUiUpdater
 
     public void LockAllTargets()
     {
-        foreach (var unit in _unitManager.ActiveUnits)
+        foreach (var unit in _unitManager.AllAllyUnits)
         {
             unit.IsPortraitInteractable = false;
         }

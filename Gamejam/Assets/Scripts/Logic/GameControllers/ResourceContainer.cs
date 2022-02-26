@@ -19,13 +19,11 @@ public class ResourceContainer
     public List<EncounterData> BossEncounters { get => _bossEncounters; }
 
     [SerializeField] private List<EntityStats> _characterStats;
-    [SerializeField] private List<EntityStats> _enemyStats;
     [SerializeField] private Sprite _deadCharacterPortrait;
     [SerializeField] private EntityStats _summonableSnakeStats;
     [SerializeField] private EntityStats _summonableWitchDoctorStats;
 
     public List<EntityStats> CharacterStats => _characterStats;
-    public List<EntityStats> EnemyStats => _enemyStats;
     public Sprite DeadCharacterPortrait => _deadCharacterPortrait;
 
     [SerializeField] private Sprite[] _statImages = new Sprite[6];

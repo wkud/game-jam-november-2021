@@ -4,6 +4,7 @@ using UnityEngine.Events;
 public class InitiativeTracker
 {
     public UnityEvent<Entity, Entity> OnCurrentEntityChange { get; private set; } = new UnityEvent<Entity, Entity>();
+    public UnityEvent<Entity> OnEntityRemoved { get; private set; } = new UnityEvent<Entity>();
 
     private List<Entity> _initiativeQueue;
     private Entity _currentEntity;
@@ -44,5 +45,6 @@ public class InitiativeTracker
         }
 
         _initiativeQueue.Remove(entity);
+        OnEntityRemoved.Invoke(entity);
     }
 }

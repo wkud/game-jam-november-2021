@@ -82,7 +82,9 @@ public class Unit : MonoBehaviour
             Entity.OnDeath.AddListener(() =>
             {
                 _fightController.OnEntityDied(Entity);
-                _portraitButton.ChangePortaitOnDeath();
+               
+                Entity.Stats.Sprite = GameController.Instance.Resources.DeadCharacterPortrait;
+                _portraitButton.UpdatePortraitImage();
             });
         }
     }
