@@ -3,7 +3,7 @@ using System.Linq;
 public class SnakeShamanAi : EnemyAi
 {
     private const SkillName SPECIAL_SKILL_ID = SkillName.SummonSnake;
-    private const int MAX_ENEMY_COUNT = 4;
+    private int MAX_ENEMY_COUNT = FightUnitManager.MAX_PARTY_COUNT;
 
     public override EnemyAiMoveDecission MakeMove(Entity[] allies, Entity[] enemies, Skill[] availableSkills)
     {

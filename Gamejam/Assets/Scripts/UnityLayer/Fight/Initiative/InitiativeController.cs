@@ -12,8 +12,10 @@ public class InitiativeController : MonoBehaviour
     public void Initialize(InitiativeTracker initiativeTracker)
     {
         _initiativeTracker = initiativeTracker;
+
         _initiativeTracker.OnCurrentEntityChange.AddListener(UpdateHighlightOnCurrentUnit);
         _initiativeTracker.OnEntityRemoved.AddListener(DestroyAvatarOfRemovedEntity);
+        _initiativeTracker.OnEntityAppended.AddListener(SpawnAvatar);
 
         foreach (Entity entity in initiativeTracker.GetInitiativeQueue())
         {

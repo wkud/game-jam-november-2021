@@ -5,6 +5,7 @@ public class InitiativeTracker
 {
     public UnityEvent<Entity, Entity> OnCurrentEntityChange { get; private set; } = new UnityEvent<Entity, Entity>();
     public UnityEvent<Entity> OnEntityRemoved { get; private set; } = new UnityEvent<Entity>();
+    public UnityEvent<Entity> OnEntityAppended { get; private set; } = new UnityEvent<Entity>();
 
     private List<Entity> _initiativeQueue;
     private Entity _currentEntity;
@@ -46,5 +47,11 @@ public class InitiativeTracker
 
         _initiativeQueue.Remove(entity);
         OnEntityRemoved.Invoke(entity);
+    }
+
+    public void AppendEntity(Entity entity) // add this entity to end of initiative queue regardless of it's initiative
+    {
+        _initiativeQueue.Add(entity);
+        OnEntityAppended.Invoke(entity);
     }
 }
