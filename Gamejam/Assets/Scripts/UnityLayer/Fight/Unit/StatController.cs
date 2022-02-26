@@ -39,6 +39,6 @@ public class StatController : MonoBehaviour, IDescriptable
     }
     private void SetIcon()
     {
-        _image.sprite = GameController.Instance.ResourceContainer.GetStatSprite(_statName);
+        _image.sprite = GameController.Instance.Resources.GetStatSprite(_statName);
     }
 }

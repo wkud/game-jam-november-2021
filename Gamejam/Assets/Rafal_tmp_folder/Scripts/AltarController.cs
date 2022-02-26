@@ -96,13 +96,17 @@ public class AltarController : MonoBehaviour
             }
             while (id == dealId1 || id == dealId2 || id == dealId3 || id == dealId4);
             availableDeals[i] = allDeals[id];
-            var statName = availableDeals[i].price.statName;
-            sacrifices[i].sprite = GameController.Instance.ResourceContainer.GetStatSprite(statName);
+            var statName = availableDeals[i].StatToLose;
+            sacrifices[i].sprite = GameController.Instance.Resources.GetStatSprite(statName);
 
-            if (availableDeals[i].profit is StatChange)
+            if (availableDeals[i].SkillToGain == null && availableDeals[i].StatToGain != 0)
             {
-                statName = ((StatChange)availableDeals[i].profit).statName;
-                gains[i].sprite = GameController.Instance.ResourceContainer.GetStatSprite(statName);
+                statName = availableDeals[i].StatToGain;
+                gains[i].sprite = GameController.Instance.Resources.GetStatSprite(statName);
+            }
+            else if (availableDeals[i].SkillToGain != null)
+            {
+                gains[i].sprite = availableDeals[i].SkillToGain.Sprite;
             }
             else 
             {
