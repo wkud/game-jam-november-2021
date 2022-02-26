@@ -9,6 +9,7 @@ public class FightUnitManager : IFightStateHolder, IUnitReferenceHolder
 
     public List<Unit> ActiveUnits => _units.Where(u => u.IsActive && u.Entity.IsAlive).ToList();
     public List<Unit> ActiveAllyUnits => _allAllies.Where(u => u.Entity.IsAlive).ToList();
+    // public List<Unit> ActiveAllyUnits => _allAllies.Where(u => u.IsActive && (u.Entity?.IsAlive ?? false)).ToList();
     public List<Unit> ActiveEnemyUnits => _allEnemies.Where(u => u.IsActive).ToList();
 
     public Entity[] Enemies => ActiveEnemyUnits.Select(u => u.Entity).ToArray();
@@ -24,6 +25,8 @@ public class FightUnitManager : IFightStateHolder, IUnitReferenceHolder
 
         // initialize allies
         var allyPresets = gameState.Allies.Select(e => (Entity)e).ToList();
+        // HideUnusedUnits(_allAllies, allyPresets.Where(a => a.Stats.CurrentHp > 0).ToList());
+        // InitializeUnits(ActiveAllyUnits, allyPresets.Where(a => a.Stats.CurrentHp > 0).ToList(), fightController);
         InitializeUnits(_allAllies, allyPresets, fightController);
 
         // initialize enemies

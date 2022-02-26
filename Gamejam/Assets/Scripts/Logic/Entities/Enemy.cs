@@ -18,6 +18,5 @@ public class Enemy : Entity
         
         var decission =_ai.MakeMove(fightState.Allies, fightState.Enemies, availableSkills);
         decission.Skill.Use(this, decission.Targets);
-
     }
 }
