@@ -56,7 +56,7 @@ public class UnitPortrait : MonoBehaviour
 
     public void ChangePortaitOnDeath()
     {
-        var imageAfterDeath = GameController.Instance.ResourceContainer.DeadCharacterPortrait;
+        var imageAfterDeath = GameController.Instance.Resources.DeadCharacterPortrait;
         _image.sprite = imageAfterDeath;
     }
 }
