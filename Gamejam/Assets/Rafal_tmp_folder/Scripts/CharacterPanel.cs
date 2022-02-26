@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class CharacterPanel : MonoBehaviour
 {
     [SerializeField] [Range(0, 3)] int _id;
-
+    [SerializeField] Image portrait;
     [SerializeField] Slider slider;
 
     [SerializeField] TextMeshProUGUI hpText;
@@ -47,10 +47,7 @@ public class CharacterPanel : MonoBehaviour
 
             slider.value = (float)unit.Stats.CurrentHp / unit.Stats.MaxHp;
 
-
-            /*if (unit.Skills[0]!=null && unit.Skills[0].Data.Sprite!=null) skill1Sprite.sprite = unit.Skills[0].Data.Sprite;
-            if (unit.Skills[0] != null && unit.Skills[1].Data.Sprite != null) skill2Sprite.sprite = unit.Skills[1].Data.Sprite;
-            if (unit.Skills[0] != null && unit.Skills[2].Data.Sprite != null) skill3Sprite.sprite = unit.Skills[2].Data.Sprite;*/
+            portrait.sprite = unit.Stats.Sprite;
         }
     }
     void UpdateUnitSkillUI(int playerId, int skillSlotId, Sprite sprite)
@@ -59,15 +56,15 @@ public class CharacterPanel : MonoBehaviour
         {
             if (skillSlotId == 0)
             {
-                skill1Sprite.sprite = sprite;
+                if (skill1Sprite!=null) skill1Sprite.sprite = sprite;
             }
             else if (skillSlotId == 1)
             {
-                skill2Sprite.sprite = sprite;
+                if (skill2Sprite != null) skill2Sprite.sprite = sprite;
             }
             else if (skillSlotId == 2)
             {
-                skill3Sprite.sprite = sprite;
+                if (skill3Sprite != null) skill3Sprite.sprite = sprite;
             }
         }
     }

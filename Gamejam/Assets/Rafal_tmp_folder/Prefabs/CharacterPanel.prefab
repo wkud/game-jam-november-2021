@@ -527,6 +527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _id: 0
+  portrait: {fileID: 4604048955065663479}
   slider: {fileID: 944138321311606096}
   hpText: {fileID: 4604048954655934320}
   initiativeText: {fileID: 4604048955693309228}
