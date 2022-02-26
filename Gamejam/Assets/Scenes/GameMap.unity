@@ -1892,13 +1892,6 @@ MonoBehaviour:
   dealIsSkill: 0
   skillSlotID: 0
   sacrifices: []
-  _statImages:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   gains: []
 --- !u!1 &1546222596
 GameObject:
@@ -2950,12 +2943,60 @@ PrefabInstance:
       value: GameController
       objectReference: {fileID: 0}
     - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
-      propertyPath: ResourceContainer._enemyStats.Array.data[0]
+      propertyPath: _resources._deadCharacterPortrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 322f8d2358ad0ad40a04b9f13f063ae3, type: 3}
+    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
+      propertyPath: _resources._enemyStats.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
+      propertyPath: _resources._statImages.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
+      propertyPath: _resources._enemyStats.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: de350960f3d47f0408e9ea1c586e10bc, type: 2}
     - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
+      propertyPath: _resources._enemyStats.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: de350960f3d47f0408e9ea1c586e10bc, type: 2}
+    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
+      propertyPath: _resources._statImages.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 93a7985e7e931dd49802aab5b96be0e7, type: 3}
+    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
+      propertyPath: _resources._statImages.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 93a7985e7e931dd49802aab5b96be0e7, type: 3}
+    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
+      propertyPath: _resources._statImages.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: baa96a2999471874ea48bc9a439ba1ca, type: 3}
+    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
+      propertyPath: _resources._statImages.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: 01689b250a4d4564ca66a7ede41365c8, type: 3}
+    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
+      propertyPath: _resources._statImages.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300000, guid: 992bec0b3a3250a4f864e09285bc1595, type: 3}
+    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
+      propertyPath: _resources._statImages.Array.data[5]
+      value: 
+      objectReference: {fileID: 21300000, guid: 0a4f443e5d21dcc46a725d414d58015c, type: 3}
+    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
+      propertyPath: _resources._statImages.Array.data[6]
+      value: 
+      objectReference: {fileID: 21300000, guid: 6d1c688b43c12764796f8d194f9db451, type: 3}
+    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
       propertyPath: _resources._bossEncounters.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
+      propertyPath: _resources._characterStats.Array.size
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
       propertyPath: _resources._eliteEncounters.Array.size
@@ -2966,9 +3007,33 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: f9d36567cd9e3f146aca3ee23f3fd8f7, type: 2}
     - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
+      propertyPath: _resources._characterStats.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 25c4dd508a1b7984186c0c2f67aa57eb, type: 2}
+    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
+      propertyPath: _resources._characterStats.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 770aa935b7444cb49a08caaff68a114d, type: 2}
+    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
+      propertyPath: _resources._characterStats.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2192ddf76a0c87f4999cc1809a54e9f9, type: 2}
+    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
+      propertyPath: _resources._characterStats.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: b449a348f2b539347a2817d0ae8bb4d1, type: 2}
+    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
+      propertyPath: _resources._characterStats.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: ef7267439a1db6248b1930e4ce62f516, type: 2}
+    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
       propertyPath: _resources._eliteEncounters.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 6928f7a34866d194f812853f27b78800, type: 2}
+    - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
+      propertyPath: ResourceContainer._enemyStats.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: de350960f3d47f0408e9ea1c586e10bc, type: 2}
     - target: {fileID: 1943255943669464060, guid: 05c690fc7d0b5a2448241d9be6b2fdfb, type: 3}
       propertyPath: _resources._normalEasyEncounters.Array.size
       value: 2
