@@ -10,12 +10,12 @@ public class Player : Entity
 
     public void SetSkill(int slotNumber, Skill skill)
     {
-        this._stats.Skills[slotNumber] = skill;
+        _stats.Skills[slotNumber] = skill;
     }
 
     public string GetSkillDescription(int slotNumber)
     {
-        var skillData = this._stats.Skills[slotNumber];
+        var skillData = _stats.Skills[slotNumber];
         return skillData?.GetTooltipDescription();
     }
 
@@ -42,7 +42,7 @@ public class Player : Entity
 
     public void UseSkill(int slotNumber, Entity[] targets)
     {
-        this._stats.Skills[slotNumber].Use(this, targets);
+        _stats.Skills[slotNumber].Use(this, targets);
     }
 
     public void AddStat(StatName statName, int statIncrease)
@@ -104,7 +104,7 @@ public class Player : Entity
 
     public bool IsSkillSingleTarget(int skillIndex)
     {
-        var skill = this._stats.Skills[skillIndex];
+        var skill = _stats.Skills[skillIndex];
         try
         {
             return skill.Data.TargetCount == SkillTargetCount.One;
@@ -118,23 +118,23 @@ public class Player : Entity
 
     public Bond GetSkillTargetBond(int skillIndex)
     {
-        return this._stats.Skills[skillIndex].Data.TargetBond;
+        return _stats.Skills[skillIndex].Data.TargetBond;
     }
 
     public void OnTurnStart()
     {
-        foreach (StateController state in this._stats.States)
+        foreach (StateController state in _stats.States)
         {
-            state.OnTurnStart(this._stats);
+            state.OnTurnStart(_stats);
         }
     }
 
     public void OnTurnEnd()
     {
-        foreach (StateController state in this._stats.States)
+        foreach (StateController state in _stats.States)
         {
-            state.OnTurnEnd(this._stats);
-            if (state.TurnsLeft <= 0) this._stats.States.Remove(state);
+            state.OnTurnEnd(_stats);
+            if (state.TurnsLeft <= 0) _stats.States.Remove(state);
         }
     }
 }

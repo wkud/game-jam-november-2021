@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using System.Text;
 
 public class FightController : MonoBehaviour  // class for main fight management logic 
 {
     private PlayerMoveMaker _playerMoveMaker;
-    private PlayerMoveUiUpdater _playerMoveUiUpdater;
+    private FightUiUpdater _fightUiUpdater;
     private InitiativeTracker _initiativeTracker;
     private InitiativeController _initiativeUiController;
     private FightUnitManager _unitManager;
@@ -29,26 +28,19 @@ public class FightController : MonoBehaviour  // class for main fight management
         _initiativeUiController.Initialize(_initiativeTracker);
 
         // setup player move input system
-        _playerMoveUiUpdater = new PlayerMoveUiUpdater(_unitManager);
+        _fightUiUpdater = new FightUiUpdater(_unitManager);
 
-        _playerMoveMaker = new PlayerMoveMaker(_unitManager, _playerMoveUiUpdater);
+        _playerMoveMaker = new PlayerMoveMaker(_unitManager, _fightUiUpdater);
         _playerMoveMaker.OnPlayerTurnEnd.AddListener(OnFinishedTurn); // TODO: add listener for playing animations
 
         //start turn
         StartTurn();
-
-        // TODO remove this after debugging
-        var stringBuilder = new StringBuilder("Initiative Queue:\n");
-        var queue = _initiativeTracker.GetInitiativeQueue();
-        foreach (var entity in queue)
-        {
-            stringBuilder.AppendLine($"{queue.IndexOf(entity) + 1}. {entity.Stats.Identifier} Stats.UniqueId: {entity.Stats.UniqueId}");
-        }
-        Debug.Log(stringBuilder.ToString());
     }
 
     private void StartTurn()
     {
+        _fightUiUpdater.SetHighlightToCurrentUnit(_currentEntity, true);
+
         if (_currentEntity.Stats.Bond == Bond.Ally)
         {
             _playerMoveMaker.OnPlayerStartTurn(_currentEntity as Player);
@@ -75,9 +67,10 @@ public class FightController : MonoBehaviour  // class for main fight management
             return;
         }
 
+        _fightUiUpdater.SetHighlightToCurrentUnit(_currentEntity, false);
+
         _initiativeTracker.SetNextEntity();
 
-        _initiativeUiController.OnFinishedTurn();
         StartTurn();
     }
 
@@ -85,9 +78,11 @@ public class FightController : MonoBehaviour  // class for main fight management
 
     public void OnSelectTarget(Unit targetUnit) => _playerMoveMaker.OnPlayerSelectTarget(targetUnit.Entity);
 
-    public void OnEntityDied(Entity entity)
+    public void OnEntityDied(Entity entity) => _initiativeTracker.RemoveFromQueue(entity);
+
+    public static void SpawnEntity()
     {
-        _initiativeTracker.RemoveFromQueue(entity);
+        // TODO add summon logic
     }
 
 }

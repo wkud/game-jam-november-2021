@@ -11,10 +11,10 @@ public class PlayerMoveMaker
 
     public UnityEvent OnPlayerTurnEnd { get; } = new UnityEvent();
 
-    private IPlayerMoveUiUpdater _uiUpdater;
+    private IFightUiUpdater _uiUpdater;
     private IFightStateHolder _fightStateHolder;
 
-    public PlayerMoveMaker(IFightStateHolder fightStateHolder, IPlayerMoveUiUpdater uiUpdater)
+    public PlayerMoveMaker(IFightStateHolder fightStateHolder, IFightUiUpdater uiUpdater)
     {
         _fightStateHolder = fightStateHolder;
         _uiUpdater = uiUpdater;
@@ -26,7 +26,7 @@ public class PlayerMoveMaker
     #region StateMachine
     public void OnPlayerStartTurn(Player currentPlayer) // state transition: WaitingForPlayerTurn -> WaitingForSkill
     {
-        _currentPlayer = currentPlayer; // TODO only this player can use skills
+        _currentPlayer = currentPlayer;
 
         State = PlayerTurnState.WaitingForSkill;
 
@@ -71,6 +71,8 @@ public class PlayerMoveMaker
     {
         _currentPlayer.UseSkill(_selectedSkillIndex, _targets);
 
+        _uiUpdater.SetHighlightToSelectedSkill(_currentPlayer, _selectedSkillIndex, false);
+
         State = PlayerTurnState.WaitingForPlayerTurn;
         OnPlayerTurnEnd.Invoke();
     }
@@ -80,6 +82,7 @@ public class PlayerMoveMaker
     private void SetSkillIndex(int skillIndex)
     {
         _selectedSkillIndex = skillIndex;
+        _uiUpdater.SetHighlightToSelectedSkill(_currentPlayer, skillIndex, true);
     }
 
     private void SetManyTargets()

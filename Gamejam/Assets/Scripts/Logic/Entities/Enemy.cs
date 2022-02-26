@@ -1,15 +1,11 @@
-using UnityEngine;
 using System.Linq;
 
 public class Enemy : Entity
 {
     private EnemyAi _ai;
-    private bool _hasStarted = false;
 
-    //TODO add states and 
+    //TODO add states
     //TODO add cooldown counter
-
-
 
     public Enemy(EntityStats initialStats, EnemyAi ai) : base(initialStats)
     {
@@ -19,11 +15,8 @@ public class Enemy : Entity
     public void MakeMove(IFightStateHolder fightState)
     {
         var availableSkills = _stats.Skills.Where(s => (s?.Data?.CurrentCooldown ?? int.MaxValue) <= 0).ToArray();
-        if (!this._hasStarted)
-        {
-            this._ai.OnCreate(this, fightState.Allies, fightState.Enemies, availableSkills);
-            this._hasStarted = true;
-        }
-        _ai.MakeMove(this, fightState.Allies, fightState.Enemies, availableSkills);
+        
+        var decission =_ai.MakeMove(fightState.Allies, fightState.Enemies, availableSkills);
+        decission.Skill.Use(this, decission.Targets);
     }
 }

@@ -1,6 +1,22 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+public struct HpValueChangedEventArgs
+{
+    public Entity Sender { get; set; }
+    public int Current { get; set; }
+    public int Max { get; set; }
+    public int DamageTaken { get; set; }
+
+    public HpValueChangedEventArgs(Entity sender, int current, int max, int damageTaken)
+    {
+        Sender = sender;
+        Current = current;
+        Max = max;
+        DamageTaken = damageTaken;
+    }
+}
+
 public abstract class Entity
 {
     protected EntityStats _stats;
@@ -8,7 +24,7 @@ public abstract class Entity
 
     public UnityEvent OnDeath { get; private set; } = new UnityEvent();
 
-    public UnityEvent<int, int> OnHpValueChanged { get; private set; } = new UnityEvent<int, int>();
+    public UnityEvent<HpValueChangedEventArgs> OnHpValueChanged { get; private set; } = new UnityEvent<HpValueChangedEventArgs>();
     public bool IsAlive => _stats.CurrentHp > 0;
 
     public Entity(EntityStats initialStats)
@@ -24,7 +40,8 @@ public abstract class Entity
         }
 
         _stats.CurrentHp -= damage;
-        OnHpValueChanged.Invoke(_stats.CurrentHp, _stats.MaxHp);
+        var args = new HpValueChangedEventArgs(this, _stats.CurrentHp, _stats.MaxHp, damage);
+        OnHpValueChanged.Invoke(args);
         
         if (_stats.CurrentHp <= 0)
         {

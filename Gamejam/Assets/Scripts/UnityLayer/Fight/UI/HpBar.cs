@@ -15,6 +15,8 @@ public class HpBar : MonoBehaviour
         UpdateHp(entity.Stats.CurrentHp, entity.Stats.MaxHp); // set hp bar on initial value
     }
 
+    public void UpdateHp(HpValueChangedEventArgs hpData) => UpdateHp(hpData.Current, hpData.Max);
+
     public void UpdateHp(int currentHp, int maxHp)
     {
         _slider.value = (currentHp * 1.0f) / maxHp;

@@ -4,7 +4,7 @@ public class DamageSkill : Skill
     {
         foreach (var target in targets)
         {
-            target.TakeDamage(this.Data.Power + user.Stats.AttackModifier);
+            target.TakeDamage(Data.Power + user.Stats.AttackModifier);
         }
     }
 }

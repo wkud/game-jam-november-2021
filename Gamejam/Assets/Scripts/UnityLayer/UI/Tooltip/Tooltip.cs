@@ -39,7 +39,7 @@ public class Tooltip : MonoBehaviour
 
         //var rectTransform = tooltipText.GetComponent<RectTransform>().rect;
         //var backgroundSize = new Vector2(rectTransform.width, rectTransform.height);
-        //this.backgroundRectTransform.sizeDelta = backgroundSize;
+        //backgroundRectTransform.sizeDelta = backgroundSize;
 
         gameObject.SetActive(true);
     }

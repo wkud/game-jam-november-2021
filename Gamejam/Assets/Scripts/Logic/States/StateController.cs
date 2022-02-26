@@ -10,21 +10,21 @@ public class StateController
 
     public StateController(EntityStats stats, IState state, int turns)
     {
-        this._turnsLeft = turns;
-        this.State = state;
-        this.State.OnStateStart(stats);
+        _turnsLeft = turns;
+        State = state;
+        State.OnStateStart(stats);
     }
 
     public void OnTurnStart(EntityStats stats)
     {
-        this.State.OnTurnStart(stats);
+        State.OnTurnStart(stats);
     }
 
     public void OnTurnEnd(EntityStats stats)
     {
-        this.State.OnTurnEnd(stats);
-        this._turnsLeft--;
+        State.OnTurnEnd(stats);
+        _turnsLeft--;
 
-        if (this._turnsLeft <= 0) this.State.OnStateEnd(stats);
+        if (_turnsLeft <= 0) State.OnStateEnd(stats);
     }
 }
