@@ -14,6 +14,6 @@ public class SummonSkill<T> : Skill where T : Entity
         var entityId = _enemyIds[typeof(T)];
         var entityStats = GameController.Instance.Resources.GetSummonableEntityStats(entityId);
         var entity = EntityFactory.CreateEntity(entityStats);
-        FightController.SpawnEntity();
+        FightController.SummonSystemInstance.SpawnEntity(entity);
     }
 }

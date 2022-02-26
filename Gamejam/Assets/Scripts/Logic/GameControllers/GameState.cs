@@ -16,11 +16,14 @@ public class GameState : IGameState
     {
         if (CurrentNode == null)
         {
-            return GameController.Instance.Resources.NormalEasyEncounters.First().Enemies.Select(s => (Enemy)EntityFactory.CreateEntity(s)).ToList();
+            //return GameController.Instance.Resources.NormalEasyEncounters.First().Enemies.Select(s => (Enemy)EntityFactory.CreateEntity(s)).ToList();
+            return GameController.Instance.Resources.NormalMediumEncounters
+                .FirstOrDefault(en => en.EnemyStats.Any(e => e.Identifier == EntityId.SnakeShaman))
+                .GetEnemies();
         }
 
         EncounterData encounter = ((FightNode)CurrentNode).EncounterData;
-        return encounter.Enemies.Select(s => (Enemy)EntityFactory.CreateEntity(s)).ToList();
+        return encounter.GetEnemies();
     }
 
     
