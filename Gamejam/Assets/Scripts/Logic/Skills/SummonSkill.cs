@@ -12,7 +12,7 @@ public class SummonSkill<T> : Skill where T : Entity
     public override void Use(Entity user, Entity[] targets)
     {
         var entityId = _enemyIds[typeof(T)];
-        var entityStats = GameController.Instance.ResourceContainer.GetSummonableEntityStats(entityId);
+        var entityStats = GameController.Instance.Resources.GetSummonableEntityStats(entityId);
         var entity = EntityFactory.CreateEntity(entityStats);
         FightController.SpawnEntity();
     }
