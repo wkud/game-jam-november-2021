@@ -57,7 +57,12 @@ public class AltarController : MonoBehaviour
         Transform firstChild = transform.GetChild(0);
         if (offeringID != -1 && firstChild.gameObject.activeSelf && dealIsSkill == false)
         {
-            GameController.Instance.ChangeCharacterStat(availableDeals[offeringID].StatToLose, availableDeals[offeringID].LoseAmount, playerId);
+            int loseAmount = availableDeals[offeringID].LoseAmount;
+            if (availableDeals[offeringID].StatToLose == StatName.CurrentHp && GameController.Instance.GameState.Allies[playerId].Stats.CurrentHp - loseAmount <= 0)
+            {
+                loseAmount = GameController.Instance.GameState.Allies[playerId].Stats.CurrentHp - 1;
+            }
+            GameController.Instance.ChangeCharacterStat(availableDeals[offeringID].StatToLose, -loseAmount, playerId);
             GameController.Instance.ChangeCharacterStat(availableDeals[offeringID].StatToGain, availableDeals[offeringID].GainAmount, playerId);
             TurnChildrenOff();
         }
@@ -72,7 +77,12 @@ public class AltarController : MonoBehaviour
         Transform firstChild = transform.GetChild(0);
         if (offeringID != -1 && firstChild.gameObject.activeSelf && dealIsSkill == true)
         {
-            GameController.Instance.ChangeCharacterStat(availableDeals[offeringID].StatToLose, availableDeals[offeringID].LoseAmount, playerId);
+            int loseAmount = availableDeals[offeringID].LoseAmount;
+            if (availableDeals[offeringID].StatToLose == StatName.CurrentHp && GameController.Instance.GameState.Allies[playerId].Stats.CurrentHp - loseAmount <= 0)
+            {
+                loseAmount = GameController.Instance.GameState.Allies[playerId].Stats.CurrentHp - 1;
+            }
+            GameController.Instance.ChangeCharacterStat(availableDeals[offeringID].StatToLose, -loseAmount, playerId);
             Skill skill = SkillFactory.CreateSkill(availableDeals[offeringID].SkillToGain);
             GameController.Instance.ChangeCharacterSkill(playerId,skillSlotID,skill);
             TurnChildrenOff();
@@ -117,17 +127,15 @@ public class AltarController : MonoBehaviour
 
     public void RejectDeal()
     {
-        GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -10, 0);
-        GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -10, 1);
-        GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -10, 2);
-        GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -10, 3);
-        //if (dealIsSkill == false)
-        //{
-        //    GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -10, 0);
-        //    GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -10, 1);
-        //    GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -10, 2);
-        //    GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -10, 3);
-        //}
+        for (int i = 0; i < 4; i++)
+        {
+            int loseAmount = 10;
+            if (GameController.Instance.GameState.Allies[i].Stats.CurrentHp - loseAmount <= 0)
+            {
+                loseAmount = GameController.Instance.GameState.Allies[i].Stats.CurrentHp - 1;
+            }
+            GameController.Instance.ChangeCharacterStat(StatName.CurrentHp, -loseAmount, i);
+        }
         TurnChildrenOff();
     }
 }

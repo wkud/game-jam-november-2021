@@ -72,6 +72,17 @@ public class GameController : MonoBehaviour
             for (int i = 0; i < GameState.Allies.Count; i++)
             {
                 OnStatChanged?.Invoke(i, GameState.Allies[i]);
+                Skill[] skills = GameState.Allies[i].Stats.Skills;
+                if (skills!=null && skills.Length > 0)
+                {
+                    for (int j = 0; j < skills.Length; j++)
+                    {
+                        if (skills[j] != null)
+                        { 
+                            OnSkillChanged?.Invoke(i, j, skills[j].Data.Sprite);
+                        }
+                    }
+                }
             }
         }
     }
