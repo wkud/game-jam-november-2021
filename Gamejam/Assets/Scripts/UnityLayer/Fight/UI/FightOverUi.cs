@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FightOverUi : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class FightOverUi : MonoBehaviour
     [SerializeField] private GameObject _losePanel;
     
     [SerializeField] private TextMeshProUGUI _winStatMessage;
+
+    [SerializeField] private Image _background;
 
     private void Awake()
     {
@@ -21,28 +24,16 @@ public class FightOverUi : MonoBehaviour
         fightCanvas.SetActive(false); // hide main fight canvas
     }
 
-    public void ShowWinPanel()
-    {
-        _winPanel.SetActive(true);
-    }
+    public void ShowWinPanel() => _winPanel.SetActive(true);
 
-    public void ShowLosePanel()
-    {
-        _losePanel.SetActive(true);
-    }
+    public void ShowLosePanel() => _losePanel.SetActive(true);
 
-    public void SetTextToStatMessage(string text)
-    {
-        _winStatMessage.text = text;
-    }
+    public void SetTextToStatMessage(string text) => _winStatMessage.text = text;
 
-    public void OnClickContinue()
-    {
-        GameController.Instance.OpenScene(SceneId.Map);
-    }
+    public void OnClickContinue() => GameController.Instance.OpenScene(SceneId.Map);
 
-    public void OnClickQuit()
-    {
-        Application.Quit();
-    }
+    public void OnClickQuit() => Application.Quit();
+
+    public void SetBackgroundToLight() => _background.color = Color.white;
+
 }

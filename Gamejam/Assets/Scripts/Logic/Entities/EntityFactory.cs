@@ -34,8 +34,14 @@ public static class EntityFactory
 
     private static Enemy CreateEnemy(EntityStats entityData)
     {
-        var enemyAi = _enemyAis[entityData.Identifier];
-        return new Enemy(entityData, enemyAi);
+        var id = entityData.Identifier;
+
+        var enemyAi = _enemyAis[id];
+        var enemy = id == EntityId.SpiritWarriorBoss
+            ? new SpiritWarriorBoss(entityData, enemyAi) 
+            : new Enemy(entityData, enemyAi);
+
+        return enemy;
     }
 
 }

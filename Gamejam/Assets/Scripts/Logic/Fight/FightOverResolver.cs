@@ -38,6 +38,8 @@ public class FightOverResolver
         {
             _fightOverUi.ShowLosePanel();
         }
+
+        _fightOverUi.SetBackgroundToLight();
     }
 
     private string IncreaseRandomStatForeachAlly()

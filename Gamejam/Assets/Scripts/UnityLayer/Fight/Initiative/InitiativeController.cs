@@ -1,37 +1,48 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InitiativeController : MonoBehaviour
 {
-    private List<Entity> _initiativeQueue;
-    private List<InitiativeAvatarController> _initiativeControllersQueue = new List<InitiativeAvatarController>();
+    private InitiativeTracker _initiativeTracker;
+    private Dictionary<Entity, InitiativeAvatarController> _avatars = new Dictionary<Entity, InitiativeAvatarController>();
 
     [SerializeField] private GameObject InitiativeAvatarPrefab;
 
     public void Initialize(InitiativeTracker initiativeTracker)
     {
-        _initiativeQueue = initiativeTracker.GetInitiativeQueue();
+        _initiativeTracker = initiativeTracker;
+        _initiativeTracker.OnCurrentEntityChange.AddListener(UpdateHighlightOnCurrentUnit);
+        _initiativeTracker.OnEntityRemoved.AddListener(DestroyAvatarOfRemovedEntity);
 
-        foreach (Entity entity in _initiativeQueue)
+        foreach (Entity entity in initiativeTracker.GetInitiativeQueue())
         {
-            this.SpawnAvatar(entity);
+            SpawnAvatar(entity);
         }
+
+        _avatars[_initiativeTracker.GetCurrentEntity()].IsCurrentTurnMaker = true;
     }
 
-    public void SpawnAvatar(Entity entity)
+    private void SpawnAvatar(Entity entity)
     {
-        GameObject childObject = Instantiate(InitiativeAvatarPrefab) as GameObject;
-        childObject.transform.parent = gameObject.transform;
+        GameObject instance = Instantiate(InitiativeAvatarPrefab) as GameObject;
+        instance.transform.parent = gameObject.transform;
 
-        InitiativeAvatarController initiativeAvatarController = childObject.GetComponentInChildren<InitiativeAvatarController>();
+        var initiativeAvatarController = instance.GetComponentInChildren<InitiativeAvatarController>();
         initiativeAvatarController.Initialize(entity);
-        _initiativeControllersQueue.Add(initiativeAvatarController);
+
+        _avatars.Add(entity, initiativeAvatarController);
     }
 
-    internal void OnFinishedTurn()
+    private void UpdateHighlightOnCurrentUnit(Entity previousEntity, Entity currentEntity)
     {
+        _avatars[previousEntity].IsCurrentTurnMaker = false; // hide for previous
+        _avatars[currentEntity].IsCurrentTurnMaker = true; // show for current
+    }
 
+    private void DestroyAvatarOfRemovedEntity(Entity entity)
+    {
+        Destroy(_avatars[entity].gameObject);
+        _avatars.Remove(entity);
     }
 }

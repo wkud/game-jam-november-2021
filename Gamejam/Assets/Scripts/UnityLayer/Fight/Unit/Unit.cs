@@ -15,6 +15,12 @@ public class Unit : MonoBehaviour
         private set => gameObject.SetActive(value);
     }
 
+    public bool IsCurrentTurnMaker
+    {
+        get => _portraitButton.IsCurrentTurnMaker;
+        set => _portraitButton.IsCurrentTurnMaker = value;
+    }
+
     public bool IsPortraitInteractable
     {
         get => _portraitButton.IsInteractable;
@@ -58,6 +64,8 @@ public class Unit : MonoBehaviour
 
     }
 
+    public void HighlightSkill(int skillIndex, bool shouldBeHighlighted) => _skillManager.HighlightSkill(skillIndex, shouldBeHighlighted);
+
     private void SetupOnDeathEffects()
     {
         if (Entity is Enemy)
@@ -74,7 +82,9 @@ public class Unit : MonoBehaviour
             Entity.OnDeath.AddListener(() =>
             {
                 _fightController.OnEntityDied(Entity);
-                _portraitButton.ChangePortaitOnDeath();
+               
+                Entity.Stats.Sprite = GameController.Instance.Resources.DeadCharacterPortrait;
+                _portraitButton.UpdatePortraitImage();
             });
         }
     }

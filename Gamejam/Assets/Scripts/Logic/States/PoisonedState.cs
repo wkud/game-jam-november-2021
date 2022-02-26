@@ -8,7 +8,7 @@ public class PoisonedState : IState
 
     public PoisonedState(StateData stateData)
     {
-        this._data = stateData;
+        _data = stateData;
     }
 
     public void OnStateStart(EntityStats stats) { }
@@ -19,6 +19,6 @@ public class PoisonedState : IState
 
     public void OnTurnEnd(EntityStats stats)
     {
-        stats.CurrentHp -= this._data.Power;
+        stats.CurrentHp -= _data.Power;
     }
 }

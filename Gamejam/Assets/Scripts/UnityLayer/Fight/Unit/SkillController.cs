@@ -3,6 +3,14 @@ using UnityEngine.UI;
 
 public class SkillController : MonoBehaviour, IDescriptable
 {
+    [SerializeField] private Image _isSelectedFrame;
+
+    public bool IsSelected
+    {
+        get => _isSelectedFrame.gameObject.activeSelf;
+        set => _isSelectedFrame.gameObject.SetActive(value);
+    }
+
     private Unit _unit;
     private Image _image;
     private Button _button;
@@ -12,7 +20,9 @@ public class SkillController : MonoBehaviour, IDescriptable
 
     private Player _player => (_unit?.Entity as Player);
 
-    private bool _isNotEmptySkillSlot => _player?.GetSkill(_skillSlotNumber) != null;
+    private Skill _skill => _player?.GetSkill(_skillSlotNumber);
+
+    private bool _isNotEmptySkillSlot => _skill != null;
 
     public bool IsInteractable
     {
@@ -20,9 +30,9 @@ public class SkillController : MonoBehaviour, IDescriptable
         set => _button.interactable = value && _isNotEmptySkillSlot;
     }
 
-    public string Description => _player?.GetSkill(_skillSlotNumber)?.GetTooltipDescription();
+    public string Description => _skill?.GetTooltipDescription();
 
-    public string Title => _player?.GetSkill(_skillSlotNumber)?.GetTooltipTitle();
+    public string Title => _skill?.GetTooltipTitle();
 
     public bool IsShowable => IsInteractable;
 
@@ -38,8 +48,5 @@ public class SkillController : MonoBehaviour, IDescriptable
 
     public void OnClick() => _unit.OnSkillClick(_skillSlotNumber);
 
-    public void UpdateSprite()
-    {
-        _image.sprite = _player.GetSkill(_skillSlotNumber).Data.Sprite;
-    }
+    public void UpdateSprite() => _image.sprite = _skill.Data.Sprite;
 }

@@ -1,12 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public static class SkillFactory 
 {
     private static Dictionary<SkillName, Type> _skillTypes = new Dictionary<SkillName, Type>()
     {
+        // playere skills
         { SkillName.DropKick, typeof(DamageSkill) },
         { SkillName.KickSkill, typeof(DamageSkill) },
         { SkillName.Punch, typeof(DamageSkill) },
@@ -20,6 +19,21 @@ public static class SkillFactory
         { SkillName.FirstAid, typeof(HealSkill) },
         { SkillName.Heal, typeof(HealSkill) },
         { SkillName.GroupHeal, typeof(HealSkill) },
+
+        // enemy skills
+        { SkillName.BloodRain, typeof(DamageSkill) },
+        { SkillName.BloodStrike, typeof(DamageSkill) },
+        { SkillName.DeathMist, typeof(DamageSkill) },
+        { SkillName.DeathStrike, typeof(DamageSkill) },
+        { SkillName.JaguarStrike, typeof(DamageSkill) },
+        { SkillName.SacrificialRite, typeof(AttackModifierBuffSkill) },
+        { SkillName.SnakeBite, typeof(DamageSkill) },
+        { SkillName.SnakeSlap, typeof(DamageSkill) },
+        { SkillName.SpiritWarriorBuffSkill, typeof(SpiritWarriorBuffSkill) },
+        { SkillName.SummonDoctor, typeof(SummonSkill<WitchDoctor>) },
+        { SkillName.SummonSnake, typeof(SummonSkill<Snake>) },
+        { SkillName.WitchDoctorBuff, typeof(AttackModifierBuffSkill) },
+        { SkillName.WitchDoctorHeal, typeof(HealSkill) },
     };
 
     public static Skill CreateSkill(SkillData data)

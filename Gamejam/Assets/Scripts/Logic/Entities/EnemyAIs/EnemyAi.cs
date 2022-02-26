@@ -1,29 +1,38 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+
+public struct EnemyAiMoveDecission
+{
+    public Skill Skill { get; set; }
+    public Entity[] Targets { get; set; }
+    
+    public EnemyAiMoveDecission(Skill skill, Entity[] targets)
+    {
+        Skill = skill;
+        Targets = targets;
+    }
+}
 
 public class EnemyAi
 {
-    Random random = new Random();
+    private Random _random = new Random();
 
     /// <summary>
     /// Enemy decides what to do in this method and the a specific skill is invoked. This method takes entities as parameters (enemy can decide what to do based on entities' state, such as hp)
     /// </summary>
-    /// <param name="players"></param>
-    /// <param name="enemies"></param>
     /// <param name="availableSkills">Collection of available spells that enemy can use</param>
-    public virtual void MakeMove(Entity user, Entity[] allies, Entity[] enemies, Skill[] availableSkills)
+    public virtual EnemyAiMoveDecission MakeMove(Entity[] allies, Entity[] enemies, Skill[] availableSkills)
     {
-        Skill selectedSkill = this.SelectRandomSkill(availableSkills, allies, enemies);
+        Skill selectedSkill = SelectRandomSkill(availableSkills, allies, enemies);
+
         // if skill bond is ally, return Enemy's allies - enemies
+        Entity[] targets = GetSkillTarget(selectedSkill, allies, enemies);
 
-        Entity[] targets = this.GetSkillTarget(selectedSkill, allies, enemies);
-
-        selectedSkill.Use(user, targets);
+        return new EnemyAiMoveDecission(selectedSkill, targets);
     }
 
-    public virtual void OnCreate(Entity user, Entity[] allies, Entity[] enemies, Skill[] availableSkills) { }
-
-    protected Skill SelectRandomSkill(Skill[] availableSkills, Entity[] allies, Entity[] enemies)
+    protected Skill SelectRandomSkill(IEnumerable<Skill> availableSkills, Entity[] allies, Entity[] enemies)
     {
         bool isSingleMemberInTargetParty(Skill skill)
         {
@@ -37,9 +46,9 @@ public class EnemyAi
                 && isSingleMemberInTargetParty(x)
             ).ToArray();
 
-        Skill[] skillsToPick = prioritySkills.Length > 0 ? prioritySkills : availableSkills;
+        Skill[] skillsToPick = prioritySkills.Length > 0 ? prioritySkills : availableSkills.ToArray();
 
-        int randomSkillId = random.Next(0, skillsToPick.Length);
+        int randomSkillId = _random.Next(0, skillsToPick.Length);
         return skillsToPick[randomSkillId];
     }
 
@@ -48,7 +57,7 @@ public class EnemyAi
         Entity[] targetGroup = skill.Data.TargetBond == Bond.Ally ? enemies : allies;
 
         Entity[] targets = skill.Data.TargetCount == SkillTargetCount.One
-        ? this.GetOneSkillTarget(targetGroup)
+        ? GetOneSkillTarget(targetGroup)
         : targetGroup;
 
         return targets;
@@ -56,7 +65,7 @@ public class EnemyAi
 
     private Entity[] GetOneSkillTarget(Entity[] targetGroup)
     {
-        int randomTargetId = random.Next(0, targetGroup.Length);
+        int randomTargetId = _random.Next(0, targetGroup.Length);
         Entity target = targetGroup[randomTargetId];
 
 
@@ -65,7 +74,7 @@ public class EnemyAi
 
         float[] threatChances = threats.Select(e => e * 100 / threatSum).ToArray();
 
-        float randomChance = random.Next(0, 100);
+        float randomChance = _random.Next(0, 100);
         int selectedId = 0;
 
         for (int i = 0; i < threatChances.Length && randomChance > 0; i++)

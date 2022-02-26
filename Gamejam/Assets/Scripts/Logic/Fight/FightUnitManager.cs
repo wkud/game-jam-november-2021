@@ -13,7 +13,9 @@ public class FightUnitManager : IFightStateHolder, IUnitReferenceHolder
 
     public Entity[] Enemies => ActiveEnemyUnits.Select(u => u.Entity).ToArray();
     public Entity[] Allies => ActiveAllyUnits.Select(u => u.Entity).ToArray();
-    public Entity[] ActiveEntities => _units.Where(u => u.IsActive).Select(u => u.Entity).ToArray();
+    public Entity[] ActiveEntities => ActiveUnits.Select(u => u.Entity).ToArray();
+
+    public List<Unit> AllAllyUnits => _allAllies;
 
     public FightUnitManager(IGameState gameState, Unit[] units, FightController fightController)
     {
@@ -24,13 +26,15 @@ public class FightUnitManager : IFightStateHolder, IUnitReferenceHolder
 
         // initialize allies
         var allyPresets = gameState.Allies.Select(e => (Entity)e).ToList();
-        InitializeUnits(_allAllies, allyPresets, fightController);
+       InitializeUnits(_allAllies, allyPresets, fightController);
 
         // initialize enemies
         var enemies = gameState.GetEnemiesForThisFight() ?? new List<Enemy>();
         var enemyPresets = enemies.Select(e => (Entity)e).ToList();
         HideUnusedUnits(_allEnemies, enemyPresets);
         InitializeUnits(ActiveEnemyUnits, enemyPresets, fightController);
+
+        TrySetupUnitsForBossFight();
     }
 
     private void InitializeUnits(List<Unit> units, List<Entity> presets, FightController fightController)
@@ -52,4 +56,20 @@ public class FightUnitManager : IFightStateHolder, IUnitReferenceHolder
             }
         }
     }
+
+    private void TrySetupUnitsForBossFight()
+    {
+        var boss = Enemies.FirstOrDefault(e => e.Stats.Identifier == EntityId.SpiritWarriorBoss) as SpiritWarriorBoss;
+        if(boss == null) // if there is no boss in this fight, ignore further logic
+        {
+            return;
+        }
+
+        foreach (var entity in ActiveEntities)
+        {
+            entity.OnDeath.AddListener(boss.UsePassiveSkill); // buff boss with his passive skill on every character death
+        }
+    }
+
+    public Unit GetUnitOfEntity(Entity entity) => _units.FirstOrDefault(u => u.Entity == entity);
 }
