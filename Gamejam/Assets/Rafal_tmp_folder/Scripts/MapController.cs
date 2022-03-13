@@ -55,11 +55,11 @@ public class MapController : MonoBehaviour
                     spawnChance = 40;//%
 
                     int nodeRandomizer = Random.Range(0, 100);
-                    if (nodeRandomizer < 30)//altar
+                    if (nodeRandomizer < 20)//altar
                     {
                         nodeInstance = Instantiate(_nodesPrefabs[0]);
                     }
-                    else if (nodeRandomizer >= 30 && nodeRandomizer < 50)//hidden altar
+                    else if (nodeRandomizer >= 20 && nodeRandomizer < 40)//hidden altar
                     {
                         nodeInstance = Instantiate(_nodesPrefabs[1]);
                     }
@@ -72,16 +72,16 @@ public class MapController : MonoBehaviour
                             nodeRandomizer = Random.Range(0, 100);
                             if (nodeRandomizer < mapCompleteness * 3 / 5)//elite encounter
                             {
-                                ((FightNode)nodeInstance).EncounterData = GetEncounterData(EncounterType.Elite, mapCompleteness);//normal encounter
+                                ((FightNode)nodeInstance).EncounterData = GetEncounterData(EncounterType.Elite, (float)mapCompleteness/100);//normal encounter
                             }
                             else//normal encounter
                             {
-                                ((FightNode)nodeInstance).EncounterData = GetEncounterData(EncounterType.Normal, mapCompleteness);//normal encounter
+                                ((FightNode)nodeInstance).EncounterData = GetEncounterData(EncounterType.Normal, (float)mapCompleteness / 100);//normal encounter
                             }
                         }
                         else
                         {
-                            ((FightNode)nodeInstance).EncounterData = GetEncounterData(EncounterType.Normal, mapCompleteness);//normal encounter
+                            ((FightNode)nodeInstance).EncounterData = GetEncounterData(EncounterType.Normal, (float)mapCompleteness / 100);//normal encounter
                         }
                         ((FightNode)nodeInstance).SetEncounterSprite(((FightNode)nodeInstance).EncounterData.EncounterType);
                     }
