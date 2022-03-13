@@ -13,6 +13,7 @@ public class FightOverResolver
     private int _maxStatIncrease => _wasThisEliteEncounter ? 8 : 4;
     private int _minStatIncrease => _wasThisEliteEncounter ? 6 : 2;
 
+    public const float HEAL_AFTER_FIGHT_MAX_HP_PERCENT = 0.25f; // every character is healed by 25% of it's max hp
 
     public FightOverResolver(IUnitReferenceHolder unitManager)
     {
@@ -33,6 +34,8 @@ public class FightOverResolver
 
             string statMessage = IncreaseRandomStatForeachAlly();
             _fightOverUi.SetTextToStatMessage(statMessage);
+
+            HealPercentOfHpForEveryCharacter();
         }
         else if (HaveCharacterLose())
         {
@@ -40,6 +43,15 @@ public class FightOverResolver
         }
 
         _fightOverUi.SetBackgroundToLight();
+    }
+
+    private void HealPercentOfHpForEveryCharacter()
+    {
+        foreach (var ally in _unitManager.ActiveAllyUnits)
+        {
+            var healingAmount = ally.Entity.Stats.MaxHp * HEAL_AFTER_FIGHT_MAX_HP_PERCENT;
+            ally.Entity.TakeDamage((int)healingAmount * -1); // negative damage = healing
+        }
     }
 
     private string IncreaseRandomStatForeachAlly()
