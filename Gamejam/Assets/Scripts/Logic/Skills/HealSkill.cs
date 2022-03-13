@@ -2,9 +2,11 @@ public class HealSkill : Skill
 {
     public override void Use(Entity user, Entity[] targets)
     {
+        var healingPower = GetMultipliedPowerOnCritical(user.Stats.CritChance, Data.Power);
+
         foreach (var target in targets)
         {
-            target.TakeDamage(-1 * Data.Power);
+            target.TakeDamage(-1 * healingPower);
         }
     }
 }

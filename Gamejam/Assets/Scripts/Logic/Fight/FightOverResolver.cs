@@ -7,7 +7,7 @@ public class FightOverResolver
     private IUnitReferenceHolder _unitManager;
     private FightOverUi _fightOverUi;
 
-    private bool _wasThisEliteEncounter => true; // TODO change this
+    private bool _wasThisEliteEncounter => GameController.Instance.GameState.CurrentEncounterDifficulty == EncounterType.Elite;
 
     // stat increase range: 10-15 for elite, 5-10 for casual, end game for boss
     private int _maxStatIncrease => _wasThisEliteEncounter ? 8 : 4;

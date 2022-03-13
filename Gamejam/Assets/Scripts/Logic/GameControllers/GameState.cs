@@ -7,6 +7,8 @@ public class GameState : IGameState
 
     public MapNode CurrentNode { private get; set; }
 
+    public EncounterType CurrentEncounterDifficulty => (CurrentNode as FightNode).EncounterData.EncounterType;
+
     public GameState(ResourceContainer resourceContainer)
     {
         Allies = resourceContainer.GetRandomCharacterPresets().Select(s => (Player)EntityFactory.CreateEntity(s)).ToList();
