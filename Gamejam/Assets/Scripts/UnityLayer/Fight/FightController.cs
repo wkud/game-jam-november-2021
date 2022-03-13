@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 
-public class FightController : MonoBehaviour  // class for main fight management logic 
+public class FightController : MonoBehaviour, ISummonSystem  // class for main fight management logic 
 {
+    public static ISummonSystem SummonSystemInstance { get; private set; } // TODO consider destroying after scene switch
+
     private PlayerMoveMaker _playerMoveMaker;
     private FightUiUpdater _fightUiUpdater;
     private InitiativeTracker _initiativeTracker;
@@ -15,6 +17,11 @@ public class FightController : MonoBehaviour  // class for main fight management
 
     public void Initialize(IGameState gameState)
     {
+        if (SummonSystemInstance == null)
+        {
+            SummonSystemInstance = this;
+        }
+
         // setup variables
         var units = FindObjectsOfType<Unit>();
         _unitManager = new FightUnitManager(gameState, units, this);
@@ -74,15 +81,22 @@ public class FightController : MonoBehaviour  // class for main fight management
         StartTurn();
     }
 
+    public void SpawnEntity(Entity entity)
+    {
+        if (_unitManager.ActiveEnemyUnits.Count >= FightUnitManager.MAX_PARTY_COUNT)
+        {
+            Debug.LogError("Summon spell was used even though there is no place for next enemy");
+            return;
+        }
+
+        _unitManager.AddEntity(entity);
+        _initiativeTracker.AppendEntity(entity);
+    }
+
     public void OnSelectSkill(int skillIndex) => _playerMoveMaker.OnPlayerSelectSkill(skillIndex);
 
     public void OnSelectTarget(Unit targetUnit) => _playerMoveMaker.OnPlayerSelectTarget(targetUnit.Entity);
 
     public void OnEntityDied(Entity entity) => _initiativeTracker.RemoveFromQueue(entity);
-
-    public static void SpawnEntity()
-    {
-        // TODO add summon logic
-    }
 
 }
