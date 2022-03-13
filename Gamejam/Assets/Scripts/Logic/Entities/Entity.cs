@@ -39,7 +39,9 @@ public abstract class Entity
             return;
         }
 
-        _stats.CurrentHp -= damage;
+        var damageAfterDefence = damage - _stats.Defence;
+        _stats.CurrentHp -= damageAfterDefence;
+
         var args = new HpValueChangedEventArgs(this, _stats.CurrentHp, _stats.MaxHp, damage);
         OnHpValueChanged.Invoke(args);
         

@@ -2,8 +2,10 @@ public class SpiritWarriorBuffSkill : Skill
 {
     public override void Use(Entity user, Entity[] targets)
     {
-        user.Stats.MaxHp += Data.Power * 3;
-        user.Stats.CurrentHp += Data.Power * 3;
-        user.Stats.AttackModifier += Data.Power;
+        var power = GetMultipliedPowerOnCritical(user.Stats.CritChance, Data.Power);
+
+        user.Stats.MaxHp += power * 3;
+        user.Stats.CurrentHp += power * 3;
+        user.Stats.AttackModifier += power;
     }
 }

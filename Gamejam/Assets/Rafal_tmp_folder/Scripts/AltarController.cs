@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -109,7 +107,7 @@ public class AltarController : MonoBehaviour
             var statName = availableDeals[i].StatToLose;
             sacrifices[i].sprite = GameController.Instance.Resources.GetStatSprite(statName);
 
-            if (availableDeals[i].SkillToGain == null && availableDeals[i].StatToGain != 0)
+            if (availableDeals[i].SkillToGain == null && availableDeals[i].GainAmount != 0)
             {
                 statName = availableDeals[i].StatToGain;
                 gains[i].sprite = GameController.Instance.Resources.GetStatSprite(statName);
@@ -120,7 +118,7 @@ public class AltarController : MonoBehaviour
             }
             else 
             {
-                Debug.LogError("Deal: " + availableDeals[i].name + " doesn't have reward");
+                Debug.LogError($"Deal: \"{availableDeals[i].name}\" doesn't have reward");
             }
         }
     }

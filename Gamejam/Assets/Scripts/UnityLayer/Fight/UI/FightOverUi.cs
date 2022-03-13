@@ -9,6 +9,7 @@ public class FightOverUi : MonoBehaviour
     [SerializeField] private GameObject _losePanel;
     
     [SerializeField] private TextMeshProUGUI _winStatMessage;
+    [SerializeField] private TextMeshProUGUI _winHealMessage;
 
     [SerializeField] private Image _background;
 
@@ -16,6 +17,8 @@ public class FightOverUi : MonoBehaviour
     {
         _winPanel.SetActive(false); // hide them at the start of the fight to reveal them later
         _losePanel.SetActive(false);
+
+        _winHealMessage.text = _winHealMessage.text.Replace("$", (FightOverResolver.HEAL_AFTER_FIGHT_MAX_HP_PERCENT * 100).ToString());
     }
 
     public void HideMainCanvas()
