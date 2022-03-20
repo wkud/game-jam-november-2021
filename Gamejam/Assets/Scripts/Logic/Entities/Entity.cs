@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -34,17 +35,37 @@ public abstract class Entity
 
     public void TakeDamage(int damage)
     {
+        if (damage < 0)
+        {
+            Debug.LogError("Invalid operation: dealing negative damage. Use Entity.Heal method instead");
+        }
+
+        var damageAfterDefence = Math.Max(damage - _stats.Defence, 0);
+        ModifyHealth(-damageAfterDefence);
+    }
+
+    public void Heal(int amount)
+    {
+        if (amount < 0)
+        {
+            Debug.LogError("Invalid operation: healing negative amount. Use Entity.TakeDamage method instead");
+        }
+
+        ModifyHealth(amount);
+    }
+
+    private void ModifyHealth(int amount)
+    {
         if (!IsAlive)
         {
             return;
         }
 
-        var damageAfterDefence = damage - _stats.Defence;
-        _stats.CurrentHp -= damageAfterDefence;
+        _stats.CurrentHp += amount;
 
-        var args = new HpValueChangedEventArgs(this, _stats.CurrentHp, _stats.MaxHp, damage);
+        var args = new HpValueChangedEventArgs(this, _stats.CurrentHp, _stats.MaxHp, amount);
         OnHpValueChanged.Invoke(args);
-        
+
         if (_stats.CurrentHp <= 0)
         {
             OnDeath.Invoke();

@@ -6,7 +6,7 @@ public class HealSkill : Skill
 
         foreach (var target in targets)
         {
-            target.TakeDamage(-1 * healingPower);
+            target.Heal(healingPower);
         }
     }
 }

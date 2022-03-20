@@ -10,10 +10,12 @@ public class FightOverResolver
     private bool _wasThisEliteEncounter => GameController.Instance.GameState.CurrentEncounterDifficulty == EncounterType.Elite;
 
     // stat increase range: 10-15 for elite, 5-10 for casual, end game for boss
-    private int _maxStatIncrease => _wasThisEliteEncounter ? 8 : 4;
-    private int _minStatIncrease => _wasThisEliteEncounter ? 6 : 2;
+    private int MAX_STAT_INCREASE => _wasThisEliteEncounter ? 8 : 4;
+    private int MIN_STAT_INCREASE => _wasThisEliteEncounter ? 6 : 2;
 
     public const float HEAL_AFTER_FIGHT_MAX_HP_PERCENT = 0.25f; // every character is healed by 25% of it's max hp
+
+    private const int HP_INCREASE_MULTIPLIER = 5;
 
     public FightOverResolver(IUnitReferenceHolder unitManager)
     {
@@ -50,18 +52,26 @@ public class FightOverResolver
         foreach (var ally in _unitManager.ActiveAllyUnits)
         {
             var healingAmount = ally.Entity.Stats.MaxHp * HEAL_AFTER_FIGHT_MAX_HP_PERCENT;
-            ally.Entity.TakeDamage((int)healingAmount * -1); // negative damage = healing
+            ally.Entity.Heal((int)healingAmount);
         }
     }
 
     private string IncreaseRandomStatForeachAlly()
     {
         var randomStat = RandomUtility.GetRandomEnumValueOf<StatName>(StatName.CurrentHp, StatName.Threat); // exclude CurrentHp and Threat from possible stats to increase
-        var statIncrease = UnityEngine.Random.Range(_minStatIncrease, _maxStatIncrease + 1);
+        var statIncrease = UnityEngine.Random.Range(MIN_STAT_INCREASE, MAX_STAT_INCREASE + 1);
+        
+        if (randomStat == StatName.MaxHp)
+        {
+            statIncrease *= HP_INCREASE_MULTIPLIER;
+        }
 
         foreach (var unit in _unitManager.ActiveAllyUnits)
         {
             (unit.Entity as Player).AddStat(randomStat, statIncrease);
+
+            if (randomStat == StatName.MaxHp)
+                (unit.Entity as Player).Heal(statIncrease);
         }
 
         var statMessage = $"Each character gains {statIncrease} points of {randomStat.GetDescription()}";

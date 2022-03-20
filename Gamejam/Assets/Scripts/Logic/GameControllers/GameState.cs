@@ -7,7 +7,7 @@ public class GameState : IGameState
 
     public MapNode CurrentNode { private get; set; }
 
-    public EncounterType CurrentEncounterDifficulty => (CurrentNode as FightNode).EncounterData.EncounterType;
+    public EncounterType CurrentEncounterDifficulty => (CurrentNode as FightNode)?.EncounterData.EncounterType ?? EncounterType.Normal;
 
     public GameState(ResourceContainer resourceContainer)
     {
@@ -19,9 +19,11 @@ public class GameState : IGameState
         if (CurrentNode == null)
         {
             //return GameController.Instance.Resources.NormalEasyEncounters.First().Enemies.Select(s => (Enemy)EntityFactory.CreateEntity(s)).ToList();
-            return GameController.Instance.Resources.NormalMediumEncounters
-                .FirstOrDefault(en => en.EnemyStats.Any(e => e.Identifier == EntityId.SnakeShaman))
-                .GetEnemies();
+            var snake = GameController.Instance.Resources.NormalMediumEncounters
+                .FirstOrDefault(en => en.EnemyStats.Any(e => e.Identifier == EntityId.Snake))
+                .GetEnemies().FirstOrDefault(e => e.Stats.Identifier == EntityId.Snake);
+            snake.Stats.CurrentHp = 1;
+            return new List<Enemy>() { snake };
         }
 
         EncounterData encounter = ((FightNode)CurrentNode).EncounterData;

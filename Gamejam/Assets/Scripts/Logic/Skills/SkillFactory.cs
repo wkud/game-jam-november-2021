@@ -5,7 +5,7 @@ public static class SkillFactory
 {
     private static Dictionary<SkillName, Type> _skillTypes = new Dictionary<SkillName, Type>()
     {
-        // playere skills
+        // player skills
         { SkillName.DropKick, typeof(DamageSkill) },
         { SkillName.KickSkill, typeof(DamageSkill) },
         { SkillName.Punch, typeof(DamageSkill) },
