@@ -4764,7 +4764,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2029205152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4780,7 +4780,7 @@ MonoBehaviour:
   _winPanel: {fileID: 1196976365}
   _losePanel: {fileID: 27844242}
   _winStatMessage: {fileID: 1114312300}
-  _winHealMessage: {fileID: 0}
+  _winHealMessage: {fileID: 1273289504}
   _background: {fileID: 70277824}
 --- !u!114 &2029205153
 MonoBehaviour:
