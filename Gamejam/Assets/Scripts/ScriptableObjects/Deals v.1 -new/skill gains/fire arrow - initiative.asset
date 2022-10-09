@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 075cc780491a7a945bc6bb26b9f4747a, type: 3}
+  m_Name: fire arrow - initiative
+  m_EditorClassIdentifier: 
+  statToLose: 2
+  loseAmount: 3
+  skillToGain: {fileID: 11400000, guid: 9412d1512460dfa42a40eebbf2a99dd9, type: 2}
+  statToGain: 0
+  gainAmount: 0

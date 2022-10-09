@@ -17,7 +17,7 @@ MonoBehaviour:
   _description: Fire at all enemies from your bow.
   _power: 10
   _maxCooldown: 0
-  _targetCount: 0
+  _targetCount: 1
   _targetBond: 1
   _imposedState: {fileID: 0}
   _sprite: {fileID: 21300000, guid: 506f5335dd1e4c044b31a4ae91cde1ed, type: 3}

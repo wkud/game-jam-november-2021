@@ -19,7 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b3f5a9c9eceb41040b02bb28d5e8b16a, type: 2}
   - {fileID: 11400000, guid: 4d77392acfaa859408edf0f3b6ab1479, type: 2}
   - {fileID: 11400000, guid: ed403d80fc1f68047b812858295cec47, type: 2}
-  _maxHp: 80
+  _maxHp: 250
   _initiative: 10
   _attackModifier: 25
   _defence: 15

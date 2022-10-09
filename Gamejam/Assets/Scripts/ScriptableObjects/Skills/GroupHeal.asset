@@ -17,7 +17,7 @@ MonoBehaviour:
   _description: Heal your entire party for a small amount.
   _power: 8
   _maxCooldown: 0
-  _targetCount: 0
-  _targetBond: 1
+  _targetCount: 1
+  _targetBond: 0
   _imposedState: {fileID: 0}
   _sprite: {fileID: 21300000, guid: c8823aacfb0b5fc40905749974188635, type: 3}
